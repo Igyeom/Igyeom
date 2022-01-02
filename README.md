@@ -7,7 +7,7 @@ A morse code utilities site made in Flask where you can learn morse, race each o
 My coding portfolio (includes everything but the cringe)
 
 # beta.hwtracker.tk
-A homework tracker made in Flask.
+A simple homework tracker made in Flask.
 
 # The Magical Ketchup
 A fun arcade game I decided to make in Godot Engine for my portfolio.
