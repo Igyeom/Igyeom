@@ -10,4 +10,4 @@ My coding portfolio (includes everything but the cringe)
 A homework tracker made in Flask.
 
 # The Magical Ketchup
-A fun arcade game I decided to make for my portfolio.
+A fun arcade game I decided to make in Godot Engine for my portfolio.
