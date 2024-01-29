@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+    background-color: black;
+    color: white;
+    font-family: 'PT Serif';
+    zoom: 150%;
+}
+
+#countdown {
+    text-align: center;
+}
+
+#number {
+    text-align: center;
+}
+
+#next_1 {
+    opacity: 0.75;
+    text-align: center;
+}
+
+#next_2 {
+    opacity: 0.5;
+    text-align: center;
+}
+
+button {
+    border: black 2px solid;
+    background: yellow;
+    font-family: 'PT Serif';
+}
+
+button:hover {
+    background: limegreen;
+    font-family: 'PT Serif';
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-6-9-Clap!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button onclick="start(mode=0);">New Game (3-6-9) [Hotkey Shortcut: 1]</button><br>
+    <button onclick="clapped = true;" style="font-size: 60pt; background:red;">Clap</button><button onclick="accepted = true;" style="font-size: 60pt; background: #0f0;">Accept</button><br>
+    <u>Target</u>
+    <h3 id="target">Loading...</h3><br>
+    <u>Score</u>
+    <h3 id="score">0</h3><br>
+    <h3 id="number"></h3>
+    <h3 id="next_1"></h3>
+    <h3 id="next_2"></h3>
+    <h1 id="countdown" hidden>3</h1>
+    <script src="script.js"></script>
+</body>
+</html>

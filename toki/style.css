@@ -1,0 +1,10 @@
+body {
+    background: #121212;
+    color: mediumpurple;
+    font-family: 'Courier New';
+    text-align: left;
+}
+
+h1, h2 {
+    display: inline-block;
+}

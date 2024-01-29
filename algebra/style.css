@@ -1,0 +1,17 @@
+* {
+    background: #121212;
+    font-family: 'Courier New';
+    text-align: center;
+    color: white;
+}
+
+input {
+    background: black;
+    font-family: 'Courier New';
+    text-align: center;
+    color: white;
+}
+
+::placeholder {
+    color: white;
+}

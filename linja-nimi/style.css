@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+body {
+    background: #121212;
+    color: white;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.tooltip .tooltiptext {
+    width: 120px;
+    top: 100%;
+    left: 50%;
+    color: yellow;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    background: #222;
+    text-align: center;
+}

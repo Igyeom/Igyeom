@@ -1,0 +1,35 @@
+body {
+  font-family: sans-serif;
+}
+
+#container {
+  width: 800px;
+  margin: 0 auto;
+}
+
+#board {
+  margin-bottom: 10px;
+  justify-content: space-around;
+}
+
+.tile {
+  width: 100px;
+  height: 100px;
+  border: 2px solid lightgray;
+  text-align: center;
+  font-size: 60pt;
+  margin: 10px;
+  display: inline-block;
+}
+
+.correct {
+  background: linear-gradient(limegreen, green);
+}
+
+.present {
+  background: linear-gradient(yellow, yellowgreen);
+}
+
+.incorrect {
+  background: linear-gradient(grey, lightgrey);
+}

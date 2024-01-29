@@ -1,0 +1,1 @@
+const highlight = async () => {document.querySelector('#mobile').style.color = 'red';await new Promise(r => setTimeout(r, 500));document.querySelector('#mobile').style.color = 'white';}

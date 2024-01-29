@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.rainbow {
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: rainbow 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow {
+    0%,
+    100% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 100% 0;
+    }
+}
+
+
+.header-1 {
+    background: linear-gradient(to right, rgb(255, 187, 0), rgb(229, 147, 85));
+    color: black;
+    font-family: 'Arial Rounded MT', monospace;
+    text-align: left; font-size: 36pt;
+}
+
+.year-container {
+    position: absolute;
+}
+
+.header-2 {
+    background: linear-gradient(to right, rgb(60, 187, 0), rgb(40, 147, 85));
+    color: black;
+    font-family: 'Arial Rounded MT', monospace;
+    text-align: left; font-size: 36pt;
+    margin-left: 50px;
+}
+
+.header-3 {
+    background: linear-gradient(to right, rgb(0, 187, 165), rgb(40, 68, 147));
+    color: black;
+    font-family: 'Arial Rounded MT', monospace;
+    text-align: left; font-size: 36pt;
+    margin-left: 100px;
+}
+
+.header-4 {
+    background: linear-gradient(to right, rgb(140, 0, 187), rgb(227, 17, 209));
+    color: black;
+    font-family: 'Arial Rounded MT', monospace;
+    text-align: left; font-size: 36pt;
+    margin-left: 150px;
+}
+
+.header-5 {
+    background: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 150, 0));
+    color: black;
+    font-family: 'Arial Rounded MT', monospace;
+    text-align: left; font-size: 36pt;
+    margin-left: 200px;
+}
+
+.element-1 {
+    background: rgb(129, 93, 51);
+    width: fit-content;
+    padding: 36px;
+    margin-left: 0px;
+    color: white;
+    text-align: left;
+    display: inline-block;
+}
+
+.element-2 {
+    background: rgb(129, 93, 51);
+    width: fit-content;
+    padding: 36px;
+    margin-left: 50px;
+    color: white;
+    text-align: left;
+    display: inline-block;
+}
+
+.element-3 {
+    background: rgb(129, 93, 51);
+    width: fit-content;
+    padding: 36px;
+    margin-left: 100px;
+    color: white;
+    text-align: left;
+    display: inline-block;
+}
+
+.element-4 {
+    background: rgb(129, 93, 51);
+    width: fit-content;
+    padding: 36px;
+    margin-left: 150px;
+    color: white;
+    text-align: left;
+    display: inline-block;
+}
+
+.element-5 {
+    background: rgb(129, 93, 51);
+    width: fit-content;
+    padding: 36px;
+    margin-left: 200px;
+    color: white;
+    text-align: left;
+    display: inline-block;
+}
+
+/* Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Typography */
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  a {
+    color: cyan;
+    text-decoration: none;
+  }
+
+  /* Layout */
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* Colors */
+
+  body {
+    color: #fff;
+    background-color: #111;
+  }
+
+  a:hover {
+    color: #ff0;
+  }
+
+  /* Responsive */
+
+  @media (max-width: 768px) {
+    main {
+      max-width: 720px;
+    }
+  }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lively Wallpaper (template)</title>
+    <style>
+        .clock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            color: #00FF00;
+            font-size: 200px;
+            font-family: JetBrains Mono;
+            letter-spacing: 7px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        var countDownDate = new Date().getTime() + 5400000;
+        
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+        
+          // Get today's date and time
+          var now = new Date().getTime();
+            
+          // Find the distance between now and the count down date
+          var distance = countDownDate - now;
+            
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+          // Output the result in an element with id="demo"
+          document.getElementById("timer").innerHTML = hours + "h "
+          + minutes + "m " + seconds + "s ";
+            
+          // If the count down is over, write some text 
+          if (distance < 0) {
+            clearInterval(x);
+            location.href = 'https://www.youtube.com/watch?v=yUk1kyljGEo';
+          }
+        }, 1000);
+    </script>
+</head>
+<body style="background: #111;">
+    <iframe class="subcount" src="https://livecounts.io/embed/youtube-live-subscriber-counter/UCCxhMzJb-qy0pV30mVmmuZA" frameborder="0"></iframe>
+    
+    <div id="timer" class="clock"></div>
+</body>
+</html>
