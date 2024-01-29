@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: lightcoral;
+    border: black 5px solid;
+    display: inline-block;
+    text-align: center;
+    font-size: 32pt;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+body {
+    background-color: #ccc;
+    font-family: Roboto;
+}

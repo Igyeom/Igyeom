@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #blackboard {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: black;
+            cursor: url("https://ians.site/board/cursor.png"), auto;
+        }
+
+        #cursor {
+            display: none;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+    <title>Blackboard v0.1</title>
+</head>
+<body>
+    <canvas id="blackboard"></canvas>
+    <img id="cursor" src="cursor.png" alt="Custom Cursor">
+    <script>
+        let currentColor = 'white';
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        const chalk = new Audio('chalk2.wav');
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === '1') {
+                currentColor = 'white';
+            } else if (event.key === '2') {
+                currentColor = 'red';
+            } else if (event.key === '3') {
+                currentColor = 'blue';
+            } else if (event.key === 'q') {
+                context.clearRect(0, 0, blackboard.width, blackboard.height);
+            } else if (event.key === 'e') {
+                currentColor = 'black';
+            }
+        });
+
+        const blackboard = document.getElementById('blackboard');
+        const context = blackboard.getContext('2d');
+        const cursor = document.getElementById('cursor');
+
+        // Set canvas dimensions to match the viewport
+        blackboard.width = window.innerWidth;
+        blackboard.height = window.innerHeight;
+
+        blackboard.addEventListener('mousemove', function (event) {
+            if (isDrawing) {
+                context.strokeStyle = currentColor;
+                context.lineJoin = 'round';
+                if (currentColor === 'black') {
+                    context.lineWidth = 20;
+                } else {
+                    context.lineWidth = 10;
+                }
+                context.beginPath();
+                context.moveTo(lastX, lastY);
+                context.lineTo(event.clientX, event.clientY);
+                context.stroke();
+                lastX = event.clientX;
+                lastY = event.clientY;
+            }
+            cursor.style.display = 'none';
+        });
+
+        blackboard.addEventListener('mouseleave', function () {
+            cursor.style.display = 'none';
+            isDrawing = false;
+        });
+
+        blackboard.addEventListener('mousedown', function (event) {
+            isDrawing = true;
+            chalk.play();
+            lastX = event.clientX;
+            lastY = event.clientY;
+        });
+
+        blackboard.addEventListener('mouseup', function () {
+            isDrawing = false;
+        });
+    </script>
+</body>
+</html>

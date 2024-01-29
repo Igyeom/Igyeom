@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juicy's Locator Map Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="element"><span class="orange">Juicy</span>'s Locator Map Calculator</h1>
+    <h2 class="element">Bedrock Edition has a feature called <span class="yellow">"Locator Maps"</span> which can be used to track where players are at the moment.</h2>
+    <h3 class="element">However, on <span class="yellow"> anarchy </span> servers, this can be used to track any player on the server.</h3>
+    <h3 class="element">But there wasn't an easy and intuitive way to track people even with locator maps at the time, so here it is.</h3>
+    <span style="font-size: 24pt;" class="element">Coordinates:</span>
+    <input type="text" placeholder="X" id="x" style="width: 200px; font-size: 24pt; color: red">
+    <input type="text" placeholder="Z" id="z" style="width: 200px; font-size: 24pt; color: blue"><br><br>
+    <span style="font-size: 20pt;" id="txt" class="element">Now, roughly click on where your cursor (the white one) is on the map.</span><br>
+    <img src="line.png" alt="mmm not loading huh?" class="element">
+    <img src="player.png" alt="player" style="z-index: 1; transform: translate(0, -256px);" id="player" class="element" hidden>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

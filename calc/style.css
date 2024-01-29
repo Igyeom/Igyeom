@@ -1,0 +1,31 @@
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+* {
+    font-family: Minecraftia;
+}
+
+.element {
+    display: flex;
+}
+
+body {
+    background: #121212;
+    color: white;
+}
+
+.orange {
+    color: orange;
+}
+
+.yellow {
+    color: yellow;
+}
+
+@font-face {
+    font-family: Minecraftia;
+    font-style: normal;
+    font-weight: normal;
+    src: local('Minecraftia Regular'), url('Minecraftia.woff') format('woff');
+}
