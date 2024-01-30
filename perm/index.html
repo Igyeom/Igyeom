@@ -1,0 +1,20 @@
+<input type="text" id="str" placeholder="String (e.g. kijetesantakalu)"><button onclick="go();">Go</button>
+
+<p id="perms"></pre>
+
+<script>
+    const stringPermutations = str => {
+  if (str.length <= 2) return str.length === 2 ? [str, str[1] + str[0]] : [str];
+  return str
+    .split('')
+    .reduce(
+      (acc, letter, i) =>
+        acc.concat(stringPermutations(str.slice(0, i) + str.slice(i + 1)).map(val => letter + val)),
+      []
+    );
+};
+    function go() {
+        let toki = stringPermutations(document.getElementById("str").value).join(", ");
+        document.getElementById("perms").innerHTML = toki;
+    }
+</script>

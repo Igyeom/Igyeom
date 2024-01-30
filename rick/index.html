@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>RickRoll Detector</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+
+      <script src="script.js"></script>
+      
+      <h1>Friend posting a suspicious link? You think it is a rickroll? Confirm here!</h1>
+
+      <h3>Run by Juicy / Ian Park. <a href="./help/">Help expand the database</a></h3>
+
+      <h4>bit.ly link? Put a plus sign (+) after the URL to see its YouTube link</h4>
+      <h5>Example: https://bit.ly/3FsbW92+</h5>
+
+      <input type="text" name="link" id="link">
+      <button onclick="check();">Check</button>
+
+      <b style="color: red;" id="detected"></b>
+      <b style="color: limegreen;" id="notdetected"></b>
+
+  </body>
+</html>

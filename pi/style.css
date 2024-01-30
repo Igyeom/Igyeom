@@ -1,0 +1,87 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #222222;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+a:hover {
+  color: #cccccc;
+}
+button {
+  background-color: #ffffff;
+  color: #222222;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+button:hover {
+  background-color: #222222;
+  color: #ffffff;
+}
+.card {
+  background-color: #333333;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.notification {
+  background-color: #222222;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  animation: slideInRight 0.5s ease-out;
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+#digits {
+    word-wrap: break-word;
+}
+#attempt {
+    background: #222222;
+    color: white;
+    border: 2px white solid;
+    font-family: Roboto;
+    width: 300px;
+    height: 150px;
+}
