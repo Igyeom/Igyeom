@@ -1,0 +1,52 @@
+body {
+    background: #fffae9;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.country {
+    border: black 2px solid;
+}
+
+.event {
+    border: black 2px solid;
+}
+
+.battle {
+    background: #fa0;
+}
+
+.surrender {
+    background: red;
+    color: white;
+}
+
+.elimination {
+    background: #a00;
+    color: white;
+}
+
+.newyear {
+    background: white;
+}
+
+.red {
+    background: red;
+    color: white;
+}
+
+.green {
+    background: green;
+    color: white;
+}
+
+.blue {
+    background: blue;
+    color: white;
+}
+
+.yellow {
+    background: yellow;
+}
