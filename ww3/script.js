@@ -74,8 +74,8 @@ function generate() {
 			if (r.length == 0) {
 				events.innerHTML += "<div class='event elimination'>❌ The Reds have officially lost the war.</div>";
 				
-				document.getElementById('events_count') = document.getElementsByClassName('event').length
-				document.getElementById('battles_count') = document.getElementsByClassName('battle').length
+				document.getElementById('events_count').innerHTML = document.getElementsByClassName('event').length
+				document.getElementById('battles_count').innerHTML = document.getElementsByClassName('battle').length
 				return;
 			}
 			if (g.length == 0) {
