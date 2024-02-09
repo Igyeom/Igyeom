@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WW3 Generator </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>WW3 Simulator</h1>
+    <h2>Decide Teams:</h2>
+    <select name="urself" id="teams" disabled>
+        <option value="2">2 teams</option>
+        <option value="3">3 teams</option>
+        <option value="4">4 teams</option>
+    </select><button onclick="colors = colors_alt.slice(0, document.getElementById('teams').options[document.getElementById('teams').selectedIndex].value)">👍 Confirm</button>
+
+    <h2>Add countries:</h2>
+    <select name="ur mother" id="country-select-1"></select><select name="ur father" id="team-select-1">
+        <option value="red">Red Team</option>
+        <option value="green">Green Team</option>
+        <option value="blue">Blue Team</option>
+        <option value="yellow">Yellow Team</option>
+    </select>
+    </select><button onclick="add();">➕ Add</button><button onclick="roll();">🎲 Random</button>
+
+    <div id="countries">
+        
+    </div>
+
+    <h2>Time Period:</h2>
+    <input type="text" placeholder="Starting Year" id="start">
+    <input type="text" placeholder="Ending Year" id="end">
+    <button onclick="s = document.getElementById('start').value; e = document.getElementById('end').value; document.getElementById('duration').innerHTML = parseInt(e)-parseInt(s);">👍 Confirm</button><br><br><br><br>
+    This war will last up to <span id="duration">?</span> year(s).<br><br>
+    
+    <button onclick="generate();">⚔️ Simulate War</button>
+
+    <span id="events_count">?</span> events and <span id="battles_count">?</span> battles generated.<br><br>
+
+    
+    <div id="events">
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
