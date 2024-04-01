@@ -1,3 +1,5 @@
+location.href = "https://customrickroll.github.io/"
+
 document.querySelector("#a").addEventListener("click", level1);
 document.querySelector("#b").addEventListener("click", level1);
 document.querySelector("#c").addEventListener("click", level1);
