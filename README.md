@@ -1,4 +1,4 @@
-yooo pog you found my profile! uh i dont know what to put here so here are my current projects lol:
+__Current Projects (may be outdated)__:
 
 # [morsecode.fun](https://morsecode.fun)
 A morse code utilities site made in Flask where you can learn morse, race each other, chat in morse, etc.
