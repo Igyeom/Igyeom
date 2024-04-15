@@ -4,6 +4,7 @@ let validate;
 let valid;
 let range;
 const jamo = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']
+let res = document.getElementById("#wordlist").innerHTML;
 
 function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
