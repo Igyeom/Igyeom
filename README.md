@@ -1,4 +1,4 @@
-<ins>Current Projects (may be outdated)</ins>:
+<ins>Current Projects (may be outdated)</ins>
 
 # [morsecode.fun](https://morsecode.fun)
 A morse code utilities site made in Flask where you can learn morse, race each other, chat in morse, etc.
