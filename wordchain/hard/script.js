@@ -4,7 +4,7 @@ let validate;
 let valid;
 let range;
 const jamo = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']
-let res = document.getElementById("#wordlist").innerHTML;
+let res = document.getElementById("wordlist").innerHTML;
 
 wordList = res.split("\n");
 console.log('WORDLIST LOADED');
