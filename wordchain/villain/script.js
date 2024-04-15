@@ -3,7 +3,7 @@ let wordList;
 let validate;
 let valid;
 let range;
-let res = document.getElementById("#wordlist").innerHTML;
+let res = document.getElementById("wordlist").innerHTML;
 const jamo = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ']
 
 wordList = res.split("\n");
