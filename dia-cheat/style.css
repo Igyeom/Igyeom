@@ -1,0 +1,44 @@
+
+        body {
+            background-color: #222;
+            color: #ddd;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+
+        p {
+            line-height: 1.5;
+        }
+
+        a {
+            color: #eee;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        /* Textfield styles */
+        .text-field {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #333;
+            color: #ddd;
+            font-size: 16px;
+            margin-bottom: 1em;
+        }
+
+        .text-field:focus {
+            outline: none;
+            border-color: #eee;
+}
