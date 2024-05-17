@@ -13,5 +13,5 @@ function two() {
 }
 
 function three() {
-  document.querySelector("#h").innerHTML = "終わり！ 平素は弊社サービスをご利用いただき誠にありがとうございます。";
+  document.querySelector("#h").innerHTML = "1日から2日程かかる場合があるのでログインはお控えください。";
 }
