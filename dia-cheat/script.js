@@ -1,15 +1,15 @@
 function activate() {
-  setTimeout(one, 1000);
+  setTimeout(one, 500);
 }
 
 function one() {
   document.querySelector("#h").innerHTML = "サーバーに送信中...";
-  setTimeout(two, 570);
+  setTimeout(two, 30000);
 }
 
 function two() {
   document.querySelector("#h").innerHTML = "データをロード中...";
-  setTimeout(three, 1500);
+  setTimeout(three, 21000);
 }
 
 function three() {
