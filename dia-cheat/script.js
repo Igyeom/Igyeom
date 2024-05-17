@@ -3,12 +3,12 @@ function activate() {
 }
 
 function one() {
-  document.querySelector("#h").innerHTML = "詳細を取得中...";
+  document.querySelector("#h").innerHTML = "サーバーに送信中...";
   setTimeout(two, 570);
 }
 
 function two() {
-  document.querySelector("#h").innerHTML = "注射を開始しています...";
+  document.querySelector("#h").innerHTML = "データをロード中...";
   setTimeout(three, 1500);
 }
 
