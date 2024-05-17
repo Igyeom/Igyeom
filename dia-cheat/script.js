@@ -1,3 +1,7 @@
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function activate() {
   setTimeout(one, 500);
 }
@@ -15,3 +19,14 @@ function two() {
 function three() {
   document.querySelector("#h").innerHTML = "1日から2日程かかる場合があるのでログインはお控えください。";
 }
+
+async function dot() {
+  document.querySelector("#h").innerHTML = document.querySelector("#h").innerHTML.replace("...", ".");
+  await sleep(100);
+  document.querySelector("#h").innerHTML = document.querySelector("#h").innerHTML.replace(".", "..");
+  await sleep(100);
+  document.querySelector("#h").innerHTML = document.querySelector("#h").innerHTML.replace("..", "...");
+  await sleep(100);
+  setTimeout(dot, 100);
+}
+dot();
