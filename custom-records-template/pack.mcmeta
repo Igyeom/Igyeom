@@ -1,0 +1,13 @@
+{
+  "pack": {
+    "pack_format": 41,
+    "supported_formats": {
+      "min_inclusive": 1,
+      "max_inclusive": 1000
+    },
+    "description": {
+      "text": "Custom Music Disc",
+      "color": "aqua"
+    }
+  }
+}
