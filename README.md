@@ -1,4 +1,5 @@
-<ins>Current Projects (may be outdated)</ins>
+<h1>:wave: Hi, I'm Ian!</h1>
+<h2>:musical_note: Check out my projects below! A comprehensive list can be found [here](https://ians.site/).</h2>
 
 # [morsecode.fun](https://morsecode.fun)
 A morse code utilities site made in Flask where you can learn morse, race each other, chat in morse, etc.
