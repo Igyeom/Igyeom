@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>you are an idiot!</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: serif;
+            zoom: 5;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="yes();">am i an idiot? button</button>
+    <h4 id="message"></h4>
+    <h1>☺︎ ☺︎ ☺︎</h1>
+    <script>
+        var arr = ["an idiot", "una idiota", "ein Idiot", "идиот", "바보", "馬鹿", "笨蛋", "một thằng ngốc", "एक बेवकूफ", "أحمق", "ਇੱਕ ਮੂਰਖ", "egy idióta", "idiootti"]
+        var i = 0;
+        
+
+        function white() {
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+            setTimeout(black, 500);
+        }
+
+        function black() {
+            document.body.style.backgroundColor = "black";
+            document.body.style.color = "white";
+            setTimeout(white, 500);
+        }
+
+        function change() {
+            document.getElementById("message").innerHTML = "you are " + arr[i] + "!";
+            document.title = "you are " + arr[i] + "!";
+            i++;
+            i %= arr.length;
+        }
+        
+        function yes() {
+            let song = new Audio("https://www.myinstants.com/media/sounds/you-are-an-idiot.mp3");
+            song.loop = true;
+            song.play();
+            setTimeout(black, 500);
+            setInterval(change, 1000);
+        }
+    </script>
+</body>
+</html>
