@@ -1,6 +1,8 @@
 <h1>:wave: Hi, I'm Ian!</h1>
 <h2>:musical_note: Check out my projects below! A comprehensive list can be found <a href="https://ians.site">here</a>.</h2>
 
+![](https://solvedac-cards-starcea.paring.moe/profile/iann)
+
 # [morsecode.fun](https://morsecode.fun)
 A morse code utilities site made in Flask where you can learn morse, race each other, chat in morse, etc.
 
