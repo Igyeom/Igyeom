@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Size Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>File Size Calculator</h1>
+    <h2>Made by <a href="https://github.com/Igyeom">Ian Park</a></h2>
+    <div class="container">
+        <h1>Image Mode</h1>
+        Resolution: <input type="text" class="img" id="w" placeholder="Image Width (W px)"> x
+        <input type="text" class="img" id="h" placeholder="Image Height (H px)">
+        <br><br>
+        Colour Depth: <input type="text" class="img" id="c" placeholder="C"> bits
+        <pre id="res_img">Result:
+W*H*C = 
+        </pre>
+    </div>
+    <br><br>
+    <div class="container">
+        <h1>Text Mode</h1>
+        Encoding: <select id="encoding">
+            <option value="a">ASCII (1-byte)</option>
+            <option value="u">UTF-8 (4-byte)</option>
+        </select><br><br>
+
+        Input Mode: <select id="mode">
+            <option value="txt">Paste Text</option>
+            <option value="len">Enter Length</option>
+        </select><br><br>
+        
+        Entered Text: <textarea id="txt"></textarea><br><br>
+        Text Length: <input type="text" id="len" disabled>
+        <br><br>
+        <pre id="res_txt">Result:
+
+        </pre>
+    </div>
+    <br><br>
+    <div class="container">
+        <h1>Audio Mode</h1>
+        Channel: <select id="channel">
+            <option value="m">Mono (1 channel)</option>
+            <option value="s">Stereo (2 channels)</option>
+        </select><br><br>
+        
+        Sample Rate: <input type="text" class="audio" id="hz"> Hz<br><br>
+        Bit Depth: <input type="text" class="audio" id="bits"> bits<br><br>
+        Length in seconds: <input type="text" class="audio" id="s"> s
+        <br><br>
+        <pre id="res_audio">Result:
+
+        </pre>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
