@@ -1,4 +1,71 @@
-console.log("toki!");
+console.log("pona");
+var AddLanguage=function(id,name,json,mod)
+{
+	//used in loc files
+	//if mod is true, this file is augmenting the current language
+	if (id==locId && !mod) return false;//don't load twice
+	if (!Langs[id]) return false;
+	locId=id;
+	if (Langs[locId].isEN) EN=true; else EN=false;
+	locName=Langs[id].nameEN;//name
+	
+	if (mod)
+	{
+		for (var i in json)
+		{
+			locStrings[i]=json[i];
+		}
+		for (var i in locStrings)
+		{
+			var bit=i.split(']');
+			if (bit[1] && bit[0].indexOf('[COMMENT:')!=0 && !locStringsByPart[bit[0].substring(1)]) locStringsByPart[bit[0].substring(1)]=i;
+		}
+		console.log('Augmented language "'+locName+'".');
+	}
+	else
+	{
+		locStrings=json;
+		locPlur=json['']['plural-forms']||locPlurFallback;
+		delete locStrings[''];
+		for (var i in locStrings)
+		{
+			if (locStrings[i]=='/') locStrings[i]=i;
+		}
+		
+		locPlur=(function(plural_form){
+			//lifted and modified from gettext.js
+			var pf_re=new RegExp('^\\s*nplurals\\s*=\\s*[0-9]+\\s*;\\s*plural\\s*=\\s*(?:\\s|[-\\?\\|&=!<>+*/%:;n0-9_\(\)])+');
+			if (!pf_re.test(plural_form))
+			throw new Error('The plural form "'+plural_form+'" is not valid');
+			return new Function('n','var plural, nplurals; '+ plural_form +' return plural;');
+			//return new Function('n','var plural, nplurals; '+ plural_form +' return { nplurals: nplurals, plural: (plural === true ? 1 : (plural ? plural : 0)) };');
+		})(locPlur);
+		
+		locPatches=[];
+		for (var i in locStrings){
+			if (i.split('|')[0]=='Update notes')
+			{
+				var patch=i.split('|');
+				var patchTranslated=locStrings[i].split('|');
+				locPatches.push({id:parseInt(patch[1]),type:1,title:patchTranslated[2],points:patchTranslated.slice(3)})
+			}
+		}
+		var sortMap=function(a,b)
+		{
+			if (a.id<b.id) return 1;
+			else return -1;
+		}
+		locPatches.sort(sortMap);
+		
+		for (var i in locStrings)
+		{
+			var bit=i.split(']');
+			if (bit[1] && bit[0].indexOf('[COMMENT:')!=0 && !locStringsByPart[bit[0].substring(1)]) locStringsByPart[bit[0].substring(1)]=i;
+		}
+		
+		console.log('Loaded language "'+locName+'".');
+	}
+}
 AddLanguage('TOK','toki pona',{
 	"": {
 		"language": "TOK",
