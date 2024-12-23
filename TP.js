@@ -1,19 +1,19 @@
-AddLanguage('FR','french',{
+AddLanguage('TOK','toki pona',{
 	"": {
-		"language": "FR",
+		"language": "TOK",
 		"plural-forms": "nplurals=2;plural=(n!=1);"
 	},
-	"cookie": "/",
-	"sugar lump": "morceau de sucre",
-	"heavenly chip": "pépite céleste",
-	"wrinkler": "rideux",
-	"building": "construction",
-	"upgrade": "amélioration",
-	"golden cookie": "cookie doré",
-	"grandmapocalypse": "/",
+	"cookie": "pan sike",
+	"sugar lump": "kulupu suwi",
+	"heavenly chip": "ijo sewi",
+	"wrinkler": "monsuta jaki",
+	"building": "tomo",
+	"upgrade": "ante pona",
+	"golden cookie": "pan sike pona",
+	"grandmapocalypse": "ike pi mama mama meli",
 	"%1 cookie": [
-		"%1 testing airogjrieojgior",
-		"%1 testing aiorsdgjidertjgioertjh"
+		"pan suwi %1",
+		"pan suwi %1"
 	],
 	"%1 sugar lump": [
 		"%1 morceau de sucre",
