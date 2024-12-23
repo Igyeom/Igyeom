@@ -1,4 +1,4 @@
-console.log("pona");
+console.log("pona a!");
 var AddLanguage=function(id,name,json,mod)
 {
 	//used in loc files
@@ -65,8 +65,7 @@ var AddLanguage=function(id,name,json,mod)
 		
 		console.log('Loaded language "'+locName+'".');
 	}
-}
-AddLanguage('TOK','toki pona',{
+}('TOK','toki pona',{
 	"": {
 		"language": "TOK",
 		"plural-forms": "nplurals=2;plural=(n!=1);"
