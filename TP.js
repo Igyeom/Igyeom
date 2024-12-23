@@ -1,3 +1,4 @@
+console.log("toki!");
 AddLanguage('TOK','toki pona',{
 	"": {
 		"language": "TOK",
