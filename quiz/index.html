@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#smp-general Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="loadjson.js"></script>
+</head>
+<body>
+    <h1>Guess who said the following:</h1>
+    <div id="card">
+        <img src="" alt="Profile Picture" id="avatar" height="64px" width="64px"> <h2 id="author">User</h2>
+        <p id="message">Press the 'Start' button to begin!</p>
+        <footer id="timestamp"></footer>
+    </div>
+    
+    <h3 id="timer">2:00</h3>
+    <h3 id="timer">Score: <span id="score" style="color: #ff0;">0</span></h3><br><br>
+
+    <div id="buttons">
+        <button id="start" onclick="start()">Start</button><br>
+        <button id="option_a" onclick="guess(options[0])"><img src="" alt="Profile Picture" id="avatar1" width="32px" height="32px"> <span id="name1"></span></button>
+        <button id="option_b" onclick="guess(options[1])"><img src="" alt="Profile Picture" id="avatar2" width="32px" height="32px"> <span id="name2"></span></button>
+        <button id="option_c" onclick="guess(options[2])"><img src="" alt="Profile Picture" id="avatar3" width="32px" height="32px"> <span id="name3"></span></button>
+        <button id="option_d" onclick="guess(options[3])"><img src="" alt="Profile Picture" id="avatar4" width="32px" height="32px"> <span id="name4"></span></button>
+        <button id="option_e" onclick="guess(options[4])"><img src="" alt="Profile Picture" id="avatar5" width="32px" height="32px"> <span id="name5"></span></button>
+        <button id="option_f" onclick="guess(options[5])"><img src="" alt="Profile Picture" id="avatar6" width="32px" height="32px"> <span id="name6"></span></button>
+        <button id="option_g" onclick="guess(options[6])"><img src="" alt="Profile Picture" id="avatar7" width="32px" height="32px"> <span id="name7"></span></button>
+        <button id="option_h" onclick="guess(options[7])"><img src="" alt="Profile Picture" id="avatar8" width="32px" height="32px"> <span id="name8"></span></button>
+        <button id="option_i" onclick="guess(options[8])"><img src="" alt="Profile Picture" id="avatar9" width="32px" height="32px"> <span id="name9"></span></button>
+        <button id="option_j" onclick="guess(options[9])"><img src="" alt="Profile Picture" id="avatar10" width="32px" height="32px"> <span id="name10"></span></button>
+        <button id="option_k" onclick="guess(options[10])"><img src="" alt="Profile Picture" id="avatar11" width="32px" height="32px"> <span id="name11"></span></button>
+        <button id="option_l" onclick="guess(options[11])"><img src="" alt="Profile Picture" id="avatar12" width="32px" height="32px"> <span id="name12"></span></button>
+        <button id="option_m" onclick="guess(options[12])"><img src="" alt="Profile Picture" id="avatar13" width="32px" height="32px"> <span id="name13"></span></button>
+        <button id="option_n" onclick="guess(options[13])"><img src="" alt="Profile Picture" id="avatar14" width="32px" height="32px"> <span id="name14"></span></button>
+        <button id="option_o" onclick="guess(options[14])"><img src="" alt="Profile Picture" id="avatar15" width="32px" height="32px"> <span id="name15"></span></button>
+        <button id="option_p" onclick="guess(options[15])"><img src="" alt="Profile Picture" id="avatar16" width="32px" height="32px"> <span id="name16"></span></button>
+        <button id="option_q" onclick="guess(options[16])"><img src="" alt="Profile Picture" id="avatar17" width="32px" height="32px"> <span id="name17"></span></button>
+        <button id="option_r" onclick="guess(options[17])"><img src="" alt="Profile Picture" id="avatar18" width="32px" height="32px"> <span id="name18"></span></button>
+        <button id="option_s" onclick="guess(options[18])"><img src="" alt="Profile Picture" id="avatar19" width="32px" height="32px"> <span id="name19"></span></button>
+        <button id="option_t" onclick="guess(options[19])"><img src="" alt="Profile Picture" id="avatar20" width="32px" height="32px"> <span id="name20"></span></button>
+        <button id="option_u" onclick="guess(options[20])"><img src="" alt="Profile Picture" id="avatar21" width="32px" height="32px"> <span id="name21"></span></button>
+        <button id="option_v" onclick="guess(options[21])"><img src="" alt="Profile Picture" id="avatar22" width="32px" height="32px"> <span id="name22"></span></button>
+        <button id="option_w" onclick="guess(options[22])"><img src="" alt="Profile Picture" id="avatar23" width="32px" height="32px"> <span id="name23"></span></button>
+        <button id="option_x" onclick="guess(options[23])"><img src="" alt="Profile Picture" id="avatar24" width="32px" height="32px"> <span id="name24"></span></button>
+        <button id="option_y" onclick="guess(options[24])"><img src="" alt="Profile Picture" id="avatar25" width="32px" height="32px"> <span id="name25"></span></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
