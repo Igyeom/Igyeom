@@ -20,11 +20,11 @@ const update = () => {
 
 const guess = async (guess) => {
     if (timer === 0) return;
-    if (timer === 120) return;
+    if (timer === 120) alert("Press 'Start' to begin the quiz.");
     if (guess === data[answer].author) {
         document.getElementById('message').innerHTML = "Correct!";
         document.getElementById('message').style.color = 'limegreen';
-        score++;
+        if (timer < 120) score++;
         document.getElementById('score').innerHTML = score;
         await new Promise(r => setTimeout(r, 300));
         document.getElementById('message').style.color = 'white';
