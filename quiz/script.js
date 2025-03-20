@@ -34,6 +34,7 @@ const guess = async (guess) => {
         document.getElementById('message').style.color = 'red';
         document.getElementById('avatar').src = data[answer].avatar;
         document.getElementById('author').innerHTML = data[answer].author;
+        if (timer < 120) score--;
         await new Promise(r => setTimeout(r, 2000));
         document.getElementById('message').style.color = 'white';
         update();
