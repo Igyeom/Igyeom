@@ -43,6 +43,7 @@ const guess = async (guess) => {
 }
 
 const start = () => {
+    timer--;
     setInterval(() => {
         if (timer > 0) {timer--; document.getElementById('timer').style.color = 'white';}
         else document.getElementById('timer').style.color = 'red';
