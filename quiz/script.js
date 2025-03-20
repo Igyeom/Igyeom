@@ -20,6 +20,7 @@ const update = () => {
 
 const guess = async (guess) => {
     if (timer === 0) return;
+    if (timer === 120) return;
     if (guess === data[answer].author) {
         document.getElementById('message').innerHTML = "Correct!";
         document.getElementById('message').style.color = 'limegreen';
