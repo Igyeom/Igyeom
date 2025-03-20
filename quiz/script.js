@@ -33,7 +33,7 @@ const guess = async (guess) => {
         document.getElementById('message').style.color = 'red';
         document.getElementById('avatar').src = data[answer].avatar;
         document.getElementById('author').innerHTML = data[answer].author;
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 2000));
         document.getElementById('message').style.color = 'white';
         update();
     }
