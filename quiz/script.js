@@ -43,7 +43,7 @@ const start = () => {
     setInterval(() => {
         if (timer > 0) {timer--; document.getElementById('timer').style.color = 'white';}
         else document.getElementById('timer').style.color = 'red';
-        if (timer < 10) document.getElementById('timer').innerText = Math.floor(timer / 60) + ":0" + timer%60;
+        if (timer%60 < 10) document.getElementById('timer').innerText = Math.floor(timer / 60) + ":0" + timer%60;
         else document.getElementById('timer').innerText = Math.floor(timer / 60) + ":" + timer%60;
         if (timer === 0) {
             document.getElementById('message').innerHTML = "Time's up!";
