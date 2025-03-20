@@ -44,6 +44,7 @@ const guess = async (guess) => {
 
 const start = () => {
     timer--;
+    document.getElementById('timer').innerText = Math.floor(timer / 60) + ":" + timer%60;
     setInterval(() => {
         if (timer > 0) {timer--; document.getElementById('timer').style.color = 'white';}
         else document.getElementById('timer').style.color = 'red';
