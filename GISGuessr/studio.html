@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoGuessr JSON Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+    #form-section {
+      flex: 1;
+    }
+    #preview-section {
+      flex: 2;
+      position: relative;
+    }
+    #floorplan-preview {
+      width: 100%;
+      border: 1px solid #ccc;
+      position: relative;
+    }
+    #select-rect {
+      position: absolute;
+      border: 2px dashed red;
+      background-color: rgba(255, 0, 0, 0.3);
+      display: none;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+  <h1>GeoGuessr Location JSON Builder</h1>
+  <div class="container">
+    <div id="form-section">
+      <label>Location Image:
+        <select id="locationPath"></select>
+      </label><br><br>
+      <label>Floor Plan:
+        <select id="floorplanPath"></select>
+      </label><br><br>
+      <button onclick="setFloorplanImage()">Load Floor Plan</button><br><br>
+      <button onclick="addLocation()">Add Location</button>
+      <button onclick="exportJSON()">Export JSON</button>
+      <button onclick="importJSON()">Import JSON</button>
+      <input type="file" id="importFile" style="display:none" accept="application/json">
+      <h3>JSON Output</h3>
+      <textarea id="jsonOutput" readonly></textarea>
+    </div>
+
+    <div id="preview-section">
+      <img id="floorplan-preview" src="" alt="Floor Plan Preview">
+      <div id="select-rect"></div>
+    </div>
+  </div>
+
+  <script>
+    const locations = [];
+    let startX, startY, isDrawing = false;
+    const floorplan = document.getElementById('floorplan-preview');
+    const rectDiv = document.getElementById('select-rect');
+
+    const floorplanList = [
+      "ArtsG.jpg", "Arts1.jpg", "Arts2.jpg", "Arts3.jpg", "Arts4.jpg", "Arts5.jpg", "Arts6.jpg",
+      "CentralG.jpg", "SecondaryB.jpg", "SecondaryL.jpg", "SecondaryG.jpg", "SecondaryF.jpg", "SecondaryS.jpg"
+    ];
+
+    const locationImages = ['IMG_2439.HEIC.png', 'IMG_2444.HEIC.png', 'IMG_2446.HEIC.png', 'IMG_2460.HEIC.png', 'IMG_2461.HEIC.png', 'IMG_2476.HEIC.png', 'IMG_2486.HEIC.png', 'IMG_2487.HEIC.png', 'IMG_5816.HEIC.png', 'IMG_5817.HEIC.png', 'IMG_5818.HEIC.png', 'IMG_5819.HEIC.png', 'IMG_5820.HEIC.png', 'IMG_5821.HEIC.png', 'IMG_5822.HEIC.png', 'IMG_5823.HEIC.png', 'IMG_5824.HEIC.png', 'IMG_5825.HEIC.png', 'IMG_5826.HEIC.png', 'IMG_5827.HEIC.png', 'IMG_5828.HEIC.png', 'IMG_5829.HEIC.png', 'IMG_5830.HEIC.png', 'IMG_5831.HEIC.png', 'IMG_5832.HEIC.png', 'IMG_5833.HEIC.png', 'IMG_5834.HEIC.png', 'IMG_5835.HEIC.png', 'IMG_5836.HEIC.png', 'IMG_5837.HEIC.png', 'IMG_5838.HEIC.png', 'IMG_5839.HEIC.png'];
+
+    const locationSelect = document.getElementById('locationPath');
+    const floorplanSelect = document.getElementById('floorplanPath');
+
+    locationImages.forEach(img => {
+      const opt = document.createElement('option');
+      opt.value = img;
+      opt.textContent = img;
+      locationSelect.appendChild(opt);
+    });
+
+    floorplanList.forEach(fp => {
+      const opt = document.createElement('option');
+      opt.value = fp;
+      opt.textContent = fp;
+      floorplanSelect.appendChild(opt);
+    });
+
+    floorplan.addEventListener('mousedown', e => {
+      const rect = floorplan.getBoundingClientRect();
+      startX = e.clientX - rect.left;
+      startY = e.clientY - rect.top;
+      rectDiv.style.left = `${startX}px`;
+      rectDiv.style.top = `${startY}px`;
+      rectDiv.style.width = '0px';
+      rectDiv.style.height = '0px';
+      rectDiv.style.display = 'block';
+      isDrawing = true;
+    });
+
+    floorplan.addEventListener('mousemove', e => {
+      if (!isDrawing) return;
+      const rect = floorplan.getBoundingClientRect();
+      const currentX = e.clientX - rect.left;
+      const currentY = e.clientY - rect.top;
+      const width = currentX - startX;
+      const height = currentY - startY;
+      rectDiv.style.width = `${Math.abs(width)}px`;
+      rectDiv.style.height = `${Math.abs(height)}px`;
+      rectDiv.style.left = `${Math.min(startX, currentX)}px`;
+      rectDiv.style.top = `${Math.min(startY, currentY)}px`;
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDrawing = false;
+    });
+
+    function setFloorplanImage() {
+      const floorplanPath = floorplanSelect.value;
+      floorplan.src = floorplanPath;
+    }
+
+    function addLocation() {
+      const locationPath = locationSelect.value;
+      const floorplanPath = floorplanSelect.value;
+      const rect = rectDiv.getBoundingClientRect();
+      const imageRect = floorplan.getBoundingClientRect();
+      const x = rect.left - imageRect.left;
+      const y = rect.top - imageRect.top;
+      const w = rect.width;
+      const h = rect.height;
+
+      if (!locationPath || !floorplanPath || w <= 0 || h <= 0) {
+        alert("Please fill all fields and draw a rectangle.");
+        return;
+      }
+
+      // Scale to 400x300 base resolution
+      const scaleX = 400 / imageRect.width;
+      const scaleY = 300 / imageRect.height;
+
+      locations.push({
+        image: locationPath,
+        correctFloor: floorplanPath,
+        rect: {
+          x: Math.round(x * scaleX),
+          y: Math.round(y * scaleY),
+          w: Math.round(w * scaleX),
+          h: Math.round(h * scaleY)
+        }
+      });
+
+      updateJSONOutput();
+      rectDiv.style.display = 'none';
+    }
+
+    function updateJSONOutput() {
+      document.getElementById('jsonOutput').value = JSON.stringify(locations, null, 2);
+    }
+
+    function exportJSON() {
+      const blob = new Blob([JSON.stringify(locations, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'locations.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importJSON() {
+      const fileInput = document.getElementById('importFile');
+      fileInput.click();
+      fileInput.onchange = () => {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+          try {
+            const data = JSON.parse(e.target.result);
+            if (Array.isArray(data)) {
+              locations.length = 0;
+              locations.push(...data);
+              updateJSONOutput();
+            } else {
+              alert("Invalid JSON format.");
+            }
+          } catch (err) {
+            alert("Error parsing JSON file.");
+          }
+        };
+        reader.readAsText(file);
+      };
+    }
+  </script>
+</body>
+</html>
