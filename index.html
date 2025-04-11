@@ -1,568 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>School GeoGuessr Game</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-    }
-
-    #game-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    #background-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    #location-image {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    #controls {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      border-radius: 10px;
-      z-index: 3;
-    }
-
-    #map-container {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      width: 400px;
-      height: 300px;
-      background-color: #fff;
-      border: 2px solid #ccc;
-      border-radius: 10px;
-      overflow: hidden;
-      z-index: 2;
-    }
-
-    #floorplan-image {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    #pin {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: red;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      display: none;
-    }
-
-    #guess-button {
-      position: absolute;
-      bottom: 5px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      padding: 5px 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #score-display, #timer-display {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      padding: 10px;
-      border-radius: 10px;
-      z-index: 3;
-      font-size: 16px;
-    }
-    #timer-display {
-      top: 100px !important;
-    }
-  </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ians.site</title>
+	<link rel="stylesheet" href="style.css">
+    <meta name="google-site-verification" content="0CCmE_M9XdzKh1mt-wvb7g6gS0MGA-BzbbEgzcPDWHI">
+    <meta name="title" content="ians.site">
+    <meta name="description" content="Ian's Coding Portfolio">
 </head>
 <body>
-  <div id="game-container">
-    <div id="background-container">
-      <img id="location-image" src="question.png" alt="Location View" />
-    </div>
-
-    <div id="controls">
-      <label for="floor-select">Select Floor:</label>
-      <select id="floor-select" onchange="updateFloor();">
-        <option>ArtsG.jpg</option>
-        <option>Arts1.jpg</option>
-        <option>Arts2.jpg</option>
-        <option>Arts3.jpg</option>
-        <option>Arts4.jpg</option>
-        <option>Arts5.jpg</option>
-        <option>Arts6.jpg</option>
-        <option>CentralG.jpg</option>
-        <option>SecondaryB.jpg</option>
-        <option>SecondaryL.jpg</option>
-        <option>SecondaryG.jpg</option>
-        <option>SecondaryF.jpg</option>
-        <option>SecondaryS.jpg</option>
-      </select>
-      <div>
-        <label for="timer-input">Set Time (seconds):</label>
-        <input type="number" id="timer-input" min="10" max="300" value="60" />
-        <button id="start-game">Start Game</button>
-      </div>
-    </div>
-
-    <div id="map-container">
-      <img id="floorplan-image" src="question.png" alt="Floor Plan" />
-      <div id="pin"></div>
-      <button id="guess-button">GUESS</button>
-    </div>
-
-    <div id="score-display"></div>
-    <div id="timer-display"></div>
-  </div>
-
-  <script>
-    const locations = [
-      {
-        "image": "locations/IMG_2439.HEIC.png",
-        "correctFloor": "Arts3.jpg",
-        "rect": {
-          "x": 272,
-          "y": 67,
-          "w": 55,
-          "h": 110
-        }
-      },
-      {
-        "image": "locations/IMG_2444.HEIC.png",
-        "correctFloor": "Arts3.jpg",
-        "rect": {
-          "x": 130,
-          "y": 40,
-          "w": 18,
-          "h": 63
-        }
-      },
-      {
-        "image": "locations/IMG_2446.HEIC.png",
-        "correctFloor": "Arts3.jpg",
-        "rect": {
-          "x": 74,
-          "y": 67,
-          "w": 56,
-          "h": 132
-        }
-      },
-      {
-        "image": "locations/IMG_2460.HEIC.png",
-        "correctFloor": "Arts4.jpg",
-        "rect": {
-          "x": 70,
-          "y": 38,
-          "w": 185,
-          "h": 139
-        }
-      },
-      {
-        "image": "locations/IMG_2461.HEIC.png",
-        "correctFloor": "Arts4.jpg",
-        "rect": {
-          "x": 147,
-          "y": 40,
-          "w": 109,
-          "h": 61
-        }
-      },
-      {
-        "image": "locations/IMG_2486.HEIC.png",
-        "correctFloor": "CentralG.jpg",
-        "rect": {
-          "x": 113,
-          "y": 64,
-          "w": 23,
-          "h": 37
-        }
-      },
-      {
-        "image": "locations/IMG_2487.HEIC.png",
-        "correctFloor": "CentralG.jpg",
-        "rect": {
-          "x": 134,
-          "y": 64,
-          "w": 21,
-          "h": 36
-        }
-      },
-      {
-        "image": "locations/IMG_5816.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 339,
-          "y": 167,
-          "w": 36,
-          "h": 25
-        }
-      },
-      {
-        "image": "locations/IMG_5819.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 338,
-          "y": 135,
-          "w": 38,
-          "h": 32
-        }
-      },
-      {
-        "image": "locations/IMG_5820.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 292,
-          "y": 151,
-          "w": 31,
-          "h": 33
-        }
-      },
-      {
-        "image": "locations/IMG_5821.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 250,
-          "y": 193,
-          "w": 31,
-          "h": 35
-        }
-      },
-      {
-        "image": "locations/IMG_5822.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 210,
-          "y": 155,
-          "w": 32,
-          "h": 71
-        }
-      },
-      {
-        "image": "locations/IMG_5823.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 211,
-          "y": 44,
-          "w": 38,
-          "h": 72
-        }
-      },
-      {
-        "image": "locations/IMG_5824.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 224,
-          "y": 107,
-          "w": 45,
-          "h": 87
-        }
-      },
-      {
-        "image": "locations/IMG_5825.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 240,
-          "y": 62,
-          "w": 89,
-          "h": 55
-        }
-      },
-      {
-        "image": "locations/IMG_5826.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 280,
-          "y": 72,
-          "w": 57,
-          "h": 45
-        }
-      },
-      {
-        "image": "locations/IMG_5827.HEIC.png",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-          "x": 338,
-          "y": 106,
-          "w": 37,
-          "h": 29
-        }
-      },
-      {
-        "image": "locations/IMG_5828.HEIC.png",
-        "correctFloor": "SecondaryG.jpg",
-        "rect": {
-          "x": 83,
-          "y": 114,
-          "w": 31,
-          "h": 32
-        }
-      },
-      {
-        "image": "locations/IMG_5829.HEIC.png",
-        "correctFloor": "SecondaryG.jpg",
-        "rect": {
-          "x": 115,
-          "y": 70,
-          "w": 27,
-          "h": 43
-        }
-      },
-      {
-        "image": "locations/IMG_5830.HEIC.png",
-        "correctFloor": "SecondaryG.jpg",
-        "rect": {
-          "x": 107,
-          "y": 181,
-          "w": 35,
-          "h": 43
-        }
-      },
-      {
-        "image": "locations/IMG_5831.HEIC.png",
-        "correctFloor": "SecondaryL.jpg",
-        "rect": {
-          "x": 16,
-          "y": 182,
-          "w": 27,
-          "h": 45
-        }
-      },
-      {
-        "image": "locations/IMG_5832.HEIC.png",
-        "correctFloor": "SecondaryL.jpg",
-        "rect": {
-          "x": 23,
-          "y": 150,
-          "w": 45,
-          "h": 33
-        }
-      },
-      {
-        "image": "locations/IMG_5833.HEIC.png",
-        "correctFloor": "SecondaryL.jpg",
-        "rect": {
-          "x": 68,
-          "y": 195,
-          "w": 48,
-          "h": 33
-        }
-      },
-      {
-        "image": "locations/IMG_5834.HEIC.png",
-        "correctFloor": "SecondaryL.jpg",
-        "rect": {
-          "x": 150,
-          "y": 195,
-          "w": 66,
-          "h": 33
-        }
-      },
-      {
-        "image": "locations/IMG_5835.HEIC.png",
-        "correctFloor": "SecondaryL.jpg",
-        "rect": {
-          "x": 22,
-          "y": 72,
-          "w": 20,
-          "h": 45
-        }
-      },
-      {
-        "image": "locations/IMG_5836.HEIC.png",
-        "correctFloor": "SecondaryL.jpg",
-        "rect": {
-          "x": 24,
-          "y": 116,
-          "w": 43,
-          "h": 35
-        }
-      },
-      {
-        "image": "locations/IMG_5837.HEIC.png",
-        "correctFloor": "SecondaryL.jpg",
-        "rect": {
-          "x": 40,
-          "y": 72,
-          "w": 83,
-          "h": 43
-        }
-      },
-      {
-        "image": "locations/IMG_5838.HEIC.png",
-        "correctFloor": "SecondaryL.jpg",
-        "rect": {
-          "x": 93,
-          "y": 144,
-          "w": 32,
-          "h": 42
-        }
-      },
-      {
-        "image": "locations/IMG_5839.HEIC.png",
-        "correctFloor": "SecondaryL.jpg",
-        "rect": {
-          "x": 134,
-          "y": 151,
-          "w": 38,
-          "h": 42
-        }
-      }
-    ];
-
-    const maxRounds = 5;
-    let round = 0, score = 0, roundScore = 0;
-    let currentLocation, pinX = null, pinY = null, timer = null, timeLeft = 0;
-
-    const locationImg = document.getElementById('location-image');
-    const floorplanImg = document.getElementById('floorplan-image');
-    const floorSelect = document.getElementById('floor-select');
-    const guessBtn = document.getElementById('guess-button');
-    const pin = document.getElementById('pin');
-    const timerDisplay = document.getElementById('timer-display');
-    const scoreDisplay = document.getElementById('score-display');
-    const startBtn = document.getElementById('start-game');
-
-    function startGame() {
-      round = 0;
-      score = 0;
-      document.getElementById('score-display').textContent = '';
-      nextRound();
-    }
-
-    function startTimer(duration) {
-      timeLeft = duration;
-      timerDisplay.textContent = `Time: ${timeLeft}`;
-      timer = setInterval(() => {
-        timeLeft--;
-        timerDisplay.textContent = `Time: ${timeLeft}`;
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          endRound(true);
-        }
-      }, 1000);
-    }
-
-    function nextRound() {
-      if (round >= maxRounds) {
-        scoreDisplay.innerHTML = `Game Over! Final Score: ${score}/25000<br><button onclick="startGame()">Play Again</button>`;
-        
-        return;
-      }
-      round++;
-      pin.style.display = 'none';
-      pinX = pinY = null;
-      const randIndex = Math.floor(Math.random() * locations.length);
-      currentLocation = locations[randIndex];
-      locationImg.src = currentLocation.image;
-      floorplanImg.src = "FloorPlan.jpg";
-      floorSelect.value = "FloorPlan.jpg";
-      startTimer(parseInt(document.getElementById('timer-input').value));
-    }
-
-    document.getElementById('map-container').addEventListener('click', (e) => {
-      const rect = e.currentTarget.getBoundingClientRect();
-      pinX = e.clientX - rect.left;
-      pinY = e.clientY - rect.top;
-      pin.style.left = `${pinX}px`;
-      pin.style.top = `${pinY}px`;
-      pin.style.display = 'block';
-    });
-
-    guessBtn.addEventListener('click', () => endRound());
-    addEventListener('keyup', (e) => {
-      if (e.key === ' ') {
-        endRound();
-      }
-    });
-
-
-
-    function endRound(timerExpired = false) {
-      clearInterval(timer);
-      let roundPoints = 0;
-      const floorChosen = floorSelect.value;
-      const rect = currentLocation.rect;
-      if (timerExpired && (pinX === null || pinY === null)) {
-        roundPoints = 0;
-      } else if (
-        pinX >= rect.x &&
-        pinX <= rect.x + rect.w &&
-        pinY >= rect.y &&
-        pinY <= rect.y + rect.h &&
-        floorChosen === currentLocation.correctFloor
-      ) {
-        roundPoints = 5000;
-      } else if (floorChosen === currentLocation.correctFloor && pinX !== null && pinY !== null) {
-        const dx = Math.max(rect.x - pinX, 0, pinX - (rect.x + rect.w));
-        const dy = Math.max(rect.y - pinY, 0, pinY - (rect.y + rect.h));
-        const D = Math.sqrt(dx * dx + dy * dy);
-        roundPoints = Math.round(5000 * Math.exp(-D / 150));
-      }
-      score += roundPoints;
-      scoreDisplay.innerHTML = `Round ${round} Score: ${roundPoints} / 5000<br>Correct Area: (${rect.x}, ${rect.y}, ${rect.w}, ${rect.h})<br>Total Score: ${score}`;
-      setTimeout(nextRound, 2000);
-
-      const correctBox = document.createElement('div');
-      correctBox.style.position = 'absolute';
-      correctBox.style.left = `${rect.x}px`;
-      correctBox.style.top = `${rect.y}px`;
-      correctBox.style.width = `${rect.w}px`;
-      correctBox.style.height = `${rect.h}px`;
-      correctBox.style.backgroundColor = 'rgba(255, 0, 0, 0.6)';
-      correctBox.style.border = '2px solid red';
-      correctBox.style.zIndex = 2;
-
-      // Remove any previous box
-      const oldBox = document.getElementById('correct-box');
-      if (oldBox) oldBox.remove();
-      correctBox.id = 'correct-box';
-      document.getElementById('map-container').appendChild(correctBox);
-      floorplanImg.src = currentLocation.correctFloor;
-
-      // Auto remove box after 2 seconds
-      setTimeout(() => {
-        const box = document.getElementById('correct-box');
-        if (box) box.remove();
-      }, 2000);
-    }
-
-    function updateFloor() {
-        floorSelect.value;
-        floorplanImg.src = floorSelect.value;
-    }
-
-    startBtn.addEventListener('click', startGame);
-  </script>
+	<h1 class="rainbow" style="font-size: 60pt;"><i>Ian's Basement</i></h1>
+	<h2>Hi, I'm Ian. I've made a lot of things over the past few years, so I made this website to keep it in one place. Hope you enjoy these random projects I have made over the years!</h2>
+	<h2><a href="https://discord.gg/V5VnXzQeVA">Discord Server</a></h2>
+	<div class="container">
+		<div class="header-1"><b>2016</b></div>
+		<div class="year-container">
+			<div class="element-1">
+				<img src="assets/img/scratch.png" height="200px" width="200px" alt="">
+				<h2><a href="https://scratch.mit.edu/users/Ian_Park/">Scratch Account</a></h2>
+				<h2>Date: 2016-07-30~</h2>
+				<h2>Platform: Scratch</h2>
+			</div>
+		</div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<div class="header-2"><b>2020-21</b></div>
+		<div class="year-container">
+			<div class="element-2">
+				<img src="assets/img/morsecode.fun.png" height="200px" width="200px" alt="">
+				<h2><a href="https://morsecode.fun">morsecode.fun</a></h2>
+				<h2>Date: 2020-03-18~</h2>
+				<h2>Platform: Web</h2>
+			</div>
+			<div class="element-2">
+				<img src="assets/img/hwtracker.jpeg" height="200px" width="200px" alt="">
+				<h2><a href="https://hw.ians.site">Homework Tracker</a></h2>
+				<h2>Date: 2021-07</h2>
+				<h2>Platform: Web</h2>
+			</div>
+			<div class="element-2">
+				<img src="assets/img/ketchup.png" height="200px" width="200px" alt="">
+				<h2><a href="https://ians.site/ketchup">The Magical Ketchup</a></h2>
+				<h2>Date: 2021-12-16</h2>
+				<h2>Platform: PC, Web</h2>
+			</div>
+		</div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<div class="header-3"><b>2022</b></div>
+		<div class="year-container">
+			<div class="element-3">
+				<img src="assets/img/connect.png" height="200px" width="200px" alt="">
+				<h2><a href="https://online.ians.site">Connect</a></h2>
+				<h2>Date: 2022-04-23</h2>
+				<h2>Platform: PC, Web</h2>
+			</div>
+			<div class="element-3">
+				<img src="assets/img/ancestor.png" height="200px" width="200px" alt="">
+				<h2><a href="https://ians.site/as">Ancestor Survival</a></h2>
+				<h2>Date: 2022-07-25</h2>
+				<h2>Platform: Python 3</h2>
+			</div>
+		</div>
+	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div class="header-4"><b>2023</b></div>
+	<div class="year-container">
+		<div class="element-4">
+			<img src="assets/img/mtpo-timer.png" height="200px" width="200px" alt="">
+			<h2><a href="https://github.com/Igyeom/MTPO-Timer">Punch-Out!! Timer</a></h2>
+			<h2>Date: 2023-06</h2>
+			<h2>Platform: PC, Web</h2>
+		</div>
+		<div class="element-4">
+			<img src="assets/img/boxes.png" height="200px" width="200px" alt=""><h2><a href="https://ians.site/boxes">Boxes</a></h2>
+			<h2>Date: 2023-08</h2>
+			<h2>Platform: PC, Web</h2>
+		</div>
+	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div class="header-5"><b>2024+</b></div>
+	<div class="year-container">
+		<div class="element-5">
+			<img src="assets/img/tpgolf.png" height="200px" width="200px" alt="">
+			<h2><a href="https://ian-p.itch.io/tpgolf">TPGolf</a></h2>
+			<h2>Date: TBD</h2>
+			<h2>Platform: PC, Web, Mobile<a style="cursor: pointer;" onclick="highlight();">*</a></h2>
+			<footer id="mobile">*Yet to be confirmed</footer>
+		</div>
+	</div><br>
+	<script src="script.js"></script>
 </body>
 </html>
