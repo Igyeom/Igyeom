@@ -879,6 +879,11 @@
       nextRound();
     }
 
+    function setLocation() {
+      let randIndex = Math.floor(Math.random() * locations.length);
+      currentLocation = locations[randIndex];
+    }
+
     function startTimer(duration) {
       timeLeft = duration;
       timerDisplay.textContent = `Time: ${timeLeft}`;
@@ -892,6 +897,17 @@
       }, 1000);
     }
 
+    function imageExists(image_url){
+
+      var http = new XMLHttpRequest();
+
+      http.open('HEAD', image_url, false);
+      http.send();
+
+      return http.status != 404;
+
+    }
+
     function nextRound() {
       if (round >= maxRounds) {
         scoreDisplay.innerHTML = `Game Over! Final Score: ${score}/25000<br><button onclick="startGame()">Play Again</button>`;
@@ -901,8 +917,8 @@
       round++;
       pin.style.display = 'none';
       pinX = pinY = null;
-      const randIndex = Math.floor(Math.random() * locations.length);
-      currentLocation = locations[randIndex];
+      setLocation();
+      locationImg.onerror = setLocation;
       locationImg.src = currentLocation.image;
       floorplanImg.src = "FloorPlan.jpg";
       floorSelect.value = "FloorPlan.jpg";
