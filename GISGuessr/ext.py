@@ -1,11 +1,11 @@
 import os
 from PIL import Image
 from heic2png import HEIC2PNG
-dirs = ['gen2/ArtsBlock', 'gen2/SecondaryBlock']
+dirs = ['gen3']
 for dir in dirs:
     for i in os.listdir(dir):
-        HEIC2PNG(dir+'/'+i).save('input/'+i+'.png')
-for i in os.listdir('input'):
-    im = Image.open('input/'+i)
+        HEIC2PNG(dir+'/'+i).save('input3/'+i+'.png')
+for i in os.listdir('input3'):
+    im = Image.open('input3/'+i)
     im.resize((1008, 756))
-    im.save('output/' + i)
+    im.save('output3/' + i)

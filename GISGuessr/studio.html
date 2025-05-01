@@ -30,6 +30,12 @@
       border: 1px solid #ccc;
       position: relative;
     }
+
+    #location-preview {
+      border: 1px solid #ccc;
+      position: relative;
+    }
+
     #select-rect {
       position: absolute;
       border: 2px dashed red;
@@ -44,7 +50,7 @@
   </style>
 </head>
 <body>
-  <h1>GISGuessr Location JSON Builder</h1>
+  <h1>GISGuessr Location JSON Builder v1.0.1</h1>
   <div class="container">
     <div id="form-section">
       <label>Location Image:
@@ -57,7 +63,11 @@
       <button onclick="addLocation()">Add Location</button>
       <button onclick="exportJSON()">Export JSON</button>
       <button onclick="importJSON()">Import JSON</button>
+      <button onclick="loadImages()">Load Images</button>
       <input type="file" id="importFile" style="display:none" accept="application/json">
+
+      <h3>Image Paths Input</h3>
+      <textarea id="jsonInput"></textarea>
       <h3>JSON Output</h3>
       <textarea id="jsonOutput" readonly></textarea>
     </div>
@@ -66,6 +76,7 @@
       <img id="floorplan-preview" src="" alt="Floor Plan Preview">
       <div id="select-rect"></div>
     </div>
+    <img id="location-preview" alt="Location Preview" width="504" height="378">
   </div>
 
   <script>
@@ -76,13 +87,65 @@
 
     const floorplanList = [
       "ArtsG.jpg", "Arts1.jpg", "Arts2.jpg", "Arts3.jpg", "Arts4.jpg", "Arts5.jpg", "Arts6.jpg",
-      "CentralG.jpg", "SecondaryB.jpg", "SecondaryL.jpg", "SecondaryG.jpg", "SecondaryF.jpg", "SecondaryS.jpg"
+      "CentralG.jpg", "Central1.jpg", "Central2.jpg", "SecondaryB.jpg", "SecondaryL.jpg", "SecondaryG.jpg", "SecondaryF.jpg", "SecondaryS.jpg"
     ];
 
-    const locationImages = ['gen2/Arts Block/Second L Left (202 203 204 205).png', 'gen2/Arts Block/Third L Left (301 - 307).png', 'gen2/Arts Block/Third L Center (316).png', 'gen2/Arts Block/Fourth F Left (408 412 Hub).png', 'gen2/Arts Block/Fourth L Left (401 403 407 Hub).png', 'gen2/Arts Block/Fourth L Center (412 413).png', 'gen2/Arts Block/Fifth F Center.png', 'gen2/Arts Block/Third F Center (309 309b).png', 'gen2/Arts Block/Second F Center (205 210).png', 'gen2/Arts Block/Fourth F Center (407).png', 'gen2/Arts Block/Fifth F Left.png', 'gen2/Arts Block/Third F Left (310 - 315).png', 'gen2/Arts Block/Fifth L Left.png', 'gen2/Arts Block/Fifth L Center.png', 'gen2/Secondary Block/Lower D Left (L2 L3a).jpg.png', 'gen2/Secondary Block/Second A Left (S5 S6).png', 'gen2/Secondary Block/Lower D Right (L1 L10).jpg.png', 'gen2/Secondary Block/Ground C Center (G6 G13 G14).png', 'gen2/Secondary Block/First B Left (F5 F6).png', 'gen2/Secondary Block/Ground D Left (G7 G8 G9).png', 'gen2/Secondary Block/Lower C Right (L3 L4 L4a).png', 'gen2/Secondary Block/Second Hallway (S7 S8 S9).png', 'gen2/Secondary Block/Second A Center (S3 S4).png', 'gen2/Secondary Block/Second B Right (S1 S2 S10).png', 'gen2/Secondary Block/Lower D Center (L5 L6).jpg.png', 'gen2/Secondary Block/First B Right (F1 F2).png', 'gen2/Secondary Block/Ground D Right (G4 G5).png', 'gen2/Secondary Block/Ground B Center (G3 G17).png', 'gen2/Secondary Block/First A Center (F3 F4 F10 F11).png', 'gen2/Secondary Block/Ground A Left (G20 G21).png', 'gen2/Secondary Block/Ground D Center (G6 G13 G14).png', 'gen2/Secondary Block/Second B Center (S3 S4).png', 'gen2/Secondary Block/Ground A Center (G3 G17).png', 'gen2/Secondary Block/MFL Secondary.png', 'gen2/Secondary Block/Ground C Left (G15 G16).png', 'gen2/Secondary Block/First A Left (F12 F13).png', 'gen2/Secondary Block/Ground B Left (G4 G5).png', 'gen2/Secondary Block/Lower C Left (L7 L8 L9).png', 'gen2/Secondary Block/Cafeteria.png', 'gen2/Secondary Block/Ground C Right (G10 G11 G12).png', 'gen2/Secondary Block/First B Center (F3 F4 F10 F11).png', 'gen2/Secondary Block/Ground B Right (uh).png', 'gen2/Secondary Block/MFL Center.png', 'gen2/Secondary Block/Lower C Center (L5 L6).png', 'gen2/Secondary Block/First A Right (F7 F8 F9).png', 'gen2/Secondary Block/Ground A Right (G15 G16).png'];
+    let locationImages = [];
+
+    function loadImages() {
+      locationImages = JSON.parse(document.getElementById("jsonInput").value);
+      locationSelect.innerHTML = "";
+      locationImages.forEach(img => {
+        const opt = document.createElement('option');
+        opt.value = img;
+        opt.textContent = img;
+        locationSelect.appendChild(opt);
+      });
+    }
 
     const locationSelect = document.getElementById('locationPath');
     const floorplanSelect = document.getElementById('floorplanPath');
+
+    const hotkeyMap = {
+      "AG": "ArtsG.jpg",
+      "A1": "Arts1.jpg",
+      "A2": "Arts2.jpg",
+      "A3": "Arts3.jpg",
+      "A4": "Arts4.jpg",
+      "A5": "Arts5.jpg",
+      "A6": "Arts6.jpg",
+      "CG": "CentralG.jpg",
+      "C1": "Central1.jpg",
+      "C2": "Central2.jpg",
+      "SB": "SecondaryB.jpg",
+      "SL": "SecondaryL.jpg",
+      "SG": "SecondaryG.jpg",
+      "SF": "SecondaryF.jpg",
+      "SS": "SecondaryS.jpg",
+    };
+
+    let lastKey = "";
+
+    document.addEventListener("keyup", (e) => {
+      if (e.keyCode === 37 || e.keyCode === 38) {locationSelect.selectedIndex--; document.getElementById('location-preview').src = locationSelect.value;}
+      if (e.keyCode === 39 || e.keyCode === 40) {locationSelect.selectedIndex++; document.getElementById('location-preview').src = locationSelect.value;}
+      
+      const key = e.key.toUpperCase();
+      
+      if (key == ' ') addLocation();
+
+      if (!/^[A-Z0-9]$/.test(key)) return; // Ignore non-alphanumeric keys
+
+      const combo = lastKey + key;
+
+      if (hotkeyMap[combo]) {
+        floorplanSelect.value = hotkeyMap[combo];
+        lastKey = ""; // Reset after valid combo
+        setFloorplanImage();
+      } else {
+        lastKey = key; // Store as potential first key
+      }
+    });
 
     locationImages.forEach(img => {
       const opt = document.createElement('option');
@@ -96,6 +159,10 @@
       opt.value = fp;
       opt.textContent = fp;
       floorplanSelect.appendChild(opt);
+    });
+    
+    locationSelect.addEventListener('change', e => {
+      document.getElementById('location-preview').src = locationSelect.value;
     });
 
     floorplan.addEventListener('mousedown', e => {

@@ -1,0 +1,82 @@
+[
+    {
+      "image": "output3/IMG_1259.HEIC.png",
+      "correctFloor": "SecondaryB.jpg",
+      "rect": {
+        "x": 20,
+        "y": 75,
+        "w": 22,
+        "h": 48
+      }
+    },
+    {
+      "image": "output3/IMG_1258.HEIC.png",
+      "correctFloor": "SecondaryB.jpg",
+      "rect": {
+        "x": 22,
+        "y": 77,
+        "w": 20,
+        "h": 122
+      }
+    },
+    {
+      "image": "output3/IMG_1486.HEIC.png",
+      "correctFloor": "Arts6.jpg",
+      "rect": {
+        "x": 147,
+        "y": 34,
+        "w": 50,
+        "h": 92
+      }
+    },
+    {
+      "image": "output3/IMG_1487.HEIC.png",
+      "correctFloor": "Arts6.jpg",
+      "rect": {
+        "x": 149,
+        "y": 33,
+        "w": 48,
+        "h": 94
+      }
+    },
+    {
+      "image": "output3/IMG_1469.HEIC.png",
+      "correctFloor": "Arts2.jpg",
+      "rect": {
+        "x": 109,
+        "y": 65,
+        "w": 20,
+        "h": 170
+      }
+    },
+    {
+      "image": "output3/IMG_1468.HEIC.png",
+      "correctFloor": "ArtsG.jpg",
+      "rect": {
+        "x": 313,
+        "y": 166,
+        "w": 56,
+        "h": 77
+      }
+    },
+    {
+      "image": "output3/IMG_1457.HEIC.png",
+      "correctFloor": "SecondaryL.jpg",
+      "rect": {
+        "x": 149,
+        "y": 106,
+        "w": 90,
+        "h": 12
+      }
+    },
+    {
+      "image": "output3/IMG_1456.HEIC.png",
+      "correctFloor": "SecondaryL.jpg",
+      "rect": {
+        "x": 122,
+        "y": 72,
+        "w": 47,
+        "h": 126
+      }
+    }
+  ]
