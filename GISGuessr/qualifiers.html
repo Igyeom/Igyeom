@@ -118,7 +118,7 @@
     </div>
 
     <div id="controls">
-      <h3>GISGuessr v1.1.0 (Web)</h3>
+      <h3>GISGuessr v1.1.0 (Qualifying)</h3>
       <h4>Made by Ian Park</h4>
       <label for="floor-select">Select Floor:</label>
       <select id="floor-select" onchange="updateFloor();">
@@ -139,12 +139,9 @@
         <option>SecondaryS.jpg</option>
       </select>
       <div>
-        <label for="timer-input">Set Time (seconds):</label>
-        <input type="number" id="timer-input" min="10" max="300" value="60" /><br>
-        <label for="rounds">Set Rounds:</label>
-        <input type="number" id="rounds" value="5" /><br>
-        <label for="blink">Set Blink Timer (milliseconds, 0 to disable Blink Mode):</label>
-        <input type="number" id="blink" value="0" /><br>
+        <input type="number" id="timer-input" min="10" max="300" value="60" hidden/>
+        <input type="number" id="rounds" value="20" hidden />
+        <input type="number" id="blink" value="0" hidden/><br>
         <button id="start-game">Start Game</button>
       </div>
     </div>
@@ -529,26 +526,6 @@
         "y": 76,
         "w": 112,
         "h": 183
-      }
-    },
-    {
-      "image": "output/FifthLCenter.png.HEIC.jpg",
-      "correctFloor": "Arts5.jpg",
-      "rect": {
-        "x": 254,
-        "y": 66,
-        "w": 17,
-        "h": 194
-      }
-    },
-    {
-      "image": "output/FifthFCenter.png.HEIC.jpg",
-      "correctFloor": "Arts5.jpg",
-      "rect": {
-        "x": 129,
-        "y": 178,
-        "w": 17,
-        "h": 59
       }
     },
     {
