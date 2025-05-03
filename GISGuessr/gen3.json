@@ -1,992 +1,1002 @@
 [
-    {
-      "image": "output3/IMG_1259.HEIC.png",
-      "correctFloor": "SecondaryB.jpg",
-      "rect": {
-        "x": 20,
-        "y": 75,
-        "w": 22,
-        "h": 48
-      }
-    },
-    {
-      "image": "output3/IMG_1258.HEIC.png",
-      "correctFloor": "SecondaryB.jpg",
-      "rect": {
-        "x": 22,
-        "y": 77,
-        "w": 20,
-        "h": 122
-      }
-    },
-    {
-      "image": "output3/IMG_1486.HEIC.png",
-      "correctFloor": "Arts6.jpg",
-      "rect": {
-        "x": 147,
-        "y": 34,
-        "w": 50,
-        "h": 92
-      }
-    },
-    {
-      "image": "output3/IMG_1487.HEIC.png",
-      "correctFloor": "Arts6.jpg",
-      "rect": {
-        "x": 149,
-        "y": 33,
-        "w": 48,
-        "h": 94
-      }
-    },
-    {
-      "image": "output3/IMG_1469.HEIC.png",
-      "correctFloor": "Arts2.jpg",
-      "rect": {
-        "x": 109,
-        "y": 65,
-        "w": 20,
-        "h": 170
-      }
-    },
-    {
-      "image": "output3/IMG_1468.HEIC.png",
-      "correctFloor": "ArtsG.jpg",
-      "rect": {
-        "x": 313,
-        "y": 166,
-        "w": 56,
-        "h": 77
-      }
-    },
-    {
-      "image": "output3/IMG_1457.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 149,
-        "y": 106,
-        "w": 90,
-        "h": 12
-      }
-    },
-    {
-      "image": "output3/IMG_1456.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 122,
-        "y": 72,
-        "w": 47,
-        "h": 126
-      }
-    },
-    {
-      "image": "output3/IMG_7973.HEIC.png",
-      "correctFloor": "Central2.jpg",
-      "rect": {
-        "x": 144,
-        "y": 159,
-        "w": 148,
-        "h": 16
-      }
-    },
-    {
-      "image": "output3/IMG_7972.HEIC.png",
-      "correctFloor": "Central1.jpg",
-      "rect": {
-        "x": 225,
-        "y": 84,
-        "w": 126,
-        "h": 67
-      }
-    },
-    {
-      "image": "output3/IMG_1225.HEIC.png",
-      "correctFloor": "SecondaryS.jpg",
-      "rect": {
-        "x": 323,
-        "y": 107,
-        "w": 17,
-        "h": 91
-      }
-    },
-    {
-      "image": "output3/IMG_1474.HEIC.png",
-      "correctFloor": "Arts3.jpg",
-      "rect": {
-        "x": 131,
-        "y": 103,
-        "w": 128,
-        "h": 19
-      }
-    },
-    {
-      "image": "output3/IMG_1475.HEIC.png",
-      "correctFloor": "Arts3.jpg",
-      "rect": {
-        "x": 130,
-        "y": 178,
-        "w": 143,
-        "h": 19
-      }
-    },
-    {
-      "image": "output3/IMG_1239.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 260,
-        "y": 101,
-        "w": 28,
-        "h": 92
-      }
-    },
-    {
-      "image": "output3/IMG_1238.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 231,
-        "y": 100,
-        "w": 56,
-        "h": 16
-      }
-    },
-    {
-      "image": "output3/IMG_1244.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 16,
-        "y": 181,
-        "w": 93,
-        "h": 11
-      }
-    },
-    {
-      "image": "output3/IMG_1233.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 122,
-        "y": 181,
-        "w": 93,
-        "h": 12
-      }
-    },
-    {
-      "image": "output3/IMG_1232.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 251,
-        "y": 183,
-        "w": 105,
-        "h": 11
-      }
-    },
-    {
-      "image": "output3/IMG_7964.HEIC.png",
-      "correctFloor": "ArtsG.jpg",
-      "rect": {
-        "x": 102,
-        "y": 26,
-        "w": 61,
-        "h": 38
-      }
-    },
-    {
-      "image": "output3/IMG_1473.HEIC.png",
-      "correctFloor": "Arts3.jpg",
-      "rect": {
-        "x": 131,
-        "y": 39,
-        "w": 16,
-        "h": 115
-      }
-    },
-    {
-      "image": "output3/IMG_1249.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 215,
-        "y": 194,
-        "w": 36,
-        "h": 34
-      }
-    },
-    {
-      "image": "output3/IMG_1248.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 216,
-        "y": 70,
-        "w": 19,
-        "h": 111
-      }
-    },
-    {
-      "image": "output3/IMG_8025.HEIC.png",
-      "correctFloor": "Central2.jpg",
-      "rect": {
-        "x": 159,
-        "y": 53,
-        "w": 21,
-        "h": 51
-      }
-    },
-    {
-      "image": "output3/IMG_7957.HEIC.png",
-      "correctFloor": "Arts6.jpg",
-      "rect": {
-        "x": 276,
-        "y": 59,
-        "w": 52,
-        "h": 108
-      }
-    },
-    {
-      "image": "output3/IMG_7956.HEIC.png",
-      "correctFloor": "Arts2.jpg",
-      "rect": {
-        "x": 109,
-        "y": 63,
-        "w": 21,
-        "h": 173
-      }
-    },
-    {
-      "image": "output3/IMG_7969.HEIC.png",
-      "correctFloor": "CentralG.jpg",
-      "rect": {
-        "x": 156,
-        "y": 158,
-        "w": 36,
-        "h": 60
-      }
-    },
-    {
-      "image": "output3/IMG_7968.HEIC.png",
-      "correctFloor": "CentralG.jpg",
-      "rect": {
-        "x": 228,
-        "y": 65,
-        "w": 161,
-        "h": 83
-      }
-    },
-    {
-      "image": "output3/IMG_7914.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 23,
-        "y": 72,
-        "w": 18,
-        "h": 35
-      }
-    },
-    {
-      "image": "output3/IMG_7915.HEIC.png",
-      "correctFloor": "SecondaryB.jpg",
-      "rect": {
-        "x": 113,
-        "y": 200,
-        "w": 37,
-        "h": 36
-      }
-    },
-    {
-      "image": "output3/IMG_1479.HEIC.png",
-      "correctFloor": "Arts4.jpg",
-      "rect": {
-        "x": 76,
-        "y": 37,
-        "w": 183,
-        "h": 147
-      }
-    },
-    {
-      "image": "output3/IMG_1478.HEIC.png",
-      "correctFloor": "Arts4.jpg",
-      "rect": {
-        "x": 254,
-        "y": 38,
-        "w": 18,
-        "h": 142
-      }
-    },
-    {
-      "image": "output3/IMG_1234.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 123,
-        "y": 107,
-        "w": 48,
-        "h": 78
-      }
-    },
-    {
-      "image": "output3/IMG_7963.HEIC.png",
-      "correctFloor": "Arts4.jpg",
-      "rect": {
-        "x": 71,
-        "y": 37,
-        "w": 78,
-        "h": 32
-      }
-    },
-    {
-      "image": "output3/IMG_7962.HEIC.png",
-      "correctFloor": "Arts2.jpg",
-      "rect": {
-        "x": 57,
-        "y": 35,
-        "w": 74,
-        "h": 30
-      }
-    },
-    {
-      "image": "output3/IMG_1446.HEIC.png",
-      "correctFloor": "SecondaryS.jpg",
-      "rect": {
-        "x": 281,
-        "y": 181,
-        "w": 30,
-        "h": 45
-      }
-    },
-    {
-      "image": "output3/IMG_7909.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 205,
-        "y": 191,
-        "w": 36,
-        "h": 34
-      }
-    },
-    {
-      "image": "output3/IMG_1464.HEIC.png",
-      "correctFloor": "ArtsG.jpg",
-      "rect": {
-        "x": 93,
-        "y": 76,
-        "w": 112,
-        "h": 183
-      }
-    },
-    {
-      "image": "output/FifthLCenter.png.heic.png",
-      "correctFloor": "Arts5.jpg",
-      "rect": {
-        "x": 254,
-        "y": 66,
-        "w": 17,
-        "h": 194
-      }
-    },
-    {
-      "image": "output/FifthFCenter.png.heic.png",
-      "correctFloor": "Arts5.jpg",
-      "rect": {
-        "x": 129,
-        "y": 178,
-        "w": 17,
-        "h": 59
-      }
-    },
-    {
-      "image": "output3/IMG_1465.HEIC.png",
-      "correctFloor": "ArtsG.jpg",
-      "rect": {
-        "x": 109,
-        "y": 162,
-        "w": 92,
-        "h": 96
-      }
-    },
-    {
-      "image": "output3/IMG_1481.HEIC.png",
-      "correctFloor": "Arts4.jpg",
-      "rect": {
-        "x": 128,
-        "y": 38,
-        "w": 20,
-        "h": 183
-      }
-    },
-    {
-      "image": "output3/IMG_1480.HEIC.png",
-      "correctFloor": "Arts4.jpg",
-      "rect": {
-        "x": 93,
-        "y": 113,
-        "w": 54,
-        "h": 149
-      }
-    },
-    {
-      "image": "output3/IMG_1229.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 123,
-        "y": 100,
-        "w": 91,
-        "h": 16
-      }
-    },
-    {
-      "image": "output3/IMG_1228.HEIC.png",
-      "correctFloor": "SecondaryS.jpg",
-      "rect": {
-        "x": 225,
-        "y": 106,
-        "w": 114,
-        "h": 12
-      }
-    },
-    {
-      "image": "output3/IMG_1260.HEIC.png",
-      "correctFloor": "SecondaryB.jpg",
-      "rect": {
-        "x": 22,
-        "y": 194,
-        "w": 30,
-        "h": 38
-      }
-    },
-    {
-      "image": "output3/IMG_1254.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 24,
-        "y": 182,
-        "w": 93,
-        "h": 16
-      }
-    },
-    {
-      "image": "output3/IMG_1255.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 24,
-        "y": 195,
-        "w": 28,
-        "h": 32
-      }
-    },
-    {
-      "image": "output3/IMG_1450.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 211,
-        "y": 194,
-        "w": 37,
-        "h": 34
-      }
-    },
-    {
-      "image": "output3/IMG_1451.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 245,
-        "y": 106,
-        "w": 49,
-        "h": 14
-      }
-    },
-    {
-      "image": "output3/IMG_7974.HEIC.png",
-      "correctFloor": "Central2.jpg",
-      "rect": {
-        "x": 209,
-        "y": 68,
-        "w": 30,
-        "h": 102
-      }
-    },
-    {
-      "image": "output3/IMG_7975.HEIC.png",
-      "correctFloor": "Central2.jpg",
-      "rect": {
-        "x": 150,
-        "y": 160,
-        "w": 104,
-        "h": 12
-      }
-    },
-    {
-      "image": "output3/IMG_7959.HEIC.png",
-      "correctFloor": "Arts6.jpg",
-      "rect": {
-        "x": 275,
-        "y": 97,
-        "w": 54,
-        "h": 36
-      }
-    },
-    {
-      "image": "output3/IMG_7958.HEIC.png",
-      "correctFloor": "Arts6.jpg",
-      "rect": {
-        "x": 276,
-        "y": 60,
-        "w": 55,
-        "h": 110
-      }
-    },
-    {
-      "image": "output3/IMG_1247.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 16,
-        "y": 179,
-        "w": 93,
-        "h": 12
-      }
-    },
-    {
-      "image": "output3/IMG_7910.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 25,
-        "y": 72,
-        "w": 17,
-        "h": 34
-      }
-    },
-    {
-      "image": "output3/IMG_7911.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 107,
-        "y": 192,
-        "w": 36,
-        "h": 34
-      }
-    },
-    {
-      "image": "output3/IMG_1230.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 249,
-        "y": 74,
-        "w": 63,
-        "h": 32
-      }
-    },
-    {
-      "image": "output3/IMG_1231.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 225,
-        "y": 107,
-        "w": 13,
-        "h": 86
-      }
-    },
-    {
-      "image": "output3/IMG_7967.HEIC.png",
-      "correctFloor": "CentralG.jpg",
-      "rect": {
-        "x": 239,
-        "y": 162,
-        "w": 151,
-        "h": 74
-      }
-    },
-    {
-      "image": "output3/IMG_1477.HEIC.png",
-      "correctFloor": "Arts3.jpg",
-      "rect": {
-        "x": 130,
-        "y": 177,
-        "w": 126,
-        "h": 19
-      }
-    },
-    {
-      "image": "output3/IMG_1476.HEIC.png",
-      "correctFloor": "Arts3.jpg",
-      "rect": {
-        "x": 254,
-        "y": 38,
-        "w": 18,
-        "h": 140
-      }
-    },
-    {
-      "image": "output3/IMG_7953.HEIC.png",
-      "correctFloor": "Arts1.jpg",
-      "rect": {
-        "x": 230,
-        "y": 199,
-        "w": 64,
-        "h": 58
-      }
-    },
-    {
-      "image": "output3/IMG_1449.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 122,
-        "y": 192,
-        "w": 28,
-        "h": 34
-      }
-    },
-    {
-      "image": "output3/IMG_1448.HEIC.png",
-      "correctFloor": "SecondaryF.jpg",
-      "rect": {
-        "x": 124,
-        "y": 148,
-        "w": 47,
-        "h": 36
-      }
-    },
-    {
-      "image": "output3/IMG_1492.HEIC.png",
-      "correctFloor": "Central2.jpg",
-      "rect": {
-        "x": 225,
-        "y": 103,
-        "w": 14,
-        "h": 59
-      }
-    },
-    {
-      "image": "output3/IMG_1493.HEIC.png",
-      "correctFloor": "Central2.jpg",
-      "rect": {
-        "x": 13,
-        "y": 68,
-        "w": 165,
-        "h": 14
-      }
-    },
-    {
-      "image": "output3/IMG_1250.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 168,
-        "y": 103,
-        "w": 28,
-        "h": 90
-      }
-    },
-    {
-      "image": "output3/IMG_1251.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 142,
-        "y": 184,
-        "w": 96,
-        "h": 11
-      }
-    },
-    {
-      "image": "output3/IMG_1454.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 261,
-        "y": 179,
-        "w": 101,
-        "h": 14
-      }
-    },
-    {
-      "image": "output3/IMG_1455.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 206,
-        "y": 192,
-        "w": 35,
-        "h": 33
-      }
-    },
-    {
-      "image": "output3/IMG_7970.HEIC.png",
-      "correctFloor": "Central1.jpg",
-      "rect": {
-        "x": 34,
-        "y": 68,
-        "w": 139,
-        "h": 95
-      }
-    },
-    {
-      "image": "output3/IMG_7971.HEIC.png",
-      "correctFloor": "Central1.jpg",
-      "rect": {
-        "x": 173,
-        "y": 159,
-        "w": 42,
-        "h": 43
-      }
-    },
-    {
-      "image": "output3/IMG_1227.HEIC.png",
-      "correctFloor": "SecondaryS.jpg",
-      "rect": {
-        "x": 221,
-        "y": 72,
-        "w": 20,
-        "h": 113
-      }
-    },
-    {
-      "image": "output3/IMG_1226.HEIC.png",
-      "correctFloor": "SecondaryS.jpg",
-      "rect": {
-        "x": 222,
-        "y": 70,
-        "w": 25,
-        "h": 117
-      }
-    },
-    {
-      "image": "output3/IMG_1485.HEIC.png",
-      "correctFloor": "Arts6.jpg",
-      "rect": {
-        "x": 221,
-        "y": 126,
-        "w": 115,
-        "h": 134
-      }
-    },
-    {
-      "image": "output3/IMG_1484.HEIC.png",
-      "correctFloor": "Arts6.jpg",
-      "rect": {
-        "x": 271,
-        "y": 205,
-        "w": 59,
-        "h": 56
-      }
-    },
-    {
-      "image": "output3/IMG_1257.HEIC.png",
-      "correctFloor": "SecondaryB.jpg",
-      "rect": {
-        "x": 105,
-        "y": 79,
-        "w": 46,
-        "h": 30
-      }
-    },
-    {
-      "image": "output3/IMG_1256.HEIC.png",
-      "correctFloor": "SecondaryL.jpg",
-      "rect": {
-        "x": 50,
-        "y": 183,
-        "w": 191,
-        "h": 13
-      }
-    },
-    {
-      "image": "output3/IMG_1453.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 15,
-        "y": 179,
-        "w": 130,
-        "h": 16
-      }
-    },
-    {
-      "image": "output3/IMG_1452.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 130,
-        "y": 148,
-        "w": 32,
-        "h": 34
-      }
-    },
-    {
-      "image": "output3/IMG_1488.HEIC.png",
-      "correctFloor": "Central1.jpg",
-      "rect": {
-        "x": 237,
-        "y": 147,
-        "w": 34,
-        "h": 15
-      }
-    },
-    {
-      "image": "output3/IMG_1489.HEIC.png",
-      "correctFloor": "Central2.jpg",
-      "rect": {
-        "x": 14,
-        "y": 159,
-        "w": 148,
-        "h": 17
-      }
-    },
-    {
-      "image": "output3/IMG_1467.HEIC.png",
-      "correctFloor": "ArtsG.jpg",
-      "rect": {
-        "x": 300,
-        "y": 12,
-        "w": 72,
-        "h": 53
-      }
-    },
-    {
-      "image": "output3/IMG_1466.HEIC.png",
-      "correctFloor": "ArtsG.jpg",
-      "rect": {
-        "x": 196,
-        "y": 74,
-        "w": 122,
-        "h": 112
-      }
-    },
-    {
-      "image": "output3/IMG_1482.HEIC.png",
-      "correctFloor": "Arts4.jpg",
-      "rect": {
-        "x": 126,
-        "y": 39,
-        "w": 22,
-        "h": 187
-      }
-    },
-    {
-      "image": "output3/IMG_1483.HEIC.png",
-      "correctFloor": "Arts4.jpg",
-      "rect": {
-        "x": 256,
-        "y": 196,
-        "w": 69,
-        "h": 43
-      }
-    },
-    {
-      "image": "output3/IMG_1458.HEIC.png",
-      "correctFloor": "SecondaryB.jpg",
-      "rect": {
-        "x": 91,
-        "y": 76,
-        "w": 67,
-        "h": 125
-      }
-    },
-    {
-      "image": "output3/IMG_1240.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 16,
-        "y": 72,
-        "w": 126,
-        "h": 44
-      }
-    },
-    {
-      "image": "output3/IMG_1241.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 141,
-        "y": 102,
-        "w": 145,
-        "h": 11
-      }
-    },
-    {
-      "image": "output3/IMG_1237.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 205,
-        "y": 69,
-        "w": 39,
-        "h": 36
-      }
-    },
-    {
-      "image": "output3/IMG_1236.HEIC.png",
-      "correctFloor": "SecondaryG.jpg",
-      "rect": {
-        "x": 204,
-        "y": 70,
-        "w": 40,
-        "h": 35
-      }
-    },
-    {
-      "image": "output3/IMG_7960.HEIC.png",
-      "correctFloor": "Arts4.jpg",
-      "rect": {
-        "x": 75,
-        "y": 37,
-        "w": 58,
-        "h": 30
-      }
-    },
-    {
-      "image": "output3/IMG_7961.HEIC.png",
-      "correctFloor": "Arts3.jpg",
-      "rect": {
-        "x": 73,
-        "y": 37,
-        "w": 62,
-        "h": 30
-      }
-    },
-    {
-      "image": "output3/IMG_1445.HEIC.png",
-      "correctFloor": "SecondaryS.jpg",
-      "rect": {
-        "x": 280,
-        "y": 181,
-        "w": 32,
-        "h": 47
-      }
-    },
-    {
-      "image": "output3/IMG_1470.HEIC.png",
-      "correctFloor": "Arts2.jpg",
-      "rect": {
-        "x": 111,
-        "y": 35,
-        "w": 19,
-        "h": 144
-      }
-    },
-    {
-      "image": "output3/IMG_1471.HEIC.png",
-      "correctFloor": "Arts3.jpg",
-      "rect": {
-        "x": 129,
-        "y": 66,
-        "w": 17,
-        "h": 170
-      }
-    },
-    {
-      "image": "output3/IMG_7954.HEIC.png",
-      "correctFloor": "Arts2.jpg",
-      "rect": {
-        "x": 236,
-        "y": 196,
-        "w": 62,
-        "h": 38
-      }
-    },
-    {
-      "image": "output3/IMG_7955.HEIC.png",
-      "correctFloor": "Arts2.jpg",
-      "rect": {
-        "x": 236,
-        "y": 69,
-        "w": 19,
-        "h": 138
-      }
-    },
-    {
-      "image": "output3/IMG_8026.HEIC.png",
-      "correctFloor": "Central2.jpg",
-      "rect": {
-        "x": 223,
-        "y": 53,
-        "w": 16,
-        "h": 51
-      }
+  {
+    "image": "gen3/IMG_1259.HEIC.jpg",
+    "correctFloor": "SecondaryB.jpg",
+    "rect": {
+      "x": 20,
+      "y": 75,
+      "w": 22,
+      "h": 48
     }
-  ]
+  },
+  {
+    "image": "gen3/IMG_1258.HEIC.jpg",
+    "correctFloor": "SecondaryB.jpg",
+    "rect": {
+      "x": 22,
+      "y": 77,
+      "w": 20,
+      "h": 122
+    }
+  },
+  {
+    "image": "gen3/IMG_1486.HEIC.jpg",
+    "correctFloor": "Arts6.jpg",
+    "rect": {
+      "x": 147,
+      "y": 34,
+      "w": 50,
+      "h": 92
+    }
+  },
+  {
+    "image": "gen3/IMG_1487.HEIC.jpg",
+    "correctFloor": "Arts6.jpg",
+    "rect": {
+      "x": 149,
+      "y": 33,
+      "w": 48,
+      "h": 94
+    }
+  },
+  {
+    "image": "gen3/IMG_1469.HEIC.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 109,
+      "y": 65,
+      "w": 20,
+      "h": 170
+    }
+  },
+  {
+    "image": "gen3/IMG_1468.HEIC.jpg",
+    "correctFloor": "ArtsG.jpg",
+    "rect": {
+      "x": 313,
+      "y": 166,
+      "w": 56,
+      "h": 77
+    }
+  },
+  {
+    "image": "gen3/IMG_1457.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 149,
+      "y": 106,
+      "w": 90,
+      "h": 12
+    }
+  },
+  {
+    "image": "gen3/IMG_1456.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 122,
+      "y": 72,
+      "w": 47,
+      "h": 126
+    }
+  },
+  {
+    "image": "gen3/IMG_7973.HEIC.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 144,
+      "y": 159,
+      "w": 148,
+      "h": 16
+    }
+  },
+  {
+    "image": "gen3/IMG_7972.HEIC.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 225,
+      "y": 84,
+      "w": 126,
+      "h": 67
+    }
+  },
+  {
+    "image": "gen3/IMG_1225.HEIC.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 323,
+      "y": 107,
+      "w": 17,
+      "h": 91
+    }
+  },
+  {
+    "image": "gen3/IMG_1474.HEIC.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 131,
+      "y": 103,
+      "w": 128,
+      "h": 19
+    }
+  },
+  {
+    "image": "gen3/IMG_1475.HEIC.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 130,
+      "y": 178,
+      "w": 143,
+      "h": 19
+    }
+  },
+  {
+    "image": "gen3/IMG_1239.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 260,
+      "y": 101,
+      "w": 28,
+      "h": 92
+    }
+  },
+  {
+    "image": "gen3/IMG_1238.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 231,
+      "y": 100,
+      "w": 56,
+      "h": 16
+    }
+  },
+  {
+    "image": "gen3/IMG_1244.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 16,
+      "y": 181,
+      "w": 93,
+      "h": 11
+    }
+  },
+  {
+    "image": "gen3/IMG_1233.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 122,
+      "y": 181,
+      "w": 93,
+      "h": 12
+    }
+  },
+  {
+    "image": "gen3/IMG_1232.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 251,
+      "y": 183,
+      "w": 105,
+      "h": 11
+    }
+  },
+  {
+    "image": "gen3/IMG_7964.HEIC.jpg",
+    "correctFloor": "ArtsG.jpg",
+    "rect": {
+      "x": 102,
+      "y": 26,
+      "w": 61,
+      "h": 38
+    }
+  },
+  {
+    "image": "gen3/IMG_1473.HEIC.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 131,
+      "y": 39,
+      "w": 16,
+      "h": 115
+    }
+  },
+  {
+    "image": "gen3/IMG_1249.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 215,
+      "y": 194,
+      "w": 36,
+      "h": 34
+    }
+  },
+  {
+    "image": "gen3/IMG_1248.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 216,
+      "y": 70,
+      "w": 19,
+      "h": 111
+    }
+  },
+  {
+    "image": "gen3/IMG_8025.HEIC.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 159,
+      "y": 53,
+      "w": 21,
+      "h": 51
+    }
+  },
+  {
+    "image": "gen3/IMG_7957.HEIC.jpg",
+    "correctFloor": "Arts6.jpg",
+    "rect": {
+      "x": 276,
+      "y": 59,
+      "w": 52,
+      "h": 108
+    }
+  },
+  {
+    "image": "gen3/IMG_7956.HEIC.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 109,
+      "y": 63,
+      "w": 21,
+      "h": 173
+    }
+  },
+  {
+    "image": "gen3/IMG_7969.HEIC.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 156,
+      "y": 158,
+      "w": 36,
+      "h": 60
+    }
+  },
+  {
+    "image": "gen3/IMG_7968.HEIC.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 228,
+      "y": 65,
+      "w": 161,
+      "h": 83
+    }
+  },
+  {
+    "image": "gen3/IMG_7914.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 23,
+      "y": 72,
+      "w": 18,
+      "h": 35
+    }
+  },
+  {
+    "image": "gen3/IMG_7915.HEIC.jpg",
+    "correctFloor": "SecondaryB.jpg",
+    "rect": {
+      "x": 113,
+      "y": 200,
+      "w": 37,
+      "h": 36
+    }
+  },
+  {
+    "image": "gen3/IMG_1479.HEIC.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 76,
+      "y": 37,
+      "w": 183,
+      "h": 147
+    }
+  },
+  {
+    "image": "gen3/IMG_1478.HEIC.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 254,
+      "y": 38,
+      "w": 18,
+      "h": 142
+    }
+  },
+  {
+    "image": "gen3/IMG_1234.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 123,
+      "y": 107,
+      "w": 48,
+      "h": 78
+    }
+  },
+  {
+    "image": "gen3/IMG_7963.HEIC.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 71,
+      "y": 37,
+      "w": 78,
+      "h": 32
+    }
+  },
+  {
+    "image": "gen3/IMG_7962.HEIC.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 57,
+      "y": 35,
+      "w": 74,
+      "h": 30
+    }
+  },
+  {
+    "image": "gen3/IMG_1446.HEIC.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 281,
+      "y": 181,
+      "w": 30,
+      "h": 45
+    }
+  },
+  {
+    "image": "gen3/IMG_7909.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 205,
+      "y": 191,
+      "w": 36,
+      "h": 34
+    }
+  },
+  {
+    "image": "gen3/IMG_1464.HEIC.jpg",
+    "correctFloor": "ArtsG.jpg",
+    "rect": {
+      "x": 93,
+      "y": 76,
+      "w": 112,
+      "h": 183
+    }
+  },
+  {
+    "image": "output/FifthLCenter.png.HEIC.jpg",
+    "correctFloor": "Arts5.jpg",
+    "rect": {
+      "x": 254,
+      "y": 66,
+      "w": 17,
+      "h": 194
+    }
+  },
+  {
+    "image": "output/FifthFCenter.png.HEIC.jpg",
+    "correctFloor": "Arts5.jpg",
+    "rect": {
+      "x": 129,
+      "y": 178,
+      "w": 17,
+      "h": 59
+    }
+  },
+  {
+    "image": "gen3/IMG_1465.HEIC.jpg",
+    "correctFloor": "ArtsG.jpg",
+    "rect": {
+      "x": 109,
+      "y": 162,
+      "w": 92,
+      "h": 96
+    }
+  },
+  {
+    "image": "gen3/IMG_1481.HEIC.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 128,
+      "y": 38,
+      "w": 20,
+      "h": 183
+    }
+  },
+  {
+    "image": "gen3/IMG_1480.HEIC.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 93,
+      "y": 113,
+      "w": 54,
+      "h": 149
+    }
+  },
+  {
+    "image": "gen3/IMG_1229.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 123,
+      "y": 100,
+      "w": 91,
+      "h": 16
+    }
+  },
+  {
+    "image": "gen3/IMG_1228.HEIC.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 225,
+      "y": 106,
+      "w": 114,
+      "h": 12
+    }
+  },
+  {
+    "image": "gen3/IMG_1260.HEIC.jpg",
+    "correctFloor": "SecondaryB.jpg",
+    "rect": {
+      "x": 22,
+      "y": 194,
+      "w": 30,
+      "h": 38
+    }
+  },
+  {
+    "image": "gen3/IMG_1254.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 24,
+      "y": 182,
+      "w": 93,
+      "h": 16
+    }
+  },
+  {
+    "image": "gen3/IMG_1255.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 24,
+      "y": 195,
+      "w": 28,
+      "h": 32
+    }
+  },
+  {
+    "image": "gen3/IMG_1450.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 211,
+      "y": 194,
+      "w": 37,
+      "h": 34
+    }
+  },
+  {
+    "image": "gen3/IMG_1451.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 245,
+      "y": 106,
+      "w": 49,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen3/IMG_7974.HEIC.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 209,
+      "y": 68,
+      "w": 30,
+      "h": 102
+    }
+  },
+  {
+    "image": "gen3/IMG_7975.HEIC.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 150,
+      "y": 160,
+      "w": 104,
+      "h": 12
+    }
+  },
+  {
+    "image": "gen3/IMG_7959.HEIC.jpg",
+    "correctFloor": "Arts6.jpg",
+    "rect": {
+      "x": 275,
+      "y": 97,
+      "w": 54,
+      "h": 36
+    }
+  },
+  {
+    "image": "gen3/IMG_7958.HEIC.jpg",
+    "correctFloor": "Arts6.jpg",
+    "rect": {
+      "x": 276,
+      "y": 60,
+      "w": 55,
+      "h": 110
+    }
+  },
+  {
+    "image": "gen3/IMG_1247.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 16,
+      "y": 179,
+      "w": 93,
+      "h": 12
+    }
+  },
+  {
+    "image": "gen3/IMG_7910.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 25,
+      "y": 72,
+      "w": 17,
+      "h": 34
+    }
+  },
+  {
+    "image": "gen3/IMG_7911.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 107,
+      "y": 192,
+      "w": 36,
+      "h": 34
+    }
+  },
+  {
+    "image": "gen3/IMG_1230.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 249,
+      "y": 74,
+      "w": 63,
+      "h": 32
+    }
+  },
+  {
+    "image": "gen3/IMG_1231.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 225,
+      "y": 107,
+      "w": 13,
+      "h": 86
+    }
+  },
+  {
+    "image": "gen3/IMG_7967.HEIC.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 239,
+      "y": 162,
+      "w": 151,
+      "h": 74
+    }
+  },
+  {
+    "image": "gen3/IMG_1477.HEIC.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 130,
+      "y": 177,
+      "w": 126,
+      "h": 19
+    }
+  },
+  {
+    "image": "gen3/IMG_1476.HEIC.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 254,
+      "y": 38,
+      "w": 18,
+      "h": 140
+    }
+  },
+  {
+    "image": "gen3/IMG_7953.HEIC.jpg",
+    "correctFloor": "Arts1.jpg",
+    "rect": {
+      "x": 230,
+      "y": 199,
+      "w": 64,
+      "h": 58
+    }
+  },
+  {
+    "image": "gen3/IMG_1449.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 122,
+      "y": 192,
+      "w": 28,
+      "h": 34
+    }
+  },
+  {
+    "image": "gen3/IMG_1448.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 124,
+      "y": 148,
+      "w": 47,
+      "h": 36
+    }
+  },
+  {
+    "image": "gen3/IMG_1492.HEIC.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 225,
+      "y": 103,
+      "w": 14,
+      "h": 59
+    }
+  },
+  {
+    "image": "gen3/IMG_1493.HEIC.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 13,
+      "y": 68,
+      "w": 165,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen3/IMG_1250.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 168,
+      "y": 103,
+      "w": 28,
+      "h": 90
+    }
+  },
+  {
+    "image": "gen3/IMG_1251.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 142,
+      "y": 184,
+      "w": 96,
+      "h": 11
+    }
+  },
+  {
+    "image": "gen3/IMG_1454.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 261,
+      "y": 179,
+      "w": 101,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen3/IMG_1455.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 206,
+      "y": 192,
+      "w": 35,
+      "h": 33
+    }
+  },
+  {
+    "image": "gen3/IMG_7970.HEIC.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 34,
+      "y": 68,
+      "w": 139,
+      "h": 95
+    }
+  },
+  {
+    "image": "gen3/IMG_7971.HEIC.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 173,
+      "y": 159,
+      "w": 42,
+      "h": 43
+    }
+  },
+  {
+    "image": "gen3/IMG_1227.HEIC.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 221,
+      "y": 72,
+      "w": 20,
+      "h": 113
+    }
+  },
+  {
+    "image": "gen3/IMG_1226.HEIC.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 222,
+      "y": 70,
+      "w": 25,
+      "h": 117
+    }
+  },
+  {
+    "image": "gen3/IMG_1485.HEIC.jpg",
+    "correctFloor": "Arts6.jpg",
+    "rect": {
+      "x": 221,
+      "y": 126,
+      "w": 115,
+      "h": 134
+    }
+  },
+  {
+    "image": "gen3/IMG_1484.HEIC.jpg",
+    "correctFloor": "Arts6.jpg",
+    "rect": {
+      "x": 271,
+      "y": 205,
+      "w": 59,
+      "h": 56
+    }
+  },
+  {
+    "image": "gen3/IMG_1257.HEIC.jpg",
+    "correctFloor": "SecondaryB.jpg",
+    "rect": {
+      "x": 105,
+      "y": 79,
+      "w": 46,
+      "h": 30
+    }
+  },
+  {
+    "image": "gen3/IMG_1256.HEIC.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 50,
+      "y": 183,
+      "w": 191,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen3/IMG_1453.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 15,
+      "y": 179,
+      "w": 130,
+      "h": 16
+    }
+  },
+  {
+    "image": "gen3/IMG_1452.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 130,
+      "y": 148,
+      "w": 32,
+      "h": 34
+    }
+  },
+  {
+    "image": "gen3/IMG_1488.HEIC.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 237,
+      "y": 147,
+      "w": 34,
+      "h": 15
+    }
+  },
+  {
+    "image": "gen3/IMG_1489.HEIC.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 14,
+      "y": 159,
+      "w": 148,
+      "h": 17
+    }
+  },
+  {
+    "image": "gen3/IMG_1467.HEIC.jpg",
+    "correctFloor": "ArtsG.jpg",
+    "rect": {
+      "x": 300,
+      "y": 12,
+      "w": 72,
+      "h": 53
+    }
+  },
+  {
+    "image": "gen3/IMG_1466.HEIC.jpg",
+    "correctFloor": "ArtsG.jpg",
+    "rect": {
+      "x": 196,
+      "y": 74,
+      "w": 122,
+      "h": 112
+    }
+  },
+  {
+    "image": "gen3/IMG_1482.HEIC.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 126,
+      "y": 39,
+      "w": 22,
+      "h": 187
+    }
+  },
+  {
+    "image": "gen3/IMG_1483.HEIC.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 256,
+      "y": 196,
+      "w": 69,
+      "h": 43
+    }
+  },
+  {
+    "image": "gen3/IMG_1458.HEIC.jpg",
+    "correctFloor": "SecondaryB.jpg",
+    "rect": {
+      "x": 91,
+      "y": 76,
+      "w": 67,
+      "h": 125
+    }
+  },
+  {
+    "image": "gen3/IMG_1240.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 16,
+      "y": 72,
+      "w": 126,
+      "h": 44
+    }
+  },
+  {
+    "image": "gen3/IMG_1241.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 141,
+      "y": 102,
+      "w": 145,
+      "h": 11
+    }
+  },
+  {
+    "image": "gen3/IMG_1237.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 205,
+      "y": 69,
+      "w": 39,
+      "h": 36
+    }
+  },
+  {
+    "image": "gen3/IMG_1236.HEIC.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 204,
+      "y": 70,
+      "w": 40,
+      "h": 35
+    }
+  },
+  {
+    "image": "gen3/IMG_7960.HEIC.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 75,
+      "y": 37,
+      "w": 58,
+      "h": 30
+    }
+  },
+  {
+    "image": "gen3/IMG_7961.HEIC.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 73,
+      "y": 37,
+      "w": 62,
+      "h": 30
+    }
+  },
+  {
+    "image": "gen3/IMG_1445.HEIC.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 280,
+      "y": 181,
+      "w": 32,
+      "h": 47
+    }
+  },
+  {
+    "image": "gen3/IMG_1470.HEIC.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 111,
+      "y": 35,
+      "w": 19,
+      "h": 144
+    }
+  },
+  {
+    "image": "gen3/IMG_1471.HEIC.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 129,
+      "y": 66,
+      "w": 17,
+      "h": 170
+    }
+  },
+  {
+    "image": "gen3/IMG_7954.HEIC.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 236,
+      "y": 196,
+      "w": 62,
+      "h": 38
+    }
+  },
+  {
+    "image": "gen3/IMG_7955.HEIC.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 236,
+      "y": 69,
+      "w": 19,
+      "h": 138
+    }
+  },
+  {
+    "image": "gen3/IMG_8026.HEIC.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 223,
+      "y": 53,
+      "w": 16,
+      "h": 51
+    }
+  },
+  {
+    "image": "gen3/IMG_1491.HEIC.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 89,
+      "y": 159,
+      "w": 24,
+      "h": 12
+    }
+  }
+]
