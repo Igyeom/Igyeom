@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GISGuessr</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    #game-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #background-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #location-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: 0;
+      position: absolute;
+      filter: brightness(100%);
+    }
+
+    #hider {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: none;
+        z-index: 99;
+        position: absolute;
+    }
+
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 3;
+    }
+
+    #map-container {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 400px;
+      height: 300px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    #floorplan-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #pin {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      display: none;
+    }
+
+    #guess-button {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #guess-button:disabled {
+      background-color: #85bbf4;
+    }
+
+    #score-display, #timer-display {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 3;
+      font-size: 16px;
+    }
+    #timer-display {
+      top: 100px !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="background-container">
+      <img id="hider" src="question.png" alt="Blink" />
+      <img id="location-image" src="question.png" alt="Location View" draggable="false" oncontextmenu="return false;">
+    </div>
+
+    <div id="controls">
+      <h3>GISGuessr v1.1.1 (Web)</h3>
+      <h4>Made by Ian Park</h4>
+      <label for="floor-select">Select Floor:</label>
+      <select id="floor-select" onchange="updateFloor();">
+        <option>ArtsG.jpg</option>
+        <option>Arts1.jpg</option>
+        <option>Arts2.jpg</option>
+        <option>Arts3.jpg</option>
+        <option>Arts4.jpg</option>
+        <option>Arts5.jpg</option>
+        <option>Arts6.jpg</option>
+        <option>CentralG.jpg</option>
+        <option>Central1.jpg</option>
+        <option>Central2.jpg</option>
+        <option>SecondaryB.jpg</option>
+        <option>SecondaryL.jpg</option>
+        <option>SecondaryG.jpg</option>
+        <option>SecondaryF.jpg</option>
+        <option>SecondaryS.jpg</option>
+      </select>
+      <div>
+        <label for="timer-input">Set Time (seconds):</label>
+        <input type="number" id="timer-input" min="10" max="300" value="60" /><br>
+        <label for="rounds">Set Rounds:</label>
+        <input type="number" id="rounds" value="5" /><br>
+        <label for="blink">Set Blink Timer (milliseconds, 0 to disable Blink Mode):</label>
+        <input type="number" id="blink" value="0" /><br>
+        <button id="start-game">Start Game</button>
+      </div>
+    </div>
+
+    <div id="map-container">
+      <img id="floorplan-image" src="question.png" alt="Floor Plan" />
+      <div id="pin"></div>
+      <button id="guess-button">GUESS</button>
+    </div>
+
+    <div id="score-display"></div>
+    <div id="timer-display"></div>
+  </div>
+
+  <script>
+    const locations = [
+        {
+            "image": "gen3/IMG_7955.HEIC.jpg",
+            "correctFloor": "Arts2.jpg",
+            "rect": {
+                "x": 236,
+                "y": 69,
+                "w": 19,
+                "h": 138
+            }
+        },
+        {
+            "image": "gen3/IMG_1478.HEIC.jpg",
+            "correctFloor": "Arts4.jpg",
+            "rect": {
+                "x": 129,
+                "y": 65,
+                "w": 17,
+                "h": 170
+            }
+        }
+    ];
+      
+    
+    const hotkeyMap = {
+      "AG": "ArtsG.jpg",
+      "A1": "Arts1.jpg",
+      "A2": "Arts2.jpg",
+      "A3": "Arts3.jpg",
+      "A4": "Arts4.jpg",
+      "A5": "Arts5.jpg",
+      "A6": "Arts6.jpg",
+      "CG": "CentralG.jpg",
+      "C1": "Central1.jpg",
+      "C2": "Central2.jpg",
+      "SB": "SecondaryB.jpg",
+      "SL": "SecondaryL.jpg",
+      "SG": "SecondaryG.jpg",
+      "SF": "SecondaryF.jpg",
+      "SS": "SecondaryS.jpg",
+    };
+
+    let lastKey = "";
+
+    document.addEventListener("keyup", (e) => {
+      const key = e.key.toUpperCase();
+
+      if (!/^[A-Z0-9]$/.test(key)) return; // Ignore non-alphanumeric keys
+
+      const combo = lastKey + key;
+
+      if (hotkeyMap[combo]) {
+        floorplanImg.src = hotkeyMap[combo];
+        floorSelect.value = hotkeyMap[combo];
+        lastKey = ""; // Reset after valid combo
+      } else {
+        lastKey = key; // Store as potential first key
+      }
+    });
+
+    let maxRounds = 5;
+    let round = 0, score = 0, roundScore = 0;
+    let currentLocation, pinX = null, pinY = null, timer = null, timeLeft = 0;
+    let splits = [];
+
+    const locationImg = document.getElementById('location-image');
+    const floorplanImg = document.getElementById('floorplan-image');
+    const floorSelect = document.getElementById('floor-select');
+    const guessBtn = document.getElementById('guess-button');
+    const pin = document.getElementById('pin');
+    const timerDisplay = document.getElementById('timer-display');
+    const scoreDisplay = document.getElementById('score-display');
+    const startBtn = document.getElementById('start-game');
+    const rounds = document.getElementById('rounds');
+    const blink = document.getElementById('blink');
+    var startTime;
+
+    function hide() {
+        locationImg.style.filter = "brightness(0%)";
+    }
+
+    function callback() {
+      const elapsed = performance.now() - startTime;
+      const drift = elapsed - blink.value;
+      
+      console.log(drift);
+      if (drift >= 0) {
+        hide();
+        return;
+      }
+      setTimeout(callback, 5);
+    }
+
+    function scheduleTimeout() {
+      locationImg.style.filter = "brightness(100%)";
+      startTime = performance.now();
+      timeoutId = setTimeout(callback, 5);
+    }
+
+    function startGame() {
+      round = 0;
+      score = 0;
+      splits = [];
+      maxRounds = parseInt(rounds.value);
+      if (parseInt(blink.value) > 0) {
+        hide = () => {
+            locationImg.style.filter = "brightness(0%)";
+        };
+      } else {
+        hide = () => {};
+      }
+      document.getElementById('score-display').textContent = '';
+      nextRound();
+    }
+
+    function setLocation() {
+      let randIndex = Math.floor(Math.random() * locations.length);
+      currentLocation = locations[randIndex];
+    }
+
+    function startTimer(duration) {
+      timeLeft = duration;
+      timerDisplay.textContent = `Time: ${timeLeft}`;
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Time: ${timeLeft}`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          endRound(true);
+        }
+      }, 1000);
+    }
+
+    function imageExists(image_url){
+
+      var http = new XMLHttpRequest();
+
+      http.open('HEAD', image_url, false);
+      http.send();
+
+      return http.status != 404;
+
+    }
+
+    function sum(x) {
+      let ans = 0;
+      for (i of x) ans += i;
+      return ans;
+    }
+
+    async function nextRound() {
+      if (round >= maxRounds) {
+        let splitsStr = "";
+        for (let i = 0; i < maxRounds-1; i++) {
+          splitsStr += splits[i] + "s, ";
+        }
+        splitsStr += splits[maxRounds-1] + "s";
+        scoreDisplay.innerHTML = `Game Over! Final Score: ${score}/${5000*maxRounds}<br>Splits: ${splitsStr}<br>Final Time: ${sum(splits)}s<br><button onclick="startGame()">Play Again</button>`;
+        
+        return;
+      }
+      round++;
+      locationImg.style.filter = "brightness(0%)";
+      pin.style.display = 'none';
+      pinX = pinY = null;
+      setLocation();
+      locationImg.onerror = setLocation;
+      floorplanImg.src = "FloorPlan.jpg";
+      floorSelect.value = "FloorPlan.jpg";
+      guessBtn.disabled = false;
+      locationImg.src = currentLocation.image;
+      if (parseInt(blink.value) > 0) await new Promise(r => setTimeout(r, 1000));
+      scheduleTimeout(parseInt(blink.value));
+      startTimer(parseInt(document.getElementById('timer-input').value));
+    }
+
+    document.getElementById('map-container').addEventListener('click', (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      pinX = e.clientX - rect.left;
+      pinY = e.clientY - rect.top;
+      pin.style.left = `${pinX}px`;
+      pin.style.top = `${pinY}px`;
+      pin.style.display = 'block';
+    });
+
+    guessBtn.addEventListener('click', () => endRound());
+    addEventListener('keyup', (e) => {
+      if (e.key === ' ') {
+        if (!guessBtn.disabled) endRound();
+      }
+    });
+
+
+
+    function endRound(timerExpired = false) {
+      clearInterval(timer);
+      splits.push(parseInt(document.getElementById('timer-input').value)-timeLeft);
+      let roundPoints = 0;
+      const floorChosen = floorSelect.value;
+      const rect = currentLocation.rect;
+      if (timerExpired && (pinX === null || pinY === null)) {
+        roundPoints = 0;
+      } else if (
+        pinX >= rect.x &&
+        pinX <= rect.x + rect.w &&
+        pinY >= rect.y &&
+        pinY <= rect.y + rect.h &&
+        floorChosen === currentLocation.correctFloor
+      ) {
+        roundPoints = 5000;
+      } else if (floorChosen === currentLocation.correctFloor && pinX !== null && pinY !== null) {
+        const dx = Math.max(rect.x - pinX, 0, pinX - (rect.x + rect.w));
+        const dy = Math.max(rect.y - pinY, 0, pinY - (rect.y + rect.h));
+        const D = Math.sqrt(dx * dx + dy * dy);
+        roundPoints = Math.round(5000 * Math.exp(-D / 150));
+      }
+      score += roundPoints;
+      scoreDisplay.innerHTML = `Round ${round} Score: ${roundPoints}/5000<br>Correct Floor: ${currentLocation.correctFloor}<br>Total Score: ${score}`;
+      setTimeout(nextRound, 2000);
+      guessBtn.disabled = true;
+
+      const correctBox = document.createElement('div');
+      correctBox.style.position = 'absolute';
+      correctBox.style.left = `${rect.x}px`;
+      correctBox.style.top = `${rect.y}px`;
+      correctBox.style.width = `${rect.w}px`;
+      correctBox.style.height = `${rect.h}px`;
+      correctBox.style.backgroundColor = 'rgba(255, 0, 0, 0.6)';
+      correctBox.style.border = '2px solid red';
+      correctBox.style.zIndex = 2;
+
+      // Remove any previous box
+      const oldBox = document.getElementById('correct-box');
+      if (oldBox) oldBox.remove();
+      correctBox.id = 'correct-box';
+      document.getElementById('map-container').appendChild(correctBox);
+      floorplanImg.src = currentLocation.correctFloor;
+
+      // Auto remove box after 2 seconds
+      setTimeout(() => {
+        const box = document.getElementById('correct-box');
+        if (box) box.remove();
+      }, 2000);
+    }
+
+    function updateFloor() {
+        floorSelect.value;
+        floorplanImg.src = floorSelect.value;
+    }
+
+    startBtn.addEventListener('click', startGame);
+  </script>
+</body>
+</html>

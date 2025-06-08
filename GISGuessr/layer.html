@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Interaction</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    #menu {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      z-index: 5;
+    }
+
+    .ready-button {
+      position: relative;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .ready-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 10px;
+      z-index: -1;
+      transition: background-color 0.4s ease;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .ready-button:hover::before {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    #toggle-image {
+      width: 100px;
+      height: 100px;
+    }
+
+    #waiting {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2rem;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 20px 40px;
+      border-radius: 15px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <img class="background" src="Arts1.jpg" alt="Background">
+
+  <div id="menu">
+    <div class="ready-button" id="readyButton">READY</div>
+    <img id="toggle-image" src="deactivated.webp" alt="Toggle Button">
+  </div>
+
+  <div id="waiting">Waiting for opponent...</div>
+
+  <audio id="activate-sound" src="Berserk.mp3"></audio>
+  <audio id="deactivate-sound" src="Berserk.mp3"></audio>
+
+  <script>
+    let berserk = false;
+    const toggleImage = document.getElementById('toggle-image');
+    const activateSound = document.getElementById('activate-sound');
+    const deactivateSound = document.getElementById('deactivate-sound');
+
+    toggleImage.addEventListener('click', () => {
+      berserk = !berserk;
+      toggleImage.src = berserk ? 'activated.webp' : 'deactivated.webp';
+      (berserk ? activateSound : deactivateSound).play();
+    });
+
+    toggleImage.addEventListener('mouseover', () => {
+      toggleImage.src = 'hovered.webp';
+    });
+
+    toggleImage.addEventListener('mouseout', () => {
+      toggleImage.src = berserk ? 'activated.webp' : 'deactivated.webp';
+    });
+
+    document.getElementById('readyButton').addEventListener('click', () => {
+      document.getElementById('menu').style.display = 'none';
+      document.getElementById('waiting').style.display = 'block';
+    });
+
+    function start() {
+        const menu = document.getElementById('menu');
+        const waiting = document.getElementById('waiting');
+
+        let timeLeft = 5;
+        waiting.textContent = timeLeft;
+        waiting.style.display = 'block';
+
+        const countdownInterval = setInterval(() => {
+            timeLeft--;
+            waiting.textContent = timeLeft;
+
+            if (timeLeft === 0) {
+            clearInterval(countdownInterval);
+            waiting.style.display = 'none';
+            menu.style.display = 'none';
+            waiting.style.display = 'none';
+            }
+        }, 1000);
+    }
+
+  </script>
+</body>
+</html>

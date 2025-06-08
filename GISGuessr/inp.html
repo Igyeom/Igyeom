@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GISGuessr</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    #menu {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      z-index: 5;
+    }
+
+    .ready-button {
+      position: relative;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .ready-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 10px;
+      z-index: -1;
+      transition: background-color 0.4s ease;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .ready-button:hover::before {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    #toggle-image {
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+    }
+
+    #waiting {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2rem;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 20px 40px;
+      border-radius: 15px;
+      z-index: 10; /* Ensure it's above menu items when shown */
+    }
+
+    #game-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #background-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #location-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: 0;
+      position: absolute;
+    }
+
+    #hider {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: brightness(0%);
+        z-index: 99;
+        position: absolute;
+    }
+
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 3;
+    }
+
+    #map-container {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 400px;
+      height: 300px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    #floorplan-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #pin {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      display: none;
+    }
+
+    #guess-button {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #guess-button:disabled {
+      background-color: #85bbf4;
+    }
+
+    #score-display, #timer-display {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 3;
+      font-size: 16px;
+      min-width: 200px; /* Ensure enough space for scores */
+    }
+    #timer-display {
+      top: 150px !important; /* Adjusted to prevent overlap with potentially larger score display */
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="background-container">
+      <img id="location-image" src="question.png" alt="Location View" />
+    </div>
+
+    <div id="controls">
+      <h3>GISGuessr Duels Client v1.0.0</h3>
+      <h4>Made by Ian Park</h4>
+      <label for="floor-select">Select Floor:</label>
+      <select id="floor-select" onchange="updateFloor();">
+        <option>ArtsG.jpg</option>
+        <option>Arts1.jpg</option>
+        <option>Arts2.jpg</option>
+        <option>Arts3.jpg</option>
+        <option>Arts4.jpg</option>
+        <option>Arts5.jpg</option>
+        <option>Arts6.jpg</option>
+        <option>CentralG.jpg</option>
+        <option>Central1.jpg</option>
+        <option>Central2.jpg</option>
+        <option>SecondaryB.jpg</option>
+        <option>SecondaryL.jpg</option>
+        <option>SecondaryG.jpg</option>
+        <option>SecondaryF.jpg</option>
+        <option>SecondaryS.jpg</option>
+      </select>
+      <div hidden> <label for="timer-input">Set Time (seconds):</label>
+        <input type="number" id="timer-input" min="10" max="300" value="60" /><br>
+        <label for="rounds">Set Rounds (for single player):</label>
+        <input type="number" id="rounds" value="5" /><br>
+        <label for="blink">Set Blink Timer (ms, 0 to disable Blink Mode):</label>
+        <input type="number" id="blink" value="0" /><br>
+        </div>
+    </div>
+
+    <div id="map-container">
+      <img id="floorplan-image" src="question.png" alt="Floor Plan" />
+      <div id="pin"></div>
+      <button id="guess-button" disabled>GUESS</button> </div>
+
+    <div id="score-display">Match Score: You 0 - Opponent 0 (First to 11)</div>
+    <div id="timer-display"></div>
+  </div>
+  
+  <div id="menu">
+    <div class="buttons ready-button" id="readyButton">READY</div>
+    <img class="buttons" id="toggle-image" src="deactivated.webp" alt="Toggle Berserk Mode">
+    <div id="waiting">Waiting for opponent...</div>
+  </div>
+
+  <audio id="activate-sound" src="Berserk.mp3" preload="auto"></audio>
+  <audio id="deactivate-sound" src="Berserk.mp3" preload="auto"></audio>
+
+  <script>
+    // --- Multiplayer Configuration ---
+    const BASE_URL = "http://127.0.0.1:1984";
+    const USERNAME = "player_"+Math.floor(Math.random()*100000); // This client's username
+
+    // --- Global Variables ---
+    let berserk = false; // Global state of the berserk toggle
+    let menuVisible = true;
+
+    // DOM Element References
+    const toggleImage = document.getElementById('toggle-image');
+    const activateSound = document.getElementById('activate-sound');
+    const deactivateSound = document.getElementById('deactivate-sound');
+    const menu = document.getElementById('menu');
+    const waiting = document.getElementById('waiting');
+    const readyButton = document.getElementById('readyButton');
+    const locationImg = document.getElementById('location-image');
+    const floorplanImg = document.getElementById('floorplan-image');
+    const floorSelect = document.getElementById('floor-select');
+    const guessBtn = document.getElementById('guess-button');
+    const pinElement = document.getElementById('pin'); // Renamed to avoid conflict
+    const timerDisplay = document.getElementById('timer-display');
+    const scoreDisplay = document.getElementById('score-display');
+    // const startGameBtn = document.getElementById('start-game'); // For single player, not used in multiplayer flow
+    const roundsInput = document.getElementById('rounds'); 
+    const blinkInput = document.getElementById('blink'); 
+    const hiderImg = document.getElementById('hider'); 
+    const timerSettingInput = document.getElementById('timer-input'); // Default timer for rounds if server doesn't specify
+    const mapContainer = document.getElementById('map-container');
+
+    // --- Game State Variables ---
+    let currentGeoGuessrRound = 0; // Tracks GeoGuessr rounds within a match
+    let playerMatchScore = 0;
+    let opponentMatchScore = 0;
+    let playerGuessesMadeThisRound = 0;
+    const MAX_GUESSES_NORMAL = 5;
+    const MAX_GUESSES_BERSERK = 1;
+    let isBerserkActiveForCurrentMatch = false; // Set when "READY" for the match is clicked
+    
+    let currentLocationData; // Data for the current GeoGuessr location
+    let currentCorrectLocationData; // Stores correct location from server for display at round end
+    let pinX = null, pinY = null;
+    let clientRoundTimer = null; // Timer for client-side countdown (e.g., time per guess)
+    let timeLeftInRound = 0; 
+    // let roundSplits = []; // For local performance tracking if needed, less critical in multiplayer
+
+    var gameStartTimeForBlink; // Variable to store the start time for blink mode precision
+    let blinkTimeoutId; 
+    let pollingIntervalId = null;
+
+
+    // --- Game Locations Data (Fallback/Example if server doesn't provide all) ---
+    const locations = [
+    {
+        "image": "gen3/IMG_1259.HEIC.jpg",
+        "correctFloor": "SecondaryB.jpg",
+        "rect": {
+            "x": 20,
+            "y": 75,
+            "w": 22,
+            "h": 48
+        }
+    },
+    {
+        "image": "gen3/IMG_1258.HEIC.jpg",
+        "correctFloor": "SecondaryB.jpg",
+        "rect": {
+            "x": 22,
+            "y": 77,
+            "w": 20,
+            "h": 122
+        }
+    },
+    {
+        "image": "gen3/IMG_1486.HEIC.jpg",
+        "correctFloor": "Arts6.jpg",
+        "rect": {
+            "x": 198,
+            "y": 33,
+            "w": 56,
+            "h": 94
+        }
+    },
+    {
+        "image": "gen3/IMG_1487.HEIC.jpg",
+        "correctFloor": "Arts6.jpg",
+        "rect": {
+            "x": 149,
+            "y": 33,
+            "w": 50,
+            "h": 92
+        }
+    },
+    {
+        "image": "gen3/IMG_1469.HEIC.jpg",
+        "correctFloor": "Arts2.jpg",
+        "rect": {
+            "x": 109,
+            "y": 65,
+            "w": 20,
+            "h": 170
+        }
+    },
+    {
+        "image": "gen3/IMG_1468.HEIC.jpg",
+        "correctFloor": "ArtsG.jpg",
+        "rect": {
+            "x": 313,
+            "y": 166,
+            "w": 56,
+            "h": 77
+        }
+    },
+    {
+        "image": "gen3/IMG_1457.HEIC.jpg",
+        "correctFloor": "SecondaryL.jpg",
+        "rect": {
+            "x": 149,
+            "y": 106,
+            "w": 90,
+            "h": 12
+        }
+    },
+    {
+        "image": "gen3/IMG_1456.HEIC.jpg",
+        "correctFloor": "SecondaryL.jpg",
+        "rect": {
+            "x": 122,
+            "y": 72,
+            "w": 47,
+            "h": 126
+        }
+    },
+    {
+        "image": "gen3/IMG_7973.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 144,
+            "y": 159,
+            "w": 148,
+            "h": 16
+        }
+    },
+    {
+        "image": "gen3/IMG_7972.HEIC.jpg",
+        "correctFloor": "Central1.jpg",
+        "rect": {
+            "x": 225,
+            "y": 84,
+            "w": 126,
+            "h": 67
+        }
+    },
+    {
+        "image": "gen3/IMG_1225.HEIC.jpg",
+        "correctFloor": "SecondaryS.jpg",
+        "rect": {
+            "x": 323,
+            "y": 107,
+            "w": 17,
+            "h": 91
+        }
+    },
+    {
+        "image": "gen3/IMG_1474.HEIC.jpg",
+        "correctFloor": "Arts3.jpg",
+        "rect": {
+            "x": 131,
+            "y": 177,
+            "w": 142,
+            "h": 19
+        }
+    },
+    {
+        "image": "gen3/IMG_1475.HEIC.jpg",
+        "correctFloor": "Arts3.jpg",
+        "rect": {
+            "x": 130,
+            "y": 178,
+            "w": 143,
+            "h": 19
+        }
+    },
+    {
+        "image": "gen3/IMG_1239.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 260,
+            "y": 101,
+            "w": 28,
+            "h": 92
+        }
+    },
+    {
+        "image": "gen3/IMG_1238.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 231,
+            "y": 100,
+            "w": 56,
+            "h": 16
+        }
+    },
+    {
+        "image": "gen3/IMG_1244.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 16,
+            "y": 181,
+            "w": 93,
+            "h": 11
+        }
+    },
+    {
+        "image": "gen3/IMG_1233.HEIC.jpg",
+        "correctFloor": "SecondaryF.jpg",
+        "rect": {
+            "x": 122,
+            "y": 181,
+            "w": 93,
+            "h": 12
+        }
+    },
+    {
+        "image": "gen3/IMG_1232.HEIC.jpg",
+        "correctFloor": "SecondaryF.jpg",
+        "rect": {
+            "x": 251,
+            "y": 183,
+            "w": 105,
+            "h": 11
+        }
+    },
+    {
+        "image": "gen3/IMG_7964.HEIC.jpg",
+        "correctFloor": "Arts1.jpg",
+        "rect": {
+            "x": 50,
+            "y": 44,
+            "w": 69,
+            "h": 29
+        }
+    },
+    {
+        "image": "gen3/IMG_1473.HEIC.jpg",
+        "correctFloor": "Arts3.jpg",
+        "rect": {
+            "x": 131,
+            "y": 39,
+            "w": 16,
+            "h": 115
+        }
+    },
+    {
+        "image": "gen3/IMG_1249.HEIC.jpg",
+        "correctFloor": "SecondaryL.jpg",
+        "rect": {
+            "x": 215,
+            "y": 194,
+            "w": 36,
+            "h": 34
+        }
+    },
+    {
+        "image": "gen3/IMG_1248.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 216,
+            "y": 70,
+            "w": 19,
+            "h": 111
+        }
+    },
+    {
+        "image": "gen3/IMG_8025.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 159,
+            "y": 53,
+            "w": 21,
+            "h": 51
+        }
+    },
+    {
+        "image": "gen3/IMG_7957.HEIC.jpg",
+        "correctFloor": "Arts6.jpg",
+        "rect": {
+            "x": 276,
+            "y": 59,
+            "w": 52,
+            "h": 108
+        }
+    },
+    {
+        "image": "gen3/IMG_7956.HEIC.jpg",
+        "correctFloor": "Arts1.jpg",
+        "rect": {
+            "x": 101,
+            "y": 181,
+            "w": 144,
+            "h": 21
+        }
+    },
+    {
+        "image": "gen3/IMG_7969.HEIC.jpg",
+        "correctFloor": "CentralG.jpg",
+        "rect": {
+            "x": 157,
+            "y": 156,
+            "w": 82,
+            "h": 60
+        }
+    },
+    {
+        "image": "gen3/IMG_7968.HEIC.jpg",
+        "correctFloor": "CentralG.jpg",
+        "rect": {
+            "x": 228,
+            "y": 65,
+            "w": 161,
+            "h": 83
+        }
+    },
+    {
+        "image": "gen3/IMG_7914.HEIC.jpg",
+        "correctFloor": "SecondaryL.jpg",
+        "rect": {
+            "x": 23,
+            "y": 72,
+            "w": 18,
+            "h": 35
+        }
+    },
+    {
+        "image": "gen3/IMG_7915.HEIC.jpg",
+        "correctFloor": "SecondaryB.jpg",
+        "rect": {
+            "x": 113,
+            "y": 200,
+            "w": 37,
+            "h": 36
+        }
+    },
+    {
+        "image": "gen3/IMG_1479.HEIC.jpg",
+        "correctFloor": "Arts4.jpg",
+        "rect": {
+            "x": 76,
+            "y": 37,
+            "w": 183,
+            "h": 147
+        }
+    },
+    {
+        "image": "gen3/IMG_1478.HEIC.jpg",
+        "correctFloor": "Arts4.jpg",
+        "rect": {
+            "x": 129,
+            "y": 65,
+            "w": 17,
+            "h": 170
+        }
+    },
+    {
+        "image": "gen3/IMG_1234.HEIC.jpg",
+        "correctFloor": "SecondaryF.jpg",
+        "rect": {
+            "x": 123,
+            "y": 107,
+            "w": 48,
+            "h": 78
+        }
+    },
+    {
+        "image": "gen3/IMG_7963.HEIC.jpg",
+        "correctFloor": "Arts4.jpg",
+        "rect": {
+            "x": 71,
+            "y": 37,
+            "w": 78,
+            "h": 32
+        }
+    },
+    {
+        "image": "gen3/IMG_7962.HEIC.jpg",
+        "correctFloor": "Arts2.jpg",
+        "rect": {
+            "x": 57,
+            "y": 35,
+            "w": 74,
+            "h": 30
+        }
+    },
+    {
+        "image": "gen3/IMG_1446.HEIC.jpg",
+        "correctFloor": "SecondaryS.jpg",
+        "rect": {
+            "x": 281,
+            "y": 181,
+            "w": 30,
+            "h": 45
+        }
+    },
+    {
+        "image": "gen3/IMG_7909.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 205,
+            "y": 191,
+            "w": 36,
+            "h": 34
+        }
+    },
+    {
+        "image": "gen3/IMG_1464.HEIC.jpg",
+        "correctFloor": "ArtsG.jpg",
+        "rect": {
+            "x": 93,
+            "y": 76,
+            "w": 112,
+            "h": 183
+        }
+    },
+    {
+        "image": "output/FifthLCenter.heic.jpg",
+        "correctFloor": "Arts5.jpg",
+        "rect": {
+            "x": 254,
+            "y": 66,
+            "w": 17,
+            "h": 194
+        }
+    },
+    {
+        "image": "output/FifthFCenter.heic.jpg",
+        "correctFloor": "Arts5.jpg",
+        "rect": {
+            "x": 129,
+            "y": 178,
+            "w": 17,
+            "h": 59
+        }
+    },
+    {
+        "image": "gen3/IMG_1465.HEIC.jpg",
+        "correctFloor": "ArtsG.jpg",
+        "rect": {
+            "x": 109,
+            "y": 162,
+            "w": 92,
+            "h": 96
+        }
+    },
+    {
+        "image": "gen3/IMG_1481.HEIC.jpg",
+        "correctFloor": "Arts4.jpg",
+        "rect": {
+            "x": 128,
+            "y": 38,
+            "w": 20,
+            "h": 183
+        }
+    },
+    {
+        "image": "gen3/IMG_1480.HEIC.jpg",
+        "correctFloor": "Arts4.jpg",
+        "rect": {
+            "x": 93,
+            "y": 113,
+            "w": 54,
+            "h": 149
+        }
+    },
+    {
+        "image": "gen3/IMG_1229.HEIC.jpg",
+        "correctFloor": "SecondaryF.jpg",
+        "rect": {
+            "x": 123,
+            "y": 100,
+            "w": 91,
+            "h": 16
+        }
+    },
+    {
+        "image": "gen3/IMG_1228.HEIC.jpg",
+        "correctFloor": "SecondaryS.jpg",
+        "rect": {
+            "x": 225,
+            "y": 106,
+            "w": 114,
+            "h": 12
+        }
+    },
+    {
+        "image": "gen3/IMG_1260.HEIC.jpg",
+        "correctFloor": "SecondaryB.jpg",
+        "rect": {
+            "x": 22,
+            "y": 194,
+            "w": 30,
+            "h": 38
+        }
+    },
+    {
+        "image": "gen3/IMG_1254.HEIC.jpg",
+        "correctFloor": "SecondaryL.jpg",
+        "rect": {
+            "x": 24,
+            "y": 182,
+            "w": 93,
+            "h": 16
+        }
+    },
+    {
+        "image": "gen3/IMG_1255.HEIC.jpg",
+        "correctFloor": "SecondaryL.jpg",
+        "rect": {
+            "x": 24,
+            "y": 195,
+            "w": 28,
+            "h": 32
+        }
+    },
+    {
+        "image": "gen3/IMG_1450.HEIC.jpg",
+        "correctFloor": "SecondaryS.jpg",
+        "rect": {
+            "x": 212,
+            "y": 195,
+            "w": 38,
+            "h": 32
+        }
+    },
+    {
+        "image": "gen3/IMG_1451.HEIC.jpg",
+        "correctFloor": "SecondaryF.jpg",
+        "rect": {
+            "x": 237,
+            "y": 107,
+            "w": 56,
+            "h": 12
+        }
+    },
+    {
+        "image": "gen3/IMG_7974.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 209,
+            "y": 68,
+            "w": 30,
+            "h": 102
+        }
+    },
+    {
+        "image": "gen3/IMG_7975.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 150,
+            "y": 160,
+            "w": 104,
+            "h": 12
+        }
+    },
+    {
+        "image": "gen3/IMG_7959.HEIC.jpg",
+        "correctFloor": "Arts6.jpg",
+        "rect": {
+            "x": 275,
+            "y": 97,
+            "w": 54,
+            "h": 36
+        }
+    },
+    {
+        "image": "gen3/IMG_7958.HEIC.jpg",
+        "correctFloor": "Arts6.jpg",
+        "rect": {
+            "x": 276,
+            "y": 60,
+            "w": 55,
+            "h": 110
+        }
+    },
+    {
+        "image": "gen3/IMG_1247.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 16,
+            "y": 179,
+            "w": 93,
+            "h": 12
+        }
+    },
+    {
+        "image": "gen3/IMG_7910.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 14,
+            "y": 69,
+            "w": 29,
+            "h": 34
+        }
+    },
+    {
+        "image": "gen3/IMG_7911.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 107,
+            "y": 192,
+            "w": 36,
+            "h": 34
+        }
+    },
+    {
+        "image": "gen3/IMG_1230.HEIC.jpg",
+        "correctFloor": "SecondaryF.jpg",
+        "rect": {
+            "x": 237,
+            "y": 107,
+            "w": 58,
+            "h": 12
+        }
+    },
+    {
+        "image": "gen3/IMG_1231.HEIC.jpg",
+        "correctFloor": "SecondaryF.jpg",
+        "rect": {
+            "x": 225,
+            "y": 107,
+            "w": 13,
+            "h": 86
+        }
+    },
+    {
+        "image": "gen3/IMG_7967.HEIC.jpg",
+        "correctFloor": "CentralG.jpg",
+        "rect": {
+            "x": 239,
+            "y": 162,
+            "w": 151,
+            "h": 74
+        }
+    },
+    {
+        "image": "gen3/IMG_1477.HEIC.jpg",
+        "correctFloor": "Arts3.jpg",
+        "rect": {
+            "x": 130,
+            "y": 177,
+            "w": 126,
+            "h": 19
+        }
+    },
+    {
+        "image": "gen3/IMG_1476.HEIC.jpg",
+        "correctFloor": "Arts3.jpg",
+        "rect": {
+            "x": 254,
+            "y": 38,
+            "w": 18,
+            "h": 140
+        }
+    },
+    {
+        "image": "gen3/IMG_7953.HEIC.jpg",
+        "correctFloor": "Arts1.jpg",
+        "rect": {
+            "x": 230,
+            "y": 199,
+            "w": 64,
+            "h": 58
+        }
+    },
+    {
+        "image": "gen3/IMG_1449.HEIC.jpg",
+        "correctFloor": "SecondaryF.jpg",
+        "rect": {
+            "x": 122,
+            "y": 192,
+            "w": 28,
+            "h": 34
+        }
+    },
+    {
+        "image": "gen3/IMG_1448.HEIC.jpg",
+        "correctFloor": "SecondaryF.jpg",
+        "rect": {
+            "x": 124,
+            "y": 148,
+            "w": 47,
+            "h": 36
+        }
+    },
+    {
+        "image": "gen3/IMG_1492.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 225,
+            "y": 103,
+            "w": 14,
+            "h": 59
+        }
+    },
+    {
+        "image": "gen3/IMG_1493.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 13,
+            "y": 68,
+            "w": 165,
+            "h": 14
+        }
+    },
+    {
+        "image": "gen3/IMG_1250.HEIC.jpg",
+        "correctFloor": "SecondaryL.jpg",
+        "rect": {
+            "x": 168,
+            "y": 103,
+            "w": 28,
+            "h": 90
+        }
+    },
+    {
+        "image": "gen3/IMG_1251.HEIC.jpg",
+        "correctFloor": "SecondaryL.jpg",
+        "rect": {
+            "x": 142,
+            "y": 184,
+            "w": 96,
+            "h": 11
+        }
+    },
+    {
+        "image": "gen3/IMG_1454.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 261,
+            "y": 179,
+            "w": 101,
+            "h": 14
+        }
+    },
+    {
+        "image": "gen3/IMG_1455.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 206,
+            "y": 192,
+            "w": 35,
+            "h": 33
+        }
+    },
+    {
+        "image": "gen3/IMG_7970.HEIC.jpg",
+        "correctFloor": "Central1.jpg",
+        "rect": {
+            "x": 34,
+            "y": 68,
+            "w": 139,
+            "h": 95
+        }
+    },
+    {
+        "image": "gen3/IMG_7971.HEIC.jpg",
+        "correctFloor": "Central1.jpg",
+        "rect": {
+            "x": 173,
+            "y": 159,
+            "w": 42,
+            "h": 43
+        }
+    },
+    {
+        "image": "gen3/IMG_1227.HEIC.jpg",
+        "correctFloor": "SecondaryS.jpg",
+        "rect": {
+            "x": 221,
+            "y": 72,
+            "w": 20,
+            "h": 113
+        }
+    },
+    {
+        "image": "gen3/IMG_1226.HEIC.jpg",
+        "correctFloor": "SecondaryS.jpg",
+        "rect": {
+            "x": 222,
+            "y": 70,
+            "w": 25,
+            "h": 117
+        }
+    },
+    {
+        "image": "gen3/IMG_1485.HEIC.jpg",
+        "correctFloor": "Arts6.jpg",
+        "rect": {
+            "x": 221,
+            "y": 126,
+            "w": 115,
+            "h": 134
+        }
+    },
+    {
+        "image": "gen3/IMG_1484.HEIC.jpg",
+        "correctFloor": "Arts6.jpg",
+        "rect": {
+            "x": 271,
+            "y": 205,
+            "w": 59,
+            "h": 56
+        }
+    },
+    {
+        "image": "gen3/IMG_1257.HEIC.jpg",
+        "correctFloor": "SecondaryB.jpg",
+        "rect": {
+            "x": 105,
+            "y": 79,
+            "w": 46,
+            "h": 30
+        }
+    },
+    {
+        "image": "gen3/IMG_1256.HEIC.jpg",
+        "correctFloor": "SecondaryL.jpg",
+        "rect": {
+            "x": 50,
+            "y": 183,
+            "w": 191,
+            "h": 13
+        }
+    },
+    {
+        "image": "gen3/IMG_1453.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 15,
+            "y": 179,
+            "w": 130,
+            "h": 16
+        }
+    },
+    {
+        "image": "gen3/IMG_1452.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 130,
+            "y": 148,
+            "w": 32,
+            "h": 34
+        }
+    },
+    {
+        "image": "gen3/IMG_1488.HEIC.jpg",
+        "correctFloor": "Central1.jpg",
+        "rect": {
+            "x": 237,
+            "y": 147,
+            "w": 34,
+            "h": 15
+        }
+    },
+    {
+        "image": "gen3/IMG_1489.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 14,
+            "y": 159,
+            "w": 148,
+            "h": 17
+        }
+    },
+    {
+        "image": "gen3/IMG_1467.HEIC.jpg",
+        "correctFloor": "ArtsG.jpg",
+        "rect": {
+            "x": 300,
+            "y": 12,
+            "w": 72,
+            "h": 53
+        }
+    },
+    {
+        "image": "gen3/IMG_1466.HEIC.jpg",
+        "correctFloor": "ArtsG.jpg",
+        "rect": {
+            "x": 196,
+            "y": 74,
+            "w": 122,
+            "h": 112
+        }
+    },
+    {
+        "image": "gen3/IMG_1482.HEIC.jpg",
+        "correctFloor": "Arts4.jpg",
+        "rect": {
+            "x": 126,
+            "y": 39,
+            "w": 22,
+            "h": 187
+        }
+    },
+    {
+        "image": "gen3/IMG_1483.HEIC.jpg",
+        "correctFloor": "Arts4.jpg",
+        "rect": {
+            "x": 256,
+            "y": 196,
+            "w": 69,
+            "h": 43
+        }
+    },
+    {
+        "image": "gen3/IMG_1458.HEIC.jpg",
+        "correctFloor": "SecondaryB.jpg",
+        "rect": {
+            "x": 91,
+            "y": 76,
+            "w": 67,
+            "h": 125
+        }
+    },
+    {
+        "image": "gen3/IMG_1240.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 16,
+            "y": 72,
+            "w": 126,
+            "h": 44
+        }
+    },
+    {
+        "image": "gen3/IMG_1241.HEIC.jpg",
+        "correctFloor": "SecondaryG.jpg",
+        "rect": {
+            "x": 141,
+            "y": 102,
+            "w": 145,
+            "h": 11
+        }
+    },
+    {
+        "image": "gen3/IMG_1237.HEIC.jpg",
+        "correctFloor": "SecondaryS.jpg",
+        "rect": {
+            "x": 223,
+            "y": 71,
+            "w": 27,
+            "h": 37
+        }
+    },
+    {
+        "image": "gen3/IMG_1236.HEIC.jpg",
+        "correctFloor": "SecondaryS.jpg",
+        "rect": {
+            "x": 223,
+            "y": 71,
+            "w": 26,
+            "h": 36
+        }
+    },
+    {
+        "image": "gen3/IMG_7960.HEIC.jpg",
+        "correctFloor": "Arts4.jpg",
+        "rect": {
+            "x": 75,
+            "y": 37,
+            "w": 58,
+            "h": 30
+        }
+    },
+    {
+        "image": "gen3/IMG_7961.HEIC.jpg",
+        "correctFloor": "Arts3.jpg",
+        "rect": {
+            "x": 73,
+            "y": 37,
+            "w": 62,
+            "h": 30
+        }
+    },
+    {
+        "image": "gen3/IMG_1445.HEIC.jpg",
+        "correctFloor": "SecondaryS.jpg",
+        "rect": {
+            "x": 280,
+            "y": 181,
+            "w": 32,
+            "h": 47
+        }
+    },
+    {
+        "image": "gen3/IMG_1470.HEIC.jpg",
+        "correctFloor": "Arts2.jpg",
+        "rect": {
+            "x": 111,
+            "y": 35,
+            "w": 19,
+            "h": 144
+        }
+    },
+    {
+        "image": "gen3/IMG_1471.HEIC.jpg",
+        "correctFloor": "Arts3.jpg",
+        "rect": {
+            "x": 129,
+            "y": 66,
+            "w": 17,
+            "h": 170
+        }
+    },
+    {
+        "image": "gen3/IMG_7954.HEIC.jpg",
+        "correctFloor": "Arts2.jpg",
+        "rect": {
+            "x": 236,
+            "y": 196,
+            "w": 62,
+            "h": 38
+        }
+    },
+    {
+        "image": "gen3/IMG_7955.HEIC.jpg",
+        "correctFloor": "Arts2.jpg",
+        "rect": {
+            "x": 236,
+            "y": 69,
+            "w": 19,
+            "h": 138
+        }
+    },
+    {
+        "image": "gen3/IMG_8026.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 223,
+            "y": 53,
+            "w": 16,
+            "h": 51
+        }
+    },
+    {
+        "image": "gen3/IMG_1491.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 89,
+            "y": 159,
+            "w": 24,
+            "h": 12
+        }
+    },
+    {
+        "image": "gen3/IMG_7976.HEIC.jpg",
+        "correctFloor": "Central2.jpg",
+        "rect": {
+            "x": 89,
+            "y": 159,
+            "w": 115,
+            "h": 13
+        }
+    }
+];
+      
+    // --- Hotkey Mapping for Floor Selection ---
+    const hotkeyMap = {
+      "AG": "ArtsG.jpg", "A1": "Arts1.jpg", "A2": "Arts2.jpg", "A3": "Arts3.jpg",
+      "A4": "Arts4.jpg", "A5": "Arts5.jpg", "A6": "Arts6.jpg", "CG": "CentralG.jpg",
+      "C1": "Central1.jpg", "C2": "Central2.jpg", "SB": "SecondaryB.jpg", "SL": "SecondaryL.jpg",
+      "SG": "SecondaryG.jpg", "SF": "SecondaryF.jpg", "SS": "SecondaryS.jpg",
+    };
+    let lastKeyPressed = "";
+
+    // --- Event Listeners ---
+    toggleImage.addEventListener('click', () => {
+      berserk = !berserk;
+      toggleImage.src = berserk ? 'activated.webp' : 'deactivated.webp';
+      (berserk ? activateSound : deactivateSound).play().catch(e => console.warn("Audio play failed:", e));
+    });
+
+    toggleImage.addEventListener('mouseover', () => {
+      if (!berserk) toggleImage.src = 'hovered.webp';
+    });
+
+    toggleImage.addEventListener('mouseout', () => {
+      toggleImage.src = berserk ? 'activated.webp' : 'deactivated.webp';
+    });
+
+    readyButton.addEventListener('click', () => {
+      isBerserkActiveForCurrentMatch = berserk; // Capture berserk state for the upcoming match
+      if (isBerserkActiveForCurrentMatch) {
+        blinkInput.value = 100; 
+      } else {
+        // If not berserk, ensure blink input reflects its non-berserk setting (e.g., user's value or default 0)
+        // If user manually set blinkInput, that value will be used unless berserk overrides it.
+        // If blinkInput was 100 from a previous berserk game, and now berserk is off, it should reset.
+        // The default value in HTML is 0. If user changes it, that's their non-berserk choice.
+      }
+
+      document.querySelectorAll(".buttons").forEach(btn => btn.style.display = "none");
+      waiting.textContent = "Waiting for opponent...";
+      waiting.style.display = 'block';
+      menu.style.pointerEvents = 'none'; // Prevent clicking menu items behind waiting message
+      sendReadySignalAndPoll();
+    });
+    
+    document.addEventListener("keyup", (e) => {
+      if (menuVisible || guessBtn.disabled) return; 
+      const key = e.key.toUpperCase();
+      if (!/^[A-Z0-9]$/.test(key)) { 
+        lastKeyPressed = ""; 
+        return;
+      }
+      const combo = lastKeyPressed + key;
+      if (hotkeyMap[combo]) {
+        floorplanImg.src = hotkeyMap[combo];
+        floorSelect.value = hotkeyMap[combo];
+        
+        updateFloor();
+        
+        lastKeyPressed = ""; 
+      } else {
+        lastKeyPressed = key; 
+      }
+    });
+
+    mapContainer.addEventListener('click', (e) => {
+      if (guessBtn.disabled) return; 
+      const rect = e.currentTarget.getBoundingClientRect();
+      pinX = e.clientX - rect.left;
+      pinY = e.clientY - rect.top;
+      pinElement.style.left = `${pinX}px`;
+      pinElement.style.top = `${pinY}px`;
+      pinElement.style.display = 'block';
+    });
+
+    guessBtn.addEventListener('click', handleGuessSubmission);
+
+    const globalSpacebarListener = (e) => {
+      if (menuVisible) return;
+      if (e.key === ' ' && !guessBtn.disabled) {
+        handleGuessSubmission();
+      }
+    };
+    document.addEventListener('keyup', globalSpacebarListener);
+
+    // --- Multiplayer Communication ---
+    async function sendReadySignalAndPoll() {
+        try {
+         // isBerserkActiveForCurrentMatch is set when readyButton is clicked
+         const response = await fetch(`${BASE_URL}/ready@${USERNAME}`, {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ berserk: isBerserkActiveForCurrentMatch }) // Send berserk status
+         });
+}catch (error) {
+        console.error('Error sending ready signal:', error);
+        waiting.textContent = `Connection error. Try again.`;
+        document.querySelectorAll(".buttons").forEach(btn => btn.style.display = "block");
+        readyButton.textContent = "READY";
+        menu.style.pointerEvents = 'auto';
+      }
+    }
+
+    async function pollGameStatus() {
+      try {
+        const response = await fetch(`${BASE_URL}/result@${USERNAME}`);
+        if (!response.ok) {
+          console.warn(`Polling: Server responded with ${response.status}`);
+          // Consider stopping poll on persistent errors like 404 after game ends
+          if (response.status === 404 && !menuVisible) { // Game might have ended and server cleared state
+             console.log("Polling returned 404, game might have ended or server issue.");
+             // handleGameEnd(null); // Or some other cleanup
+          }
+          return;
+        }
+        const rawData = await response.text();
+
+        let jsonData;
+        try { jsonData = JSON.parse(rawData); } catch (e) { /* Not JSON */ }
+
+        if (jsonData) {
+          console.log("Polling: Received JSON", jsonData);
+          if ((jsonData.action === "start_game" || jsonData.type === "enable_guess") && menuVisible) { // Process start_game only once
+            if (pollingIntervalId && !jsonData.initialRoundData) {
+                // If start_game is a standalone signal, don't clear polling yet,
+                // as next poll should bring round data.
+                // However, if initialRoundData is present, we are good.
+            } else if (!jsonData.initialRoundData) {
+                 // If start_game is the ONLY thing, we need to make sure polling continues for the first round data
+            }
+
+            waiting.style.display = 'none';
+            menuVisible = false;
+            menu.style.display = 'none';
+            menu.style.pointerEvents = 'none';
+            
+            initializeMatchState(); // Renamed from startGame for clarity in multiplayer context
+            
+            if (jsonData.initialRoundData) {
+              clientSideNextRoundSetup(jsonData.initialRoundData);
+            } else {
+                // If no initial round data, assume next poll will bring it.
+                console.log("Match initialized. Waiting for first round data from server via polling.");
+            }
+          } else {
+            handleServerUpdate(jsonData); // Handles other JSON messages like new_round, round_result
+          }
+        } else { // Fallback to string checks
+          if (rawData.includes("start_game") && menuVisible) { // Process start_game string only once
+            console.log("Polling: Received start_game (string)");
+            waiting.style.display = 'none';
+            menuVisible = false;
+            menu.style.display = 'none';
+            menu.style.pointerEvents = 'none';
+            initializeMatchState();
+            // Assume next poll will bring first round data
+          } else if (rawData.startsWith("end_game@")) {
+            console.log("Polling: Received end_game (string)");
+            if (pollingIntervalId) clearInterval(pollingIntervalId);
+            pollingIntervalId = null;
+            const winnerUsername = rawData.substring("end_game@".length);
+            handleGameEnd(winnerUsername);
+          } else if (rawData.includes("waiting_for_players")) {
+            if(menu.style.display !== 'none') { // Only show if menu is still active
+                waiting.textContent = "Waiting for opponent...";
+                waiting.style.display = 'block';
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error polling game status:', error);
+        // waiting.textContent = "Polling error. Check console."; // Avoid persistent error message here
+      }
+    }
+    
+    function handleServerUpdate(update) { // Expects JSON update object
+        if (update.type === "new_round" || update.type === "replay_round") {
+            if (update.type === "replay_round") {
+                scoreDisplay.innerHTML += "<br>Point replayed (no score change).";
+            }
+            waiting.style.display = 'none'; // Ensure these are hidden if game is ongoing
+            menuVisible = false;
+            menu.style.display = 'none';
+            menu.style.pointerEvents = 'none';
+            clientSideNextRoundSetup(update.data);
+        } else if (update.type === "round_result") {
+            displayRoundResults(update);
+            playerMatchScore = update.data.match_scores[USERNAME] || playerMatchScore;
+            const opponentKey = Object.keys(update.data.match_scores).find(k => k !== USERNAME);
+            opponentMatchScore = opponentKey ? (update.data.match_scores[opponentKey] || opponentMatchScore) : opponentMatchScore;
+            updateOverallScoreDisplay();
+        } else if (update.type === "info_message") { // For general messages from server
+            let currentText = scoreDisplay.innerHTML;
+            scoreDisplay.innerHTML = `${update.message}`;
+        } else if (update.type === "enable_guess") { // Server explicitly tells client to enable guess
+            const maxAllowed = isBerserkActiveForCurrentMatch ? MAX_GUESSES_BERSERK : MAX_GUESSES_NORMAL;
+            if (playerGuessesMadeThisRound < maxAllowed) {
+                guessBtn.disabled = false;
+                let currentText = scoreDisplay.innerHTML;
+                
+            } else {
+                guessBtn.disabled = true;
+                 let currentText = scoreDisplay.innerHTML;
+            }
+        }
+    }
+
+    // --- Core Game Logic Functions (Multiplayer Adjusted) ---
+    function initializeMatchState() {
+      currentGeoGuessrRound = 0;
+      playerMatchScore = 0;
+      opponentMatchScore = 0;
+      // roundSplits = []; // Reset if using
+      // maxRounds (GeoGuessr rounds) is not the primary match end condition. Match is to 11 points.
+      updateOverallScoreDisplay();
+      console.log("Match state initialized. Waiting for server to start first round.");
+    }
+    
+    function clientSideNextRoundSetup(roundData) {
+      // roundData = { roundNumber: 1, location: {image: "...", correctFloor:"...", rect:{...}}, timerDuration: 60 }
+      currentGeoGuessrRound = roundData.roundNumber;
+      playerGuessesMadeThisRound = 0;
+
+      pinElement.style.display = 'none';
+      pinX = pinY = null;
+      
+      currentLocationData = roundData.location; 
+      currentCorrectLocationData = roundData.location; // Store for showing answer later
+      
+      locationImg.src = currentLocationData.image;
+      locationImg.onerror = () => { 
+          console.error("Failed to load location image:", currentLocationData.image);
+          scoreDisplay.innerHTML += "<br>Error loading location image. Server may send new round.";
+          // Optionally, inform server of image load failure if protocol supports it
+      };
+      
+      floorplanImg.src = "question.png"; 
+      floorSelect.value = "ArtsG.jpg"; 
+      updateFloor();
+      
+      // Guess button is typically enabled by a server message like "enable_guess" or implicitly if it's this player's turn
+      // For now, let's assume server will signal when to enable it.
+      guessBtn.disabled = true; 
+      
+      // Blink effect uses isBerserkActiveForCurrentMatch, blinkInput.value was set at "READY"
+      scheduleBlinkEffect(); 
+      
+      startClientRoundTimer(roundData.timerDuration || parseInt(timerSettingInput.value));
+      
+      updateOverallScoreDisplay(); // Shows match score and current round
+      let currentText = scoreDisplay.innerHTML;
+      if (!currentText.endsWith("<br>")) currentText += "<br>";
+      scoreDisplay.innerHTML = currentText + `Round ${currentGeoGuessrRound} started.`;
+    }
+
+    async function handleGuessSubmission() {
+      if (pinX === null || pinY === null) {
+        alert("Please place your pin on the map first!"); // Consider a less intrusive message box
+        return;
+      }
+
+      const maxAllowedGuesses = isBerserkActiveForCurrentMatch ? MAX_GUESSES_BERSERK : MAX_GUESSES_NORMAL;
+      if (playerGuessesMadeThisRound >= maxAllowedGuesses) {
+        alert("No more guesses left for this round.");
+        guessBtn.disabled = true;
+        return;
+      }
+
+      playerGuessesMadeThisRound++;
+      if (clientRoundTimer) clearInterval(clientRoundTimer); 
+      if (blinkTimeoutId) cancelAnimationFrame(blinkTimeoutId);
+
+      const floorChosen = floorSelect.value;
+      // isBerserkActiveForCurrentMatch was set when player hit READY for the match.
+      const berserkStatusForGuess = isBerserkActiveForCurrentMatch; 
+
+      guessBtn.disabled = true;
+      let currentText = scoreDisplay.innerHTML;
+      if (!currentText.endsWith("<br>")) currentText += "<br>";
+      scoreDisplay.innerHTML = currentText + "Guess submitted. Waiting for results...";
+
+      try {
+        const url = `${BASE_URL}/guess@${USERNAME}@${floorChosen}@${pinX}@${pinY}@${berserkStatusForGuess}`;
+        const response = await fetch(url, { method: 'POST' });
+        if (!response.ok) throw new Error(`Server guess error: ${response.status}`);
+        console.log("Guess sent. Server will update via polling.");
+        // Server response via polling will dictate next state (e.g. wait for opponent, show results)
+      } catch (error) {
+        console.error('Error sending guess:', error);
+        scoreDisplay.innerHTML += `<br>Error sending guess: ${error.message}.`;
+        // Re-enable guess button cautiously, server state should ideally control this
+        // guessBtn.disabled = false; 
+      }
+    }
+    
+    function displayRoundResults(resultsData) {
+      // resultsData = { your_score_this_round: 5000, opp_score_this_round: ..., point_winner: "ian" or "opponent" or "none",
+      //                 match_scores: {ian:1, opp:0}, correctLocation: {x,y,w,h,correctFloor}, message: "..." }
+      let resultText = `--- Round ${currentGeoGuessrRound} Result ---<br>`;
+      if (resultsData.message) resultText += `${resultsData.message}<br>`;
+      
+    //   if (resultsData.your_score_this_round !== undefined) {
+    //     resultText += `Your GISGuessr score this round: ${resultsData.your_score_this_round}/5000<br>`;
+    //   }
+      if (resultsData.point_winner) {
+        if (resultsData.point_winner === USERNAME) {
+          resultText += "You won the match point!<br>";
+        } else if (resultsData.point_winner === "none" || resultsData.point_winner === "draw") {
+          resultText += "No one won the match point this round.<br>";
+        } else {
+          resultText += `Opponent (${resultsData.point_winner}) won the match point!<br>`;
+        }
+      }
+      
+      // Update score display area, could be a specific div or the main one
+      let mainScoreHTML = scoreDisplay.innerHTML.split("--- Round")[0]; // Keep overall score part
+      scoreDisplay.innerHTML = mainScoreHTML + resultText;
+
+
+      if (resultsData.correctLocation) {
+        currentCorrectLocationData = resultsData.correctLocation;
+        const rect = resultsData.correctLocation.rect;
+        const correctFloorFile = resultsData.correctLocation.correctFloor;
+
+        const correctBox = document.createElement('div');
+        correctBox.style.position = 'absolute';
+        correctBox.style.left = `${rect.x}px`;
+        correctBox.style.top = `${rect.y}px`;
+        correctBox.style.width = `${rect.w}px`;
+        correctBox.style.height = `${rect.h}px`;
+        correctBox.style.backgroundColor = 'rgba(0, 255, 0, 0.4)';
+        correctBox.style.border = '2px solid green';
+        correctBox.style.zIndex = 2;
+        correctBox.id = 'correct-box';
+
+        const oldBox = document.getElementById('correct-box');
+        if (oldBox) oldBox.remove();
+        mapContainer.appendChild(correctBox);
+        floorplanImg.src = correctFloorFile; 
+
+        setTimeout(() => {
+          const box = document.getElementById('correct-box');
+          if (box) box.remove();
+        }, 4000);
+      }
+      guessBtn.disabled = true; // Keep disabled, server will signal next turn/round
+    }
+
+    function updateOverallScoreDisplay() {
+      let displayStr = `Match Score: You ${playerMatchScore} - Opponent ${opponentMatchScore} (First to 11)<br>`;
+      if (currentGeoGuessrRound > 0) {
+         displayStr += `Current Round: ${currentGeoGuessrRound}<br>`;
+      }
+      if (isBerserkActiveForCurrentMatch && currentGeoGuessrRound > 0 && !menuVisible) { 
+        displayStr += `BERSERK ACTIVE THIS MATCH! (1 guess per round)<br>`;
+      }
+      scoreDisplay.innerHTML = displayStr;
+    }
+
+    function handleGameEnd(winnerUsername) {
+      if (pollingIntervalId) clearInterval(pollingIntervalId);
+      pollingIntervalId = null;
+      if (clientRoundTimer) clearInterval(clientRoundTimer);
+
+      let gameOverMessage = `<h2>Match Over!</h2>`;
+      if (winnerUsername === USERNAME) {
+        gameOverMessage += `<p>Congratulations! You won the match ${playerMatchScore} - ${opponentMatchScore}!</p>`;
+      } else if (winnerUsername && winnerUsername !== "none") {
+        gameOverMessage += `<p>${winnerUsername} won the match. Final score: ${opponentMatchScore} - ${playerMatchScore}.</p>`;
+      } else {
+        gameOverMessage += `<p>The match ended. Final Score: You ${playerMatchScore} - Opponent ${opponentMatchScore}</p>`;
+      }
+      
+      gameOverMessage += `<button id="playAgainMultiplayerButton" style="padding: 10px 15px; font-size: 1rem; cursor: pointer;">Play Again?</button>`;
+      scoreDisplay.innerHTML = gameOverMessage;
+
+      const playAgainBtn = document.getElementById('playAgainMultiplayerButton');
+      if(playAgainBtn) playAgainBtn.addEventListener('click', resetAndPrepareForNewMatch);
+
+      menu.style.display = 'flex';
+      document.querySelectorAll(".buttons").forEach(btn => btn.style.display = "block");
+      readyButton.textContent = "NEW MATCH";
+      waiting.style.display = 'none';
+      menuVisible = true;
+      menu.style.pointerEvents = 'auto';
+    }
+
+    function resetAndPrepareForNewMatch() {
+      playerMatchScore = 0;
+      opponentMatchScore = 0;
+      currentGeoGuessrRound = 0;
+      berserk = false; 
+      toggleImage.src = 'deactivated.webp';
+      isBerserkActiveForCurrentMatch = false;
+      blinkInput.value = blinkInput.defaultValue; // Reset to initial HTML value (e.g., "0")
+      
+      scoreDisplay.innerHTML = "Match Score: You 0 - Opponent 0 (First to 11)"; 
+      timerDisplay.textContent = "";
+      const oldBox = document.getElementById('correct-box');
+      if (oldBox) oldBox.remove();
+
+      menu.style.display = 'flex';
+      document.querySelectorAll(".buttons").forEach(btn => btn.style.display = "block");
+      readyButton.textContent = "READY";
+      waiting.style.display = 'none';
+      menuVisible = true;
+      menu.style.pointerEvents = 'auto';
+
+      locationImg.src = "question.png";
+      floorplanImg.src = "question.png";
+      pinElement.style.display = 'none';
+      guessBtn.disabled = true; 
+      if (pollingIntervalId) clearInterval(pollingIntervalId); // Ensure no old polls running
+      pollingIntervalId = null;
+      if (clientRoundTimer) clearInterval(clientRoundTimer);
+      clientRoundTimer = null;
+    }
+
+    // --- Utility and Blink Mode Functions ---
+    function revealLocationImage() { hiderImg.style.filter = "brightness(100%)"; }
+
+    function blinkTimerCallback() {
+      const elapsed = performance.now() - gameStartTimeForBlink;
+      const blinkDurationVal = parseInt(blinkInput.value);
+      if (elapsed >= blinkDurationVal || blinkDurationVal <= 0) {
+        revealLocationImage();
+        if(blinkTimeoutId) cancelAnimationFrame(blinkTimeoutId);
+        blinkTimeoutId = null;
+        return;
+      }
+      blinkTimeoutId = requestAnimationFrame(blinkTimerCallback);
+    }
+
+    function scheduleBlinkEffect() {
+      const blinkDurationVal = parseInt(blinkInput.value);
+      if (blinkTimeoutId) cancelAnimationFrame(blinkTimeoutId); // Clear previous
+      
+      if (blinkDurationVal > 0) {
+        hiderImg.style.filter = "brightness(0%)"; 
+        gameStartTimeForBlink = performance.now();
+        blinkTimeoutId = requestAnimationFrame(blinkTimerCallback);
+      } else {
+        revealLocationImage(); 
+      }
+    }
+    
+    function startClientRoundTimer(duration) {
+      timeLeftInRound = duration;
+      timerDisplay.textContent = `Time: ${timeLeftInRound}`;
+      if (clientRoundTimer) clearInterval(clientRoundTimer); 
+      clientRoundTimer = setInterval(() => {
+        timeLeftInRound--;
+        timerDisplay.textContent = `Time: ${timeLeftInRound}`;
+        if (timeLeftInRound <= 0) {
+          clearInterval(clientRoundTimer);
+          timerDisplay.textContent = "Time's up!";
+          guessBtn.disabled = true; // Disable guess if time runs out locally
+          // Server will ultimately decide round end / consequences of timeout
+          // Client might send an auto-fail or server detects no guess.
+          // For now, client just stops allowing guesses.
+        }
+      }, 1000);
+    }
+    
+    function updateFloor() {
+        floorplanImg.src = floorSelect.value;
+    }
+
+    // --- Initial Setup ---
+    updateOverallScoreDisplay(); // Initialize score display on load
+    guessBtn.disabled = true; // Guess button disabled until a round starts and it's player's turn
+
+    setInterval(pollGameStatus, 200)
+  </script>
+</body>
+</html>

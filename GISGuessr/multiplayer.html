@@ -109,7 +109,68 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
+      background-color: #000;
+    }
+
+    #menu {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      z-index: 5;
+    }
+
+    .ready-button {
+      position: relative;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .ready-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 10px;
+      z-index: -1;
+      transition: background-color 0.4s ease;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .ready-button:hover::before {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    #toggle-image {
+      width: 100px;
+      height: 100px;
+    }
+
+    #waiting {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2rem;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 20px 40px;
+      border-radius: 15px;
+      z-index: 1;
     }
 
     #game-container {
@@ -134,14 +195,13 @@
       object-fit: contain;
       z-index: 0;
       position: absolute;
-      filter: brightness(100%);
     }
 
     #hider {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        display: none;
+        filter: brightness(0%);
         z-index: 99;
         position: absolute;
     }
@@ -226,14 +286,26 @@
 </head>
 <body>
   <div id="game-container">
-    <div id="background-container">
-      <img id="hider" src="question.png" alt="Blink" />
-      <img id="location-image" src="question.png" alt="Location View" draggable="false" oncontextmenu="return false;">
-    </div>
 
+    <div id="five-k" style="z-index: 10; position: absolute; background-color: #1fd4f9; width: 100%; height: 100%;" hidden>
+        <h1 style="font-family: Arial, Helvetica, sans-serif; font-size: 64pt; text-align: center; transform: translateY(50%);">5000 points</h1>
+        <p id="info5k" style="font-family: Arial, Helvetica, sans-serif; font-size: 24pt; text-align: center; transform: translateY(50%);">Normal, 0.000s</p>
+        <h4 id="message2" style="font-family: Arial, Helvetica, sans-serif; font-size: 12pt; text-align: center; transform: translateY(50%);"></h4>
+    </div>
+    <div id="failed" style="z-index: 10; position: absolute; background-color: #aa0000; width: 100%; height: 100%;" hidden>
+        <h1 style="font-family: Arial, Helvetica, sans-serif; font-size: 64pt; text-align: center; vertical-align: middle; color: white; transform: translateY(50%);">Failed</h1>
+        <p id="info" style="font-family: Arial, Helvetica, sans-serif; font-size: 24pt; text-align: center; vertical-align: middle; color: white; transform: translateY(50%);">Normal, 0.000s</p>
+        <h4 id="message3" style="font-family: Arial, Helvetica, sans-serif; font-size: 12pt; text-align: center; transform: translateY(50%); color: white;"></h4>
+    </div>
+    <div id="background-container">
+      <img id="location-image" src="question.png" alt="Location View" />
+    </div>
+    
     <div id="controls">
-      <h3>GISGuessr v1.1.1 (Web)</h3>
+      <h3>GISGuessr Duels Client v1.0.0</h3>
       <h4>Made by Ian Park</h4>
+      <h1 id="score"></h1>
+      <h4 id="message"></h4>
       <label for="floor-select">Select Floor:</label>
       <select id="floor-select" onchange="updateFloor();">
         <option>ArtsG.jpg</option>
@@ -252,11 +324,11 @@
         <option>SecondaryF.jpg</option>
         <option>SecondaryS.jpg</option>
       </select>
-      <div>
+      <div hidden>
         <label for="timer-input">Set Time (seconds):</label>
-        <input type="number" id="timer-input" min="10" max="300" value="60" /><br>
+        <input type="number" id="timer-input" min="10" max="300" value="20" /><br>
         <label for="rounds">Set Rounds:</label>
-        <input type="number" id="rounds" value="5" /><br>
+        <input type="number" id="rounds" value="1" /><br>
         <label for="blink">Set Blink Timer (milliseconds, 0 to disable Blink Mode):</label>
         <input type="number" id="blink" value="0" /><br>
         <button id="start-game">Start Game</button>
@@ -269,11 +341,113 @@
       <button id="guess-button">GUESS</button>
     </div>
 
-    <div id="score-display"></div>
-    <div id="timer-display"></div>
+    <div id="score-display" hidden></div>
+    <div id="timer-display" hidden></div>
+  </div>
+  
+  <div id="menu">
+    <div class="buttons ready-button" id="readyButton">READY</div>
+    <img class="buttons" id="toggle-image" src="deactivated.webp" alt="Toggle Button">
+    <div id="waiting">Waiting...</div>
   </div>
 
+
+  <audio id="activate-sound" src="Berserk.mp3"></audio>
+  <audio id="deactivate-sound" src="Berserk.mp3"></audio>
+
   <script>
+    let berserk = false;
+    let menuVisible = true;
+
+    const toggleImage = document.getElementById('toggle-image');
+    const activateSound = document.getElementById('activate-sound');
+    const deactivateSound = document.getElementById('deactivate-sound');
+
+    toggleImage.addEventListener('click', () => {
+      berserk = !berserk;
+      toggleImage.src = berserk ? 'activated.webp' : 'deactivated.webp';
+      (berserk ? activateSound : deactivateSound).play();
+    });
+
+    toggleImage.addEventListener('mouseover', () => {
+      toggleImage.src = 'hovered.webp';
+    });
+
+    toggleImage.addEventListener('mouseout', () => {
+      toggleImage.src = berserk ? 'activated.webp' : 'deactivated.webp';
+    });
+
+    document.getElementById('readyButton').addEventListener('click', () => {
+      for (btn of document.getElementsByClassName("buttons")) {
+        btn.style.display = "none";
+      }
+      menu.style.pointerEvents = 'auto';
+      waiting.style.display = 'block';
+    });
+
+    var started = false;
+
+    function start() {
+      if (started) return;
+      started = true;
+      let t = 3;
+      document.getElementById('waiting').textContent = t;
+      document.getElementById('waiting').style.display = 'block';
+      menuVisible = true;
+
+      const countdownInterval = setInterval(() => {
+        t--;
+        document.getElementById('waiting').textContent = t;
+
+        if (t === 0) {
+          clearInterval(countdownInterval);
+          document.getElementById('waiting').style.display = 'none';
+          menuVisible = false;
+          menu.style.display = 'none';
+          menu.style.pointerEvents = 'none';
+
+            if (berserk) {
+                blink.value = "100";
+                console.log(blink.value);
+                hide = () => {
+                document.getElementById("location-image").style.filter = "brightness(0%)";
+                };
+            }
+          nextRound();
+        }
+      }, 1000);
+    }
+
+    var a = setInterval(async () => {
+        fetch("http://217.15.161.253:1984").then(
+            async (response) => {
+                let data = await response.text();
+                // console.log(data);
+                if (data != "") {
+                    start();
+                    clearInterval(a);
+                    serv = parseInt(data);
+                }
+            }
+        );
+
+        fetch("http://217.15.161.253:1984/message").then(
+            async (response) => {
+                let data = await response.text();
+                document.getElementById("message").innerHTML = data;
+                document.getElementById("message2").innerHTML = data;
+                document.getElementById("message3").innerHTML = data;
+            }
+        );
+        
+        fetch("http://217.15.161.253:1984/score").then(
+            async (response) => {
+                let data = await response.text();
+                document.getElementById("score").innerHTML = data;
+            }
+        );
+    }, 150)
+
     const locations = [
     {
         "image": "gen3/IMG_1259.HEIC.jpg",
@@ -1326,7 +1500,8 @@
 
     let maxRounds = 5;
     let round = 0, score = 0, roundScore = 0;
-    let currentLocation, pinX = null, pinY = null, timer = null, timeLeft = 0;
+    var currentLocation;
+    let pinX = null, pinY = null, timer = null, timeLeft = 0;
     let splits = [];
 
     const locationImg = document.getElementById('location-image');
@@ -1340,17 +1515,15 @@
     const rounds = document.getElementById('rounds');
     const blink = document.getElementById('blink');
     var startTime;
+    var started;
+    var serv;
 
     function hide() {
-        locationImg.style.filter = "brightness(0%)";
+      
     }
 
     function callback() {
-      const elapsed = performance.now() - startTime;
-      const drift = elapsed - blink.value;
-      
-      console.log(drift);
-      if (drift >= 0) {
+      if ((Math.min(20.000, (Date.now()-started)/1000)) >= parseInt(blink.value)/1000.0) {
         hide();
         return;
       }
@@ -1358,7 +1531,6 @@
     }
 
     function scheduleTimeout() {
-      locationImg.style.filter = "brightness(100%)";
       startTime = performance.now();
       timeoutId = setTimeout(callback, 5);
     }
@@ -1368,29 +1540,29 @@
       score = 0;
       splits = [];
       maxRounds = parseInt(rounds.value);
-      if (parseInt(blink.value) > 0) {
+      if (berserk) {
+        // console.log(blink.value);
         hide = () => {
-            locationImg.style.filter = "brightness(0%)";
+          document.getElementById("location-image").style.filter = "brightness(0%)";
         };
-      } else {
-        hide = () => {};
       }
       document.getElementById('score-display').textContent = '';
       nextRound();
     }
 
     function setLocation() {
-      let randIndex = Math.floor(Math.random() * locations.length);
+      let randIndex = serv;
       currentLocation = locations[randIndex];
     }
 
     function startTimer(duration) {
+      started = Date.now();
       timeLeft = duration;
       timerDisplay.textContent = `Time: ${timeLeft}`;
       timer = setInterval(() => {
         timeLeft--;
         timerDisplay.textContent = `Time: ${timeLeft}`;
-        if (timeLeft <= 0) {
+        if ((Math.min(20.000, (Date.now()-started)/1000)) >= 20.000) {
           clearInterval(timer);
           endRound(true);
         }
@@ -1426,7 +1598,6 @@
         return;
       }
       round++;
-      locationImg.style.filter = "brightness(0%)";
       pin.style.display = 'none';
       pinX = pinY = null;
       setLocation();
@@ -1435,9 +1606,8 @@
       floorSelect.value = "FloorPlan.jpg";
       guessBtn.disabled = false;
       locationImg.src = currentLocation.image;
-      if (parseInt(blink.value) > 0) await new Promise(r => setTimeout(r, 1000));
-      scheduleTimeout(parseInt(blink.value));
       startTimer(parseInt(document.getElementById('timer-input').value));
+      scheduleTimeout();
     }
 
     document.getElementById('map-container').addEventListener('click', (e) => {
@@ -1482,6 +1652,19 @@
       }
       score += roundPoints;
       scoreDisplay.innerHTML = `Round ${round} Score: ${roundPoints}/5000<br>Correct Floor: ${currentLocation.correctFloor}<br>Total Score: ${score}`;
+      if (roundPoints === 5000) {
+        document.getElementById('five-k').hidden = false;
+        document.getElementById('info5k').innerHTML = berserk?"Berserk, ":"Normal, ";
+        document.getElementById('info5k').innerHTML += (Math.min(20.000, (Date.now()-started)/1000)).toFixed(3);
+        document.getElementById('info5k').innerHTML += "s";
+      } else {
+        document.getElementById('failed').hidden = false;
+        document.getElementById('info').innerHTML = berserk?"Berserk, ":"Normal, ";
+        console.log(Date.now()-started);
+        document.getElementById('info').innerHTML += (Math.min(20.000, (Date.now()-started)/1000)).toFixed(3);
+        document.getElementById('info').innerHTML += "s";
+      }
+
       setTimeout(nextRound, 2000);
       guessBtn.disabled = true;
 
