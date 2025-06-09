@@ -1,0 +1,32 @@
+[
+  {
+    "image": "output/FifthFCenter.heic.jpg",
+    "correctFloor": "Arts5.jpg",
+    "rect": {
+      "x": 96,
+      "y": 67,
+      "w": 50,
+      "h": 193
+    }
+  },
+  {
+    "image": "gen3/IMG_7956.HEIC.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 58,
+      "y": 63,
+      "w": 70,
+      "h": 198
+    }
+  },
+  {
+    "image": "gen3/IMG_1469.HEIC.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 235,
+      "y": 66,
+      "w": 74,
+      "h": 202
+    }
+  }
+]
