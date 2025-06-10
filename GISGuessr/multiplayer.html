@@ -298,7 +298,7 @@
         <h4 id="message3" style="font-family: Arial, Helvetica, sans-serif; font-size: 12pt; text-align: center; transform: translateY(50%); color: white;"></h4>
     </div>
     <div id="background-container">
-      <img id="location-image" src="question.png" alt="Location View" />
+      <img id="location-image" src="question.png" alt="Location View" draggable="false" oncontextmenu="return false;">
     </div>
     
     <div id="controls">
@@ -425,7 +425,6 @@
                 // console.log(data);
                 if (data != "") {
                     start();
-                    clearInterval(a);
                     serv = parseInt(data);
                 }
             }
@@ -691,7 +690,7 @@
     },
     {
         "image": "gen3/IMG_7956.HEIC.jpg",
-        "correctFloor": "Arts1.jpg",
+        "correctFloor": "Arts2.jpg",
         "rect": {
             "x": 58,
             "y": 63,
@@ -1564,7 +1563,9 @@
         timerDisplay.textContent = `Time: ${timeLeft}`;
         if ((Math.min(20.000, (Date.now()-started)/1000)) >= 20.000) {
           clearInterval(timer);
-          endRound(true);
+          if (document.getElementById('five-k').hidden) {
+            endRound(true);
+          }
         }
       }, 1000);
     }
