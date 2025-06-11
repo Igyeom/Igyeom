@@ -350,7 +350,7 @@
     },
     {
         "image": "gen3/IMG_1478.HEIC.jpg",
-        "correåctFloor": "Arts4.jpg",
+        "correctFloor": "Arts4.jpg",
         "rect": {
             "x": 255,
             "y": 67,
@@ -1063,7 +1063,7 @@
         const container = document.getElementById('locationContainer');
 
         locations.forEach(({ image, correctFloor, rect }, index) => {
-            // if (!correctFloor.includes("Arts")) return;
+            if (!correctFloor.includes("Arts4")) return;
             const wrapper = document.createElement('div');
             wrapper.className = 'image-box';
 

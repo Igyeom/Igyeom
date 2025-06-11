@@ -301,7 +301,7 @@
     },
     {
         "image": "gen3/IMG_1478.HEIC.jpg",
-        "correåctFloor": "Arts4.jpg",
+        "correctFloor": "Arts4.jpg",
         "rect": {
             "x": 255,
             "y": 67,
