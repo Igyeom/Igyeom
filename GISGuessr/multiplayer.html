@@ -317,6 +317,7 @@
       document.getElementById('waiting').style.display = 'block';
       menuVisible = true;
 
+      setLocation();
         locationImg.src = currentLocation.image;
         locationImg.style.display = 'none';
       const countdownInterval = setInterval(() => {
@@ -1499,7 +1500,6 @@
       round++;
       pin.style.display = 'none';
       pinX = pinY = null;
-      setLocation();
       locationImg.onerror = setLocation;
       floorplanImg.src = "FloorPlan.jpg";
       floorSelect.value = "FloorPlan.jpg";
