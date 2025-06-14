@@ -317,6 +317,8 @@
       document.getElementById('waiting').style.display = 'block';
       menuVisible = true;
 
+        locationImg.src = currentLocation.image;
+        locationImg.style.display = 'none';
       const countdownInterval = setInterval(() => {
         t--;
         document.getElementById('waiting').textContent = t;
@@ -1502,7 +1504,7 @@
       floorplanImg.src = "FloorPlan.jpg";
       floorSelect.value = "FloorPlan.jpg";
       guessBtn.disabled = false;
-      locationImg.src = currentLocation.image;
+      locationImg.style.display = 'block';
       startTimer(parseInt(document.getElementById('timer-input').value));
       scheduleTimeout();
     }
