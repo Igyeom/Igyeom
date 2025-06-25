@@ -224,6 +224,7 @@
       object-fit: contain;
       z-index: 0;
       position: absolute;
+      display: block;
     }
 
     #hider {
@@ -436,9 +437,9 @@
       document.getElementById('waiting').style.display = 'block';
       menuVisible = true;
 
+        document.getElementById("location-image").style.filter = "brightness(0%)";
       setLocation();
         locationImg.src = currentLocation.image;
-        locationImg.style.display = 'none';
       const countdownInterval = setInterval(() => {
         t--;
         document.getElementById('waiting').textContent = t;
@@ -543,6 +544,7 @@
     }
 
     function scheduleTimeout() {
+      locationImg.style.filter = "brightness(100%)";
       startTime = performance.now();
       timeoutId = setTimeout(callback, 5);
     }
@@ -611,15 +613,17 @@
         return;
       }
       round++;
+      locationImg.style.filter = "brightness(0%)";
       pin.style.display = 'none';
       pinX = pinY = null;
       locationImg.onerror = setLocation;
       floorplanImg.src = "FloorPlan.jpg";
       floorSelect.value = "FloorPlan.jpg";
       guessBtn.disabled = false;
-      locationImg.style.display = 'block';
-      startTimer(parseInt(document.getElementById('timer-input').value));
+      locationImg.src = currentLocation.image;
+      if (berserk) await new Promise(r => setTimeout(r, 1000));
       scheduleTimeout();
+      startTimer(parseInt(document.getElementById('timer-input').value));
     }
 
     document.getElementById('map-container').addEventListener('click', (e) => {
