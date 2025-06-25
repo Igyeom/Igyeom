@@ -454,7 +454,7 @@
                 blink.value = "100";
                 console.log(blink.value);
                 hide = () => {
-                document.getElementById("location-image").style.filter = "brightness(0%)";
+                    document.getElementById("location-image").style.filter = "brightness(0%)";
                 };
             }
           nextRound();
@@ -531,7 +531,11 @@
     }
 
     function callback() {
-      if ((Math.min(20.000, (Date.now()-started)/1000)) >= parseInt(blink.value)/1000.0) {
+      const elapsed = performance.now() - startTime;
+      const drift = elapsed - blink.value;
+      
+      console.log(drift);
+      if (drift >= 0) {
         hide();
         return;
       }
