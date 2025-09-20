@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        h1 {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="countdown"></h1>
+    <script>
+    /*
+        Once upon a midnight dreary, while I pondered, weak and weary,
+    */
+    let countdownElement = document.getElementById('countdown');
+    let targetDate = new Date('2025-10-12T03:25:00');
+
+    function updateCountdown() {
+        let now = new Date();
+        let diff = Math.max(0, targetDate - now);
+
+        let days = String(Math.floor(diff / (1000 * 60 * 60 * 24)));
+        diff %= (1000 * 60 * 60 * 24);
+        let hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+        diff %= (1000 * 60 * 60);
+        let minutes = String(Math.floor(diff / (1000 * 60))).padStart(2, '0');
+        diff %= (1000 * 60);
+        let seconds = String(Math.floor(diff / 1000)).padStart(2, '0');
+
+        countdownElement.innerHTML = `${days}:${hours}:${minutes}:${seconds}`;
+        setTimeout(updateCountdown, 300);
+    }
+
+    updateCountdown();
+    </script>
+</body>
+</html>
