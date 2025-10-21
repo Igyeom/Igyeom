@@ -947,17 +947,16 @@
             "w": 27,
             "h": 37
         }
-    },
-    {
-        "image": "gen3/IMG_1236.HEIC.jpg",
-        "correctFloor": "SecondaryS.jpg",
-        "rect": {
-            "x": 223,
-            "y": 71,
-            "w": 26,
-            "h": 36
-        }
-    },
+    },{
+    "image": "gen3/IMG_1236.HEIC.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 122,
+      "y": 72,
+      "w": 20,
+      "h": 35
+    }
+  },
     {
         "image": "gen3/IMG_7960.HEIC.jpg",
         "correctFloor": "Arts4.jpg",
@@ -1063,7 +1062,7 @@
         const container = document.getElementById('locationContainer');
 
         locations.forEach(({ image, correctFloor, rect }, index) => {
-            if (!correctFloor.includes("Arts4")) return;
+            // if (!correctFloor.includes("Arts4")) return;
             const wrapper = document.createElement('div');
             wrapper.className = 'image-box';
 

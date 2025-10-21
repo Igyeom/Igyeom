@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GISGuessr</title>
+  <link rel="preload" href="gen4/FloorPlan.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3497.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3536.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3495.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3494.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3480.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3537.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3493.jpg" as="image">
+<link rel="preload" href="gen4/IMG_6267.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3581.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3542.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3608.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3620.jpg" as="image">
+<link rel="preload" href="gen4/SecondaryL.jpg" as="image">
+<link rel="preload" href="gen4/CentralG.jpg" as="image">
+<link rel="preload" href="gen4/Central1.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3621.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3609.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3557.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3543.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3580.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3596.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3582.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3569.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3555.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3541.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3623.jpg" as="image">
+<link rel="preload" href="gen4/Central2.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3540.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3568.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3583.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3550.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3544.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3578.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3579.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3545.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3551.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3547.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3553.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3625.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3619.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3618.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3624.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3552.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3546.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3585.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3563.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3577.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3601.jpg" as="image">
+<link rel="preload" href="gen4/SecondaryS.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3600.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3614.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3628.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3576.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3562.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3548.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3574.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3560.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3602.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3616.jpg" as="image">
+<link rel="preload" href="gen4/SecondaryG.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3400.jpg" as="image">
+<link rel="preload" href="gen4/SecondaryF.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3617.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3603.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3561.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3575.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3549.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3571.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3565.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3559.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3607.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3613.jpg" as="image">
+<link rel="preload" href="gen4/SecondaryB.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3612.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3606.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3558.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3564.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3202.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3570.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3200.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3566.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3572.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3610.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3604.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3605.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3573.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3567.jpg" as="image">
+<link rel="preload" href="gen4/Arts2.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3312.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3306.jpg" as="image">
+<link rel="preload" href="gen4/thanks.JPG" as="image">
+<link rel="preload" href="gen4/Arts3.jpg" as="image">
+<link rel="preload" href="gen4/ArtsG.jpg" as="image">
+<link rel="preload" href="gen4/Arts1.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3305.jpg" as="image">
+<link rel="preload" href="gen4/Arts4.jpg" as="image">
+<link rel="preload" href="gen4/IMG_1311.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3300.jpg" as="image">
+<link rel="preload" href="gen4/Arts5.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3288.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3539.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3316.jpg" as="image">
+<link rel="preload" href="gen4/IMG_3538.jpg" as="image">
+<link rel="preload" href="gen4/Arts6.jpg" as="image">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 1rem;
+        border: 2px solid #666;
+        border-radius: 5px;
+        background-color: #444;
+        color: white;
+        width: 200px;
+        box-sizing: border-box;
+    }
+
+    #menu {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      z-index: 5;
+    }
+
+    .ready-button {
+      position: relative;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .ready-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 10px;
+      z-index: -1;
+      transition: background-color 0.4s ease;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .ready-button:hover::before {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    #toggle-image {
+      width: 100px;
+      height: 100px;
+    }
+
+    #waiting {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2rem;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 20px 40px;
+      border-radius: 15px;
+      z-index: 1;
+    }
+
+    #game-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #background-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #location-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: 0;
+      position: absolute;
+      display: block;
+    }
+
+    #hider {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: brightness(0%);
+        z-index: 99;
+        position: absolute;
+    }
+
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 3;
+    }
+
+    #map-container {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 400px;
+      height: 300px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    #floorplan-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #pin {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      display: none;
+    }
+
+    #guess-button {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #guess-button:disabled {
+      background-color: #85bbf4;
+    }
+
+    #score-display, #timer-display {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      z-index: 3;
+      font-size: 16px;
+    }
+    #timer-display {
+      top: 100px !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+
+    <div id="five-k" style="z-index: 10; position: absolute; background-color: #1fd4f9; width: 100%; height: 100%;" hidden>
+        <h1 style="font-family: Arial, Helvetica, sans-serif; font-size: 64pt; text-align: center; transform: translateY(50%);">5000 points</h1>
+        <p id="info5k" style="font-family: Arial, Helvetica, sans-serif; font-size: 24pt; text-align: center; transform: translateY(50%);">Normal, 0.000s</p>
+        <h4 id="message2" style="font-family: Arial, Helvetica, sans-serif; font-size: 12pt; text-align: center; transform: translateY(50%);"></h4>
+    </div>
+    <div id="failed" style="z-index: 10; position: absolute; background-color: #ffaa00; width: 100%; height: 100%;" hidden>
+        <h1 id="infopoints" style="font-family: Arial, Helvetica, sans-serif; font-size: 64pt; text-align: center; vertical-align: middle; color: black; transform: translateY(50%);">Failed</h1>
+        <p id="info" style="font-family: Arial, Helvetica, sans-serif; font-size: 24pt; text-align: center; vertical-align: middle; color: black; transform: translateY(50%);">Normal, 0.000s</p>
+        <h4 id="message3" style="font-family: Arial, Helvetica, sans-serif; font-size: 12pt; text-align: center; transform: translateY(50%); color: black;"></h4>
+    </div>
+    <div id="background-container">
+      <img id="location-image" src="question.png" alt="Location View" draggable="false" oncontextmenu="return false;">
+    </div>
+    
+    <div id="controls">
+      <h3>GISGuessr Duels Client v1.0.1 (Generation 4)</h3>
+      <h4>Made by Ian Park</h4>
+      <h1 id="score"></h1>
+      <h4 id="message"></h4>
+      <label for="floor-select">Select Floor:</label>
+      <select id="floor-select" onchange="updateFloor();">
+        <option>ArtsG.jpg</option>
+        <option>Arts1.jpg</option>
+        <option>Arts2.jpg</option>
+        <option>Arts3.jpg</option>
+        <option>Arts4.jpg</option>
+        <option>Arts5.jpg</option>
+        <option>Arts6.jpg</option>
+        <option>CentralG.jpg</option>
+        <option>Central1.jpg</option>
+        <option>Central2.jpg</option>
+        <option>SecondaryB.jpg</option>
+        <option>SecondaryL.jpg</option>
+        <option>SecondaryG.jpg</option>
+        <option>SecondaryF.jpg</option>
+        <option>SecondaryS.jpg</option>
+      </select>
+      <div hidden>
+        <label for="timer-input">Set Time (seconds):</label>
+        <input type="number" id="timer-input" min="10" max="300" value="20" /><br>
+        <label for="rounds">Set Rounds:</label>
+        <input type="number" id="rounds" value="1" /><br>
+        <label for="blink">Set Blink Timer (milliseconds, 0 to disable Blink Mode):</label>
+        <input type="number" id="blink" value="0" /><br>
+        <button id="start-game">Start Game</button>
+      </div>
+    </div>
+
+    <div id="map-container">
+      <img id="floorplan-image" src="question.png" alt="Floor Plan" />
+      <div id="pin"></div>
+      <button id="guess-button">GUESS</button>
+    </div>
+
+    <div id="score-display" hidden></div>
+    <div id="timer-display" hidden></div>
+  </div>
+  
+  <div id="menu">
+    <h4 style="color: white;" id="instruction">Loading...</h4>
+    <input type="text" id="seed" placeholder="Seed (or type 'rnd')">
+    <div class="buttons ready-button" id="readyButton" hidden>START</div>
+    <img class="buttons" id="toggle-image" src="deactivated.webp" alt="Toggle Button" hidden>
+    <span id="berserk" style="color: white;">Loading Images...</span>
+    <div id="waiting">Waiting...</div>
+  </div>
+
+
+  <audio id="activate-sound" style="display: none;" src="Berserk.mp3"></audio>
+  <audio id="deactivate-sound" style="display: none;" src="Berserk.mp3"></audio>
+
+  <script>
+    let berserk = false;
+    let menuVisible = true;
+
+    document.getElementById("readyButton").hidden = false;
+    document.getElementById("toggle-image").hidden = false;
+    document.getElementById("berserk").innerHTML = "Normal Mode"
+
+    const toggleImage = document.getElementById('toggle-image');
+    const activateSound = document.getElementById('activate-sound');
+    const deactivateSound = document.getElementById('deactivate-sound');
+
+    toggleImage.addEventListener('click', () => {
+      document.getElementById("berserk").innerHTML = berserk ? "Normal Mode" : "Berserk Mode";
+      berserk = !berserk;
+      toggleImage.src = berserk ? 'activated.webp' : 'deactivated.webp';
+      (berserk ? activateSound : deactivateSound).play();
+    });
+
+    toggleImage.addEventListener('mouseover', () => {
+      toggleImage.src = 'hovered.webp';
+    });
+
+    toggleImage.addEventListener('mouseout', () => {
+      toggleImage.src = berserk ? 'activated.webp' : 'deactivated.webp';
+    });
+
+    document.getElementById('readyButton').addEventListener('click', () => {
+      for (btn of document.getElementsByClassName("buttons")) {
+        btn.style.display = "none";
+        document.getElementById("berserk").style.display = "none";
+        document.getElementById("instruction").style.display = "none";
+        document.getElementById("seed").style.display = "none";
+      }
+      menu.style.pointerEvents = 'auto';
+      randIndex = parseInt(document.getElementById("seed").value)%locations.length;
+      start();
+    });
+
+    var started = false;
+
+    function start() {
+      if (started) return;
+      started = true;
+      let t = 3;
+      document.getElementById('waiting').textContent = t;
+      document.getElementById('waiting').style.display = 'block';
+      menuVisible = true;
+
+        document.getElementById("location-image").style.filter = "brightness(0%)";
+      setLocation();
+        locationImg.src = currentLocation.image;
+      const countdownInterval = setInterval(() => {
+        t--;
+        document.getElementById('waiting').textContent = t;
+
+        if (t === 0) {
+          clearInterval(countdownInterval);
+          document.getElementById('waiting').style.filter = "brightness(0%)";
+          menuVisible = false;
+          menu.style.display = 'none';
+          menu.style.pointerEvents = 'none';
+
+            if (berserk) {
+                blink.value = "100";
+                console.log(blink.value);
+                hide = () => {
+                    document.getElementById("location-image").style.filter = "brightness(0%)";
+                };
+            }
+          nextRound();
+        }
+      }, 1000);
+    }
+
+    onload = () => {
+        document.getElementById("instruction").innerHTML = "Only press 'START' when instructed to do so."
+    }
+
+    const locations = [
+  {
+    "image": "gen4/IMG_3200.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 237,
+      "y": 184,
+      "w": 19,
+      "h": 35
+    }
+  },
+  {
+    "image": "gen4/IMG_3202.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 237,
+      "y": 149,
+      "w": 18,
+      "h": 17
+    }
+  },
+  {
+    "image": "gen4/IMG_3288.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 220,
+      "y": 102,
+      "w": 36,
+      "h": 29
+    }
+  },
+  {
+    "image": "gen4/IMG_3300.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 255,
+      "y": 188,
+      "w": 20,
+      "h": 35
+    }
+  },
+  {
+    "image": "gen4/IMG_3305.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 207,
+      "y": 196,
+      "w": 21,
+      "h": 20
+    }
+  },
+  {
+    "image": "gen4/IMG_3306.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 169,
+      "y": 151,
+      "w": 21,
+      "h": 27
+    }
+  },
+  {
+    "image": "gen4/IMG_3312.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 169,
+      "y": 122,
+      "w": 22,
+      "h": 28
+    }
+  },
+  {
+    "image": "gen4/IMG_3316.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 273,
+      "y": 151,
+      "w": 24,
+      "h": 28
+    }
+  },
+  {
+    "image": "gen4/IMG_3400.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 256,
+      "y": 196,
+      "w": 22,
+      "h": 33
+    }
+  },
+  {
+    "image": "gen4/IMG_3549.jpg",
+    "correctFloor": "Arts5.jpg",
+    "rect": {
+      "x": 232,
+      "y": 127,
+      "w": 34,
+      "h": 48
+    }
+  },
+  {
+    "image": "gen4/IMG_3550.jpg",
+    "correctFloor": "Arts5.jpg",
+    "rect": {
+      "x": 254,
+      "y": 185,
+      "w": 26,
+      "h": 49
+    }
+  },
+  {
+    "image": "gen4/IMG_3551.jpg",
+    "correctFloor": "Arts1.jpg",
+    "rect": {
+      "x": 231,
+      "y": 196,
+      "w": 15,
+      "h": 31
+    }
+  },
+  {
+    "image": "gen4/IMG_3571.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 130,
+      "y": 65,
+      "w": 18,
+      "h": 25
+    }
+  },
+  {
+    "image": "gen4/IMG_3572.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 130,
+      "y": 66,
+      "w": 17,
+      "h": 25
+    }
+  },
+  {
+    "image": "gen4/IMG_3573.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 111,
+      "y": 63,
+      "w": 19,
+      "h": 27
+    }
+  },
+  {
+    "image": "gen4/IMG_3600.jpg",
+    "correctFloor": "ArtsG.jpg",
+    "rect": {
+      "x": 314,
+      "y": 230,
+      "w": 20,
+      "h": 29
+    }
+  },
+  {
+    "image": "gen4/IMG_3493.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 216,
+      "y": 94,
+      "w": 10,
+      "h": 22
+    }
+  },
+  {
+    "image": "gen4/IMG_3494.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 161,
+      "y": 94,
+      "w": 12,
+      "h": 23
+    }
+  },
+  {
+    "image": "gen4/IMG_3539.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 238,
+      "y": 153,
+      "w": 11,
+      "h": 10
+    }
+  },
+  {
+    "image": "gen4/IMG_3540.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 186,
+      "y": 146,
+      "w": 28,
+      "h": 12
+    }
+  },
+  {
+    "image": "gen4/IMG_3553.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 269,
+      "y": 152,
+      "w": 13,
+      "h": 10
+    }
+  },
+  {
+    "image": "gen4/IMG_3562.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 38,
+      "y": 147,
+      "w": 21,
+      "h": 15
+    }
+  },
+  {
+    "image": "gen4/IMG_3563.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 142,
+      "y": 151,
+      "w": 16,
+      "h": 11
+    }
+  },
+  {
+    "image": "gen4/IMG_3564.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 162,
+      "y": 95,
+      "w": 20,
+      "h": 9
+    }
+  },
+  {
+    "image": "gen4/IMG_3565.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 211,
+      "y": 68,
+      "w": 15,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen4/IMG_3566.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 134,
+      "y": 166,
+      "w": 28,
+      "h": 10
+    }
+  },
+  {
+    "image": "gen4/IMG_3567.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 289,
+      "y": 167,
+      "w": 13,
+      "h": 10
+    }
+  },
+  {
+    "image": "gen4/IMG_3568.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 172,
+      "y": 102,
+      "w": 21,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen4/IMG_3574.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 191,
+      "y": 167,
+      "w": 14,
+      "h": 36
+    }
+  },
+  {
+    "image": "gen4/IMG_3579.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 34,
+      "y": 92,
+      "w": 14,
+      "h": 15
+    }
+  },
+  {
+    "image": "gen4/IMG_3493.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 216,
+      "y": 94,
+      "w": 10,
+      "h": 22
+    }
+  },
+  {
+    "image": "gen4/IMG_3494.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 161,
+      "y": 94,
+      "w": 12,
+      "h": 23
+    }
+  },
+  {
+    "image": "gen4/IMG_3539.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 238,
+      "y": 153,
+      "w": 11,
+      "h": 10
+    }
+  },
+  {
+    "image": "gen4/IMG_3540.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 186,
+      "y": 146,
+      "w": 28,
+      "h": 12
+    }
+  },
+  {
+    "image": "gen4/IMG_3553.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 269,
+      "y": 152,
+      "w": 13,
+      "h": 10
+    }
+  },
+  {
+    "image": "gen4/IMG_3562.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 38,
+      "y": 147,
+      "w": 21,
+      "h": 15
+    }
+  },
+  {
+    "image": "gen4/IMG_3563.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 142,
+      "y": 151,
+      "w": 16,
+      "h": 11
+    }
+  },
+  {
+    "image": "gen4/IMG_3564.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 162,
+      "y": 95,
+      "w": 20,
+      "h": 9
+    }
+  },
+  {
+    "image": "gen4/IMG_3565.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 211,
+      "y": 68,
+      "w": 15,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen4/IMG_3566.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 134,
+      "y": 166,
+      "w": 28,
+      "h": 10
+    }
+  },
+  {
+    "image": "gen4/IMG_3567.jpg",
+    "correctFloor": "Central2.jpg",
+    "rect": {
+      "x": 289,
+      "y": 167,
+      "w": 13,
+      "h": 10
+    }
+  },
+  {
+    "image": "gen4/IMG_3568.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 172,
+      "y": 102,
+      "w": 21,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen4/IMG_3574.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 191,
+      "y": 167,
+      "w": 14,
+      "h": 36
+    }
+  },
+  {
+    "image": "gen4/IMG_3579.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 34,
+      "y": 92,
+      "w": 14,
+      "h": 15
+    }
+  },
+  {
+    "image": "gen4/IMG_1311.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 168,
+      "y": 106,
+      "w": 25,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3495.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 261,
+      "y": 123,
+      "w": 14,
+      "h": 47
+    }
+  },
+  {
+    "image": "gen4/IMG_3536.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 267,
+      "y": 182,
+      "w": 26,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3538.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 224,
+      "y": 182,
+      "w": 14,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3541.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 294,
+      "y": 180,
+      "w": 30,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3542.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 332,
+      "y": 180,
+      "w": 21,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen4/IMG_3543.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 151,
+      "y": 154,
+      "w": 11,
+      "h": 18
+    }
+  },
+  {
+    "image": "gen4/IMG_3544.jpg",
+    "correctFloor": "SecondaryB.jpg",
+    "rect": {
+      "x": 124,
+      "y": 110,
+      "w": 15,
+      "h": 16
+    }
+  },
+  {
+    "image": "gen4/IMG_3547.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 286,
+      "y": 180,
+      "w": 22,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3555.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 59,
+      "y": 102,
+      "w": 24,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen4/IMG_3557.jpg",
+    "correctFloor": "SecondaryB.jpg",
+    "rect": {
+      "x": 31,
+      "y": 119,
+      "w": 11,
+      "h": 26
+    }
+  },
+  {
+    "image": "gen4/IMG_3558.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 24,
+      "y": 183,
+      "w": 20,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3559.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 16,
+      "y": 179,
+      "w": 17,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen4/IMG_3560.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 58,
+      "y": 179,
+      "w": 26,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen4/IMG_3561.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 137,
+      "y": 106,
+      "w": 24,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3576.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 326,
+      "y": 101,
+      "w": 31,
+      "h": 27
+    }
+  },
+  {
+    "image": "gen4/IMG_3580.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 116,
+      "y": 178,
+      "w": 16,
+      "h": 16
+    }
+  },
+  {
+    "image": "gen4/IMG_3582.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 238,
+      "y": 182,
+      "w": 28,
+      "h": 12
+    }
+  },
+  {
+    "image": "gen4/IMG_3583.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 339,
+      "y": 152,
+      "w": 17,
+      "h": 15
+    }
+  },
+  {
+    "image": "gen4/IMG_3597.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 281,
+      "y": 102,
+      "w": 14,
+      "h": 34
+    }
+  },
+  {
+    "image": "gen4/IMG_3601.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 62,
+      "y": 183,
+      "w": 22,
+      "h": 12
+    }
+  },
+  {
+    "image": "gen4/IMG_3602.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 223,
+      "y": 183,
+      "w": 15,
+      "h": 14
+    }
+  },
+  {
+    "image": "gen4/IMG_3480.jpg",
+    "correctFloor": "Arts4.jpg",
+    "rect": {
+      "x": 305,
+      "y": 194,
+      "w": 20,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3489.jpg",
+    "correctFloor": "Arts3.jpg",
+    "rect": {
+      "x": 295,
+      "y": 230,
+      "w": 15,
+      "h": 30
+    }
+  },
+  {
+    "image": "gen4/IMG_3497.jpg",
+    "correctFloor": "SecondaryG.jpg",
+    "rect": {
+      "x": 161,
+      "y": 180,
+      "w": 26,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3537.jpg",
+    "correctFloor": "SecondaryS.jpg",
+    "rect": {
+      "x": 224,
+      "y": 198,
+      "w": 13,
+      "h": 16
+    }
+  },
+  {
+    "image": "gen4/IMG_3545.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 139,
+      "y": 183,
+      "w": 18,
+      "h": 11
+    }
+  },
+  {
+    "image": "gen4/IMG_3546.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 214,
+      "y": 183,
+      "w": 9,
+      "h": 11
+    }
+  },
+  {
+    "image": "gen4/IMG_3548.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 274,
+      "y": 63,
+      "w": 24,
+      "h": 19
+    }
+  },
+  {
+    "image": "gen4/IMG_3552.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 371,
+      "y": 149,
+      "w": 12,
+      "h": 11
+    }
+  },
+  {
+    "image": "gen4/IMG_3569.jpg",
+    "correctFloor": "Central1.jpg",
+    "rect": {
+      "x": 350,
+      "y": 150,
+      "w": 17,
+      "h": 10
+    }
+  },
+  {
+    "image": "gen4/IMG_3570.jpg",
+    "correctFloor": "Arts1.jpg",
+    "rect": {
+      "x": 313,
+      "y": 200,
+      "w": 53,
+      "h": 49
+    }
+  },
+  {
+    "image": "gen4/IMG_3575.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 248,
+      "y": 132,
+      "w": 39,
+      "h": 16
+    }
+  },
+  {
+    "image": "gen4/IMG_3577.jpg",
+    "correctFloor": "Arts2.jpg",
+    "rect": {
+      "x": 237,
+      "y": 66,
+      "w": 18,
+      "h": 38
+    }
+  },
+  {
+    "image": "gen4/IMG_3578.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 156,
+      "y": 83,
+      "w": 11,
+      "h": 17
+    }
+  },
+  {
+    "image": "gen4/IMG_3581.jpg",
+    "correctFloor": "SecondaryF.jpg",
+    "rect": {
+      "x": 330,
+      "y": 182,
+      "w": 25,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3585.jpg",
+    "correctFloor": "SecondaryL.jpg",
+    "rect": {
+      "x": 88,
+      "y": 182,
+      "w": 17,
+      "h": 13
+    }
+  },
+  {
+    "image": "gen4/IMG_3596.jpg",
+    "correctFloor": "CentralG.jpg",
+    "rect": {
+      "x": 234,
+      "y": 63,
+      "w": 14,
+      "h": 13
+    }
+  }
+];
+      
+    
+    const hotkeyMap = {
+      "AG": "ArtsG.jpg",
+      "A1": "Arts1.jpg",
+      "A2": "Arts2.jpg",
+      "A3": "Arts3.jpg",
+      "A4": "Arts4.jpg",
+      "A5": "Arts5.jpg",
+      "A6": "Arts6.jpg",
+      "CG": "CentralG.jpg",
+      "C1": "Central1.jpg",
+      "C2": "Central2.jpg",
+      "SB": "SecondaryB.jpg",
+      "SL": "SecondaryL.jpg",
+      "SD": "SecondaryL.jpg",
+      "SG": "SecondaryG.jpg",
+      "SF": "SecondaryF.jpg",
+      "SS": "SecondaryS.jpg",
+    };
+
+    let lastKey = "";
+
+    document.addEventListener("keyup", (e) => {
+      const key = e.key.toUpperCase();
+
+      if (!/^[A-Z0-9]$/.test(key)) return; // Ignore non-alphanumeric keys
+
+      const combo = lastKey + key;
+
+      if (hotkeyMap[combo]) {
+        floorplanImg.src = hotkeyMap[combo];
+        floorSelect.value = hotkeyMap[combo];
+        lastKey = ""; // Reset after valid combo
+      } else {
+        lastKey = key; // Store as potential first key
+      }
+    });
+
+    let maxRounds = 5;
+    let round = 0, score = 0, roundScore = 0;
+    var currentLocation, randIndex;
+    let pinX = null, pinY = null, timer = null, timeLeft = 0;
+    let splits = [];
+
+    const locationImg = document.getElementById('location-image');
+    const floorplanImg = document.getElementById('floorplan-image');
+    const floorSelect = document.getElementById('floor-select');
+    const guessBtn = document.getElementById('guess-button');
+    const pin = document.getElementById('pin');
+    const timerDisplay = document.getElementById('timer-display');
+    const scoreDisplay = document.getElementById('score-display');
+    const startBtn = document.getElementById('start-game');
+    const rounds = document.getElementById('rounds');
+    const blink = document.getElementById('blink');
+    var startTime;
+    var started;
+    var serv;
+
+    function hide() {
+      
+    }
+
+    function callback() {
+      const elapsed = performance.now() - startTime;
+      const drift = elapsed - blink.value;
+      
+      console.log(drift);
+      if (drift >= 0) {
+        hide();
+        return;
+      }
+      setTimeout(callback, 5);
+    }
+
+    function scheduleTimeout() {
+      locationImg.style.filter = "brightness(100%)";
+      startTime = performance.now();
+      timeoutId = setTimeout(callback, 5);
+    }
+
+    function startGame() {
+      round = 0;
+      score = 0;
+      splits = [];
+      maxRounds = parseInt(rounds.value);
+      if (berserk) {
+        // console.log(blink.value);
+        hide = () => {
+          document.getElementById("location-image").style.filter = "brightness(0%)";
+        };
+      }
+      document.getElementById('score-display').textContent = '';
+      nextRound();
+    }
+
+    function setLocation() {
+      currentLocation = locations[randIndex];
+    }
+
+    function startTimer(duration) {
+      started = Date.now();
+      timeLeft = duration;
+      timerDisplay.textContent = `Time: ${timeLeft}`;
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Time: ${timeLeft}`;
+        if ((Math.min(20.000, (Date.now()-started)/1000)) >= 20.000) {
+          clearInterval(timer);
+          if (document.getElementById('five-k').hidden) {
+            endRound(true);
+          }
+        }
+      }, 1000);
+    }
+
+    function imageExists(image_url){
+
+      var http = new XMLHttpRequest();
+
+      http.open('HEAD', image_url, false);
+      http.send();
+
+      return http.status != 404;
+
+    }
+
+    function sum(x) {
+      let ans = 0;
+      for (i of x) ans += i;
+      return ans;
+    }
+
+    async function nextRound() {
+      if (round >= maxRounds) {
+        let splitsStr = "";
+        for (let i = 0; i < maxRounds-1; i++) {
+          splitsStr += splits[i] + "s, ";
+        }
+        splitsStr += splits[maxRounds-1] + "s";
+        scoreDisplay.innerHTML = `Game Over! Final Score: ${score}/${5000*maxRounds}<br>Splits: ${splitsStr}<br>Final Time: ${sum(splits)}s<br><button onclick="startGame()">Play Again</button>`;
+        
+        return;
+      }
+      round++;
+      locationImg.style.filter = "brightness(0%)";
+      pin.style.display = 'none';
+      pinX = pinY = null;
+      locationImg.onerror = setLocation;
+      floorplanImg.src = "FloorPlan.jpg";
+      floorSelect.value = "FloorPlan.jpg";
+      guessBtn.disabled = false;
+      locationImg.src = currentLocation.image;
+      if (berserk) await new Promise(r => setTimeout(r, 1000));
+      scheduleTimeout();
+      startTimer(parseInt(document.getElementById('timer-input').value));
+    }
+
+    document.getElementById('map-container').addEventListener('click', (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      pinX = e.clientX - rect.left;
+      pinY = e.clientY - rect.top;
+      pin.style.left = `${pinX}px`;
+      pin.style.top = `${pinY}px`;
+      pin.style.display = 'block';
+    });
+
+    guessBtn.addEventListener('click', () => endRound());
+    addEventListener('keyup', (e) => {
+      if (e.key === ' ') {
+        if (!guessBtn.disabled) endRound();
+      }
+    });
+
+
+
+    function endRound(timerExpired = false) {
+      clearInterval(timer);
+      splits.push(parseInt(document.getElementById('timer-input').value)-timeLeft);
+      let roundPoints = 0;
+      const floorChosen = floorSelect.value;
+      const rect = currentLocation.rect;
+      if (timerExpired && (pinX === null || pinY === null)) {
+        roundPoints = 0;
+      } else if (
+        pinX >= rect.x &&
+        pinX <= rect.x + rect.w &&
+        pinY >= rect.y &&
+        pinY <= rect.y + rect.h &&
+        floorChosen === currentLocation.correctFloor
+      ) {
+        roundPoints = 5000;
+      } else if (floorChosen === currentLocation.correctFloor && pinX !== null && pinY !== null) {
+        const dx = Math.max(rect.x - pinX, 0, pinX - (rect.x + rect.w));
+        const dy = Math.max(rect.y - pinY, 0, pinY - (rect.y + rect.h));
+        const D = Math.sqrt(dx * dx + dy * dy);
+        roundPoints = Math.round(5000 * Math.exp(-D / 150));
+      }
+      score += roundPoints;
+      scoreDisplay.innerHTML = `Round ${round} Score: ${roundPoints}/5000<br>Correct Floor: ${currentLocation.correctFloor}<br>Total Score: ${score}`;
+      if (roundPoints === 5000) {
+        document.getElementById('five-k').hidden = false;
+        document.getElementById('info5k').innerHTML = berserk?"Berserk, ":"Normal, ";
+        document.getElementById('info5k').innerHTML += (Math.min(20.000, (Date.now()-started)/1000)).toFixed(3);
+        document.getElementById('info5k').innerHTML += "s";
+      } else {
+        document.getElementById('failed').hidden = false;
+        document.getElementById('infopoints').innerHTML = roundPoints + " points";
+        document.getElementById('info').innerHTML = berserk?"Berserk, ":"Normal, ";
+        console.log(Date.now()-started);
+        document.getElementById('info').innerHTML += (Math.min(20.000, (Date.now()-started)/1000)).toFixed(3);
+        document.getElementById('info').innerHTML += "s";
+      }
+
+      setTimeout(nextRound, 2000);
+      guessBtn.disabled = true;
+
+      const correctBox = document.createElement('div');
+      correctBox.style.position = 'absolute';
+      correctBox.style.left = `${rect.x}px`;
+      correctBox.style.top = `${rect.y}px`;
+      correctBox.style.width = `${rect.w}px`;
+      correctBox.style.height = `${rect.h}px`;
+      correctBox.style.backgroundColor = 'rgba(255, 0, 0, 0.6)';
+      correctBox.style.border = '2px solid red';
+      correctBox.style.zIndex = 2;
+
+      // Remove any previous box
+      const oldBox = document.getElementById('correct-box');
+      if (oldBox) oldBox.remove();
+      correctBox.id = 'correct-box';
+      document.getElementById('map-container').appendChild(correctBox);
+      floorplanImg.src = currentLocation.correctFloor;
+
+      // Auto remove box after 2 seconds
+      setTimeout(() => {
+        const box = document.getElementById('correct-box');
+        if (box) box.remove();
+      }, 2000);
+    }
+
+    function updateFloor() {
+        floorSelect.value;
+        floorplanImg.src = floorSelect.value;
+    }
+
+    document.getElementById("seed").addEventListener("keyup", (e) => {
+      if (document.getElementById("seed").value.toLowerCase() === "rnd") {
+        document.getElementById("seed").value = Math.floor(Math.random() * 10000);
+      }
+    });
+
+    document.getElementById("seed").addEventListener("keyup", (e) => {
+      if (document.getElementById("seed").value.toLowerCase() === "random") {
+        document.getElementById("seed").value = Math.floor(Math.random() * 10000);
+      }
+    });
+
+    startBtn.addEventListener('click', startGame);
+  </script>
+</body>
+</html>
