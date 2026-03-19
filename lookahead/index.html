@@ -209,14 +209,6 @@
                 location.reload();
             }
         });
-        function autoClick() {
-            if (nextNumberToClick <= 64) {
-                document.getElementById(positions[nextNumberToClick-1]).click();
-                setTimeout(autoClick, 100);
-            }
-            console.log(nextNumberToClick, positions.length);
-        }
-        autoClick();
     </script>
 </body>
 </html>
