@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lookahead</title>
+    <style>
+        td {
+            border: 2px solid white;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+        }
+        table {
+            border-spacing: 0 0;
+            border: 2px solid white;
+        }
+    </style>
+    <script src="http://unpkg.com/tone"></script>
+</head>
+<body style="background: black; color: white; font-family: Arial, Helvetica, sans-serif; font-size: 24pt;">
+    <b style="font-size: 30pt;">Lookahead</b><br>
+    <b style="font-size: 20pt;">Can you get a perfect score of 64?</b><br>
+    <span style="font-size: 16pt;">Score: <b id="score">0</b></span><br>
+    <span style="font-size: 16pt;">Time: <b id="time">00:00.000</b></span><br><br>
+    <button onclick="location.reload();" style="font-size: 18pt; background: black; border: 2px solid white; color: white;">Reset (R)</button><br>
+    <table>
+        <tr>
+            <td id="1"></td>
+            <td id="2"></td>
+            <td id="3"></td>
+            <td id="4"></td>
+            <td id="5"></td>
+            <td id="6"></td>
+            <td id="7"></td>
+            <td id="8"></td>
+        </tr>
+        <tr>
+            <td id="9"></td>
+            <td id="10"></td>
+            <td id="11"></td>
+            <td id="12"></td>
+            <td id="13"></td>
+            <td id="14"></td>
+            <td id="15"></td>
+            <td id="16"></td>
+        </tr>
+        <tr>
+            <td id="17"></td>
+            <td id="18"></td>
+            <td id="19"></td>
+            <td id="20"></td>
+            <td id="21"></td>
+            <td id="22"></td>
+            <td id="23"></td>
+            <td id="24"></td>
+        </tr>
+        <tr>
+            <td id="25"></td>
+            <td id="26"></td>
+            <td id="27"></td>
+            <td id="28"></td>
+            <td id="29"></td>
+            <td id="30"></td>
+            <td id="31"></td>
+            <td id="32"></td>
+        </tr>
+        <tr>
+            <td id="33"></td>
+            <td id="34"></td>
+            <td id="35"></td>
+            <td id="36"></td>
+            <td id="37"></td>
+            <td id="38"></td>
+            <td id="39"></td>
+            <td id="40"></td>
+        </tr>
+        <tr>
+            <td id="41"></td>
+            <td id="42"></td>
+            <td id="43"></td>
+            <td id="44"></td>
+            <td id="45"></td>
+            <td id="46"></td>
+            <td id="47"></td>
+            <td id="48"></td>
+        </tr>
+        <tr>
+            <td id="49"></td>
+            <td id="50"></td>
+            <td id="51"></td>
+            <td id="52"></td>
+            <td id="53"></td>
+            <td id="54"></td>
+            <td id="55"></td>
+            <td id="56"></td>
+        </tr>
+        <tr>
+            <td id="57"></td>
+            <td id="58"></td>
+            <td id="59"></td>
+            <td id="60"></td>
+            <td id="61"></td>
+            <td id="62"></td>
+            <td id="63"></td>
+            <td id="64"></td>
+        </tr>
+    </table>
+    <script>
+        const lookahead = 5;
+        const synth = new Tone.Synth().toDestination();
+
+        let nextNumberToClick = 1;
+        let positions = [];
+        let interval;
+
+        for (let i = 1; i <= lookahead; i++) {
+            let randomSquare = Math.floor(Math.random() * 64) + 1;
+            while (positions.includes(randomSquare)) {
+                randomSquare = Math.floor(Math.random() * 64) + 1;
+            }
+            document.getElementById(randomSquare).innerText = i;
+            positions.push(randomSquare);
+        }
+        for (let i = 1; i <= 64; i++) {
+            document.getElementById(i).addEventListener('click', function() {
+                if (positions[nextNumberToClick-1] === parseInt(this.id)) {
+                    if (nextNumberToClick !== 64) synth.triggerAttackRelease(["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5", "B4", "A4", "G4", "F4", "E4", "D4"][(nextNumberToClick-1)%14], "32n");
+                    document.getElementById("score").innerText = nextNumberToClick;
+                    if (nextNumberToClick === 64) {
+                        const now = Tone.now();
+                        for (let i = 0; i < 8; i++) {
+                            synth.triggerAttackRelease(["C5", "D5", "E5", "F5", "G5", "A5", "B5", "C6"][i], 0.08, now + i * 0.08);
+                        }
+
+                        clearInterval(interval);
+                        document.getElementById("time").style.color = 'limegreen';
+                        for (let j = 1; j <= 64; j++) {
+                            document.getElementById(j).style.transition = 'background-color 2s ease, color 2s ease';
+                            document.getElementById(j).style.pointerEvents = 'none';
+                            document.getElementById(j).style.backgroundColor = 'limegreen';
+                            document.getElementById(j).style.color = 'black';
+                            document.getElementById(j).innerText = positions.indexOf(j) + 1;
+                        }
+                    }
+                    if (nextNumberToClick === 1) {
+                        if (!window.startTime) {
+                            window.startTime = Date.now();
+                            interval = setInterval(() => {
+                                if (window.startTime) {
+                                    const elapsed = Date.now() - window.startTime;
+                                    const minutes = Math.floor(elapsed / 60000).toString().padStart(2, '0');
+                                    const seconds = Math.floor((elapsed % 60000) / 1000).toString().padStart(2, '0');
+                                    const milliseconds = (elapsed % 1000).toString().padStart(3, '0');
+                                    document.getElementById("time").innerText = `${minutes}:${seconds}.${milliseconds}`;
+                                }
+                            }, 7);
+                        }
+                        for (let j = 2; j <= lookahead; j++) {
+                            document.getElementById(positions[j-1]).innerText = '';
+                        }
+                    }
+                    if (nextNumberToClick < 64) {
+                        this.style.backgroundColor = 'limegreen';
+                        this.style.color = 'limegreen';
+                        setTimeout(() => {
+                            this.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+                            this.style.backgroundColor = 'black';
+                            this.style.color = 'black';
+                            this.innerText = "";
+                        }, 10);
+                    }
+                    nextNumberToClick++;
+
+                    if (nextNumberToClick == 60) {
+                        document.getElementById(positions[62]).innerText = "";
+                    }
+
+                    if (nextNumberToClick == 61) {
+                        document.getElementById(positions[63]).innerText = "";
+                    }
+
+                    if (nextNumberToClick > 60) return;
+
+                    if (nextNumberToClick > 2) {
+                        document.getElementById(positions[nextNumberToClick+lookahead-3]).style.transition = 'background-color 0.3s ease, color 0.3s ease';
+                        document.getElementById(positions[nextNumberToClick+lookahead-3]).style.backgroundColor = 'black';
+                        document.getElementById(positions[nextNumberToClick+lookahead-3]).style.color = 'black';
+                        document.getElementById(positions[nextNumberToClick+lookahead-3]).style.transition = 'none';
+                        document.getElementById(positions[nextNumberToClick+lookahead-3]).innerText = "";
+                    }
+
+                    let randomSquare = Math.floor(Math.random() * 64) + 1;
+                    while (positions.includes(randomSquare)) {
+                        randomSquare = Math.floor(Math.random() * 64) + 1;
+                    }
+                    document.getElementById(randomSquare).innerText = nextNumberToClick+lookahead-1;
+                    document.getElementById(randomSquare).style.backgroundColor = 'black';
+                    document.getElementById(randomSquare).style.color = 'white';
+                    positions.push(randomSquare);
+                } else {
+                    synth.triggerAttackRelease("F2", "32n");
+                    clearInterval(interval);
+                    document.getElementById("time").style.color = 'red';
+                    this.style.backgroundColor = 'red';
+                    document.getElementById(positions[nextNumberToClick-1]).innerText = nextNumberToClick;
+                    document.getElementById(positions[nextNumberToClick-1]).style.color = '#fa0';
+                    for (let j = 1; j <= 64; j++) {
+                        document.getElementById(j).style.pointerEvents = 'none';
+                    }
+                }
+            });
+        }
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'r' || event.key === 'R') {
+                location.reload();
+            }
+        });
+    </script>
+</body>
+</html>
