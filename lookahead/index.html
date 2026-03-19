@@ -172,6 +172,13 @@
                         }, 10);
                     }
                     nextNumberToClick++;
+                    if (nextNumberToClick === 61) {
+                        document.getElementById(positions[62]).innerText = "";
+                    }
+
+                    if (nextNumberToClick === 62) {
+                        document.getElementById(positions[63]).innerText = "";
+                    }
 
                     if (nextNumberToClick > 61) return;
 
