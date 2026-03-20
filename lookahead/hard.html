@@ -32,7 +32,7 @@
     <b style="font-size: 20pt;">Can you get a perfect score of 64?</b><br>
     <span style="font-size: 16pt;">Score: <b id="score">0</b></span><br>
     <span style="font-size: 16pt;">Time: <b id="time">00:00.000</b></span><br>
-    <b style="font-size: 16pt; color: yellow;">Made by Ian Park, play at <span style="color: cyan;">ians.site/lookahead</span></b><br>
+    <b style="font-size: 16pt; color: yellow;">Made by Ian Park, play at <span style="color: cyan;">ians.site/lookahead/hard.html</span></b><br>
     <button onclick="location.reload();" style="font-size: 18pt; background: black; border: 2px solid white; color: white;">Reset (R)</button><br><br>
     <table>
         <tr>
@@ -225,14 +225,6 @@
                 location.reload();
             }
         });
-        function autoClick() {
-            if (nextNumberToClick <= 64) {
-                document.getElementById(positions[nextNumberToClick-1]).click();
-                setTimeout(autoClick, 100);
-            }
-            console.log(nextNumberToClick, positions.length);
-        }
-        // autoClick();
     </script>
 </body>
 </html>
