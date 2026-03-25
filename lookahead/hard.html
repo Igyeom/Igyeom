@@ -181,15 +181,20 @@
                         }, 10);
                     }
                     nextNumberToClick++;
-                    if (nextNumberToClick === 61) {
+
+                    if (nextNumberToClick === 59) {
+                        document.getElementById(positions[61]).innerText = "";
+                    }
+
+                    if (nextNumberToClick === 60) {
                         document.getElementById(positions[62]).innerText = "";
                     }
 
-                    if (nextNumberToClick === 62) {
+                    if (nextNumberToClick === 61) {
                         document.getElementById(positions[63]).innerText = "";
                     }
 
-                    if (nextNumberToClick > 61) return;
+                    if (nextNumberToClick > 60) return;
 
                     if (nextNumberToClick > 2) {
                         document.getElementById(positions[nextNumberToClick+lookahead-3]).style.transition = 'background-color 0.3s ease, color 0.3s ease';
