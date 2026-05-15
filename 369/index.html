@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WWWWWEFWE0"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-WWWWWEFWE0');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>369</title>
+    <style>
+        body {
+            background: #121212;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        .input-container {
+            margin: 5px;
+            width: 490px;
+            height: 100px;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24pt;
+            border-radius: 10px;
+        }
+        .progress-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 500px;
+            margin-top: 20px;
+        }
+        .progress-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #1e1e1e;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        #horizontal-timer-bar {
+            height: 5px;
+            margin: 5px;
+            width: 490px;
+            background: #ff5722;
+        }
+        .animate {
+            animation: timerAnimation linear;
+            animation-play-state: running;
+            animation-iteration-count: 1;
+        }
+        @keyframes timerAnimation {
+            from { width: 500px; }
+            to { width: 0; }
+        }
+    </style>
+    <script src="https://unpkg.com/tone"></script>
+</head>
+<body>
+    <b style="font-size: 24pt;">369</b><br>
+    <b style="font-size: 20pt;">How far can you get?</b><br><br>
+    <b style="font-size: 12pt; color: yellow;">Made by Ian Park, play at <span style="color: cyan;">ians.site/369</span></b><br>
+
+    <div class="input-container">
+        ENTER to start/clap, R to reset
+    </div>
+    <div id="horizontal-timer-bar"></div>
+    <div class="progress-container">
+    </div>
+    <script>
+        let progress = 0;
+        let speed = 480;
+        let interval = 60 / speed;
+        let timelimit = 240 / speed;
+        console.log(timelimit*1000);
+        let target = ['3', '6', '9'];
+        let intervalId, answer;
+        if (new URLSearchParams(window.location.search).has('target')) {
+            target = new URLSearchParams(window.location.search).get('target').split('');
+        }
+        if (new URLSearchParams(window.location.search).has('speed')) {
+            speed = parseInt(new URLSearchParams(window.location.search).get('speed'), 10);
+            interval = 60 / speed;
+            timelimit = 240 / speed;
+        }
+        const synth = new Tone.Synth().toDestination();
+
+        function getKoreanLength(num) {
+            if (num === 0) return "영".length;
+
+            const units = ["", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
+            const tens = ["", "십", "백", "천"];
+            const bigUnits = ["", "만", "억", "조", "경"];
+
+            let numStr = num.toString();
+            let result = [];
+            
+            let chunkCount = Math.ceil(numStr.length / 4);
+            for (let i = 0; i < chunkCount; i++) {
+                let end = numStr.length - (i * 4);
+                let start = Math.max(0, end - 4);
+                let part = numStr.slice(start, end);
+                let partNum = parseInt(part, 10);
+
+                if (partNum === 0) continue;
+
+                let partStr = "";
+                for (let j = 0; j < part.length; j++) {
+                let digit = parseInt(part[part.length - 1 - j], 10);
+                if (digit === 0) continue;
+                
+                let digitStr = (digit === 1 && j > 0) ? "" : units[digit];
+                partStr = digitStr + tens[j] + partStr;
+                }
+
+                if (partStr) {
+                result.unshift(partStr + bigUnits[i]);
+                }
+            }
+
+            const hangulText = result.join("");
+
+            return hangulText.length;
+        }
+
+        for (let i = 1; i <= 10; i++) {
+            for (let j = (i-1)*10+1; j <= (i-1)*10+10; j++) {
+                const div = document.createElement('div');
+                div.classList.add('progress-item');
+                div.id = `item-${j}`;
+                if (i%2==0 && j%10==0) {
+                    div.innerHTML = j;
+                }
+                document.querySelector('.progress-container').appendChild(div);
+            }
+            document.querySelector('.progress-container').appendChild(document.createElement('br'));
+        }
+
+        function playNote(progress) {
+            let numChars;
+            let flag = false;
+            if (countTargetDigits(progress.toString()) > 0) {
+                numChars = countTargetDigits(progress.toString());
+                flag = true;
+            } else {
+                numChars = getKoreanLength(progress);
+            }
+            const noteDuration = interval / numChars;
+            let now = Tone.now();
+            for (let i = 0; i < numChars; i++) {
+                if (flag) {
+                    synth.triggerAttackRelease('G5', noteDuration/2, now + i * noteDuration);
+                } else {
+                    synth.triggerAttackRelease('C5', noteDuration/2, now + i * noteDuration);
+                }
+            }
+        }
+
+        function countTargetDigits(string) {
+            let count = 0;
+            for (let char of string) {
+                if (target.includes(char)) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        document.getElementById("horizontal-timer-bar").style.animationDuration = `${interval*8}s`;
+        document.addEventListener('keypress', (event) => {
+            const key = event.key;
+            if (key === 'r') {
+                window.location.reload();
+            }
+            if (progress === 0) {
+                if (key === 'Enter') {
+                    let now = Tone.now();
+                    document.querySelector('.input-container').innerHTML = "READY?";
+                    document.getElementById("horizontal-timer-bar").classList.add('animate');
+                    document.getElementById("horizontal-timer-bar").style.width = '490px';
+                    setTimeout(() => {
+                        document.getElementById("horizontal-timer-bar").classList.remove('animate');
+                        void document.getElementById("horizontal-timer-bar").offsetWidth;
+                        document.getElementById("horizontal-timer-bar").style.background = 'limegreen';
+                        document.getElementById("horizontal-timer-bar").classList.add('animate');
+                        document.querySelector('.input-container').innerHTML = "GO!";
+                    }, interval*8000);
+                    setTimeout(() => {
+                        document.getElementById("horizontal-timer-bar").classList.remove('animate');
+                        void document.getElementById("horizontal-timer-bar").offsetWidth;
+                            document.getElementById("horizontal-timer-bar").style.animationDuration = `${timelimit}s`;
+                        document.getElementById("horizontal-timer-bar").classList.add('animate');
+                        document.getElementById("horizontal-timer-bar").style.width = '490px';
+                        document.querySelector('.input-container').innerHTML = "";
+                        progress++;
+                        document.getElementById(`item-${progress}`).style.background = 'white';
+                        intervalId = setInterval(() => {
+                        document.getElementById("horizontal-timer-bar").classList.remove('animate');
+                        void document.getElementById("horizontal-timer-bar").offsetWidth;
+                            document.getElementById("horizontal-timer-bar").style.animationDuration = `${timelimit}s`;
+                        document.getElementById("horizontal-timer-bar").classList.add('animate');
+                            document.getElementById("horizontal-timer-bar").style.background = 'limegreen';
+                                if (progress % 100 === 1) {
+                                    document.querySelector('.progress-container').innerHTML = "";
+                                    for (let i = 1; i <= 10; i++) {
+                                        for (let j = (i-1)*10+(progress); j <= (i-1)*10+9+(progress); j++) {
+                                            const div = document.createElement('div');
+                                            div.classList.add('progress-item');
+                                            div.id = `item-${j}`;
+                                            if (j%20==0) {
+                                                div.innerHTML = j;
+                                            }
+                                            document.querySelector('.progress-container').appendChild(div);
+                                        }
+                                        document.querySelector('.progress-container').appendChild(document.createElement('br'));
+                                    }
+                                    document.getElementById(`item-${progress}`).style.background = 'white';
+                                }
+                            if (document.querySelector('.input-container').innerHTML === answer) {
+                                playNote(progress);
+                                document.getElementById(`item-${progress}`).style.background = 'limegreen';
+                                progress++;
+                                document.getElementById(`item-${progress}`).style.background = 'white';
+                                document.querySelector('.input-container').innerHTML = "";
+                                document.getElementById("horizontal-timer-bar").style.animationPlayState = 'running';
+                            } else {
+                                let now = Tone.now();
+                                document.querySelector(".input-container").innerHTML = `Final Score: ${progress-1}`;
+                                document.getElementById("horizontal-timer-bar").style.animationPlayState = 'paused';
+                                synth.triggerAttackRelease('F2', '32n');
+                                clearInterval(intervalId);
+                            }
+                        }, timelimit*1000);
+                    }, interval*16000);
+                    synth.triggerAttackRelease('C5', interval/2, now);
+                    synth.triggerAttackRelease('C5', interval/2, now + 2 * interval);
+                    synth.triggerAttackRelease('B4', interval, now + 3 * interval);
+                    synth.triggerAttackRelease('C5', interval/2, now + 4 * interval);
+                    synth.triggerAttackRelease('B4', interval/2, now + 5 * interval);
+                    synth.triggerAttackRelease('C5', interval/2, now + 6 * interval);
+                    synth.triggerAttackRelease('C5', interval/2, now + 8 * interval);
+                    synth.triggerAttackRelease('C5', interval/2, now + 10 * interval);
+                    synth.triggerAttackRelease('B4', interval, now + 11 * interval);
+                    synth.triggerAttackRelease('C5', interval/2, now + 12 * interval);
+                    synth.triggerAttackRelease('B4', interval/2, now + 13 * interval);
+                    synth.triggerAttackRelease('C5', interval/2, now + 14 * interval);
+                }
+            }
+            if (progress > 0 && ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Enter'].includes(key)) {
+                answer = progress.toString();
+                let flag = false;
+                for (i of target) {
+                    if (answer.includes(i)) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag) {
+                    answer = '👏'.repeat(countTargetDigits(answer));
+                }
+                if (target.includes(key)) {
+                    document.querySelector(".input-container").innerHTML = `Final Score: ${progress-1}`;
+                    synth.triggerAttackRelease('F2', '32n');
+                    clearInterval(intervalId);
+                }
+                if (key === 'Enter') {
+                    document.querySelector(".input-container").innerHTML += "👏";
+                } else {
+                    document.querySelector(".input-container").innerHTML += key;
+                }
+                if (!answer.startsWith(document.querySelector(".input-container").innerHTML)) {
+                    let now = Tone.now();
+                    document.getElementById("horizontal-timer-bar").style.animationPlayState = 'paused';
+                    document.querySelector(".input-container").innerHTML = `Final Score: ${progress-1}`;
+                    synth.triggerAttackRelease('F2', '32n');
+                    clearInterval(intervalId);
+                }
+            }
+        });
+        // setInterval(() => {
+        //     document.getElementById("debug").innerHTML = `Progress: ${progress}, Answer: ${answer}`;
+        // }, 100);
+    </script>    
+</body>
+</html>
