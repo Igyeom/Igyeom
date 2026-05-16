@@ -174,6 +174,8 @@
             return count;
         }
 
+        var start = false;
+
         document.getElementById("horizontal-timer-bar").style.animationDuration = `${interval*8}s`;
         document.addEventListener('keypress', (event) => {
             const key = event.key;
@@ -186,21 +188,24 @@
                     document.querySelector('.input-container').innerHTML = "READY?";
                     document.getElementById("horizontal-timer-bar").classList.add('animate');
                     document.getElementById("horizontal-timer-bar").style.width = '490px';
+                    if (!start) {
+                        start = true;
+                        setTimeout(() => {
+                            document.getElementById("horizontal-timer-bar").classList.remove('animate');
+                            void document.getElementById("horizontal-timer-bar").offsetWidth;
+                            document.getElementById("horizontal-timer-bar").style.background = '#ffff00';
+                            document.getElementById("horizontal-timer-bar").classList.add('animate');
+                            document.querySelector('.input-container').innerHTML = "GO!";
+                        }, interval*8000);
                     setTimeout(() => {
                         document.getElementById("horizontal-timer-bar").classList.remove('animate');
                         void document.getElementById("horizontal-timer-bar").offsetWidth;
-                        document.getElementById("horizontal-timer-bar").style.background = 'limegreen';
-                        document.getElementById("horizontal-timer-bar").classList.add('animate');
-                        document.querySelector('.input-container').innerHTML = "GO!";
-                    }, interval*8000);
-                    setTimeout(() => {
-                        document.getElementById("horizontal-timer-bar").classList.remove('animate');
-                        void document.getElementById("horizontal-timer-bar").offsetWidth;
+                            document.getElementById("horizontal-timer-bar").style.background = 'limegreen';
                             document.getElementById("horizontal-timer-bar").style.animationDuration = `${timelimit}s`;
                         document.getElementById("horizontal-timer-bar").classList.add('animate');
                         document.getElementById("horizontal-timer-bar").style.width = '490px';
                         document.querySelector('.input-container').innerHTML = "";
-                        progress++;
+                        if (start) progress++;
                         document.getElementById(`item-${progress}`).style.background = 'white';
                         intervalId = setInterval(() => {
                         document.getElementById("horizontal-timer-bar").classList.remove('animate');
@@ -227,7 +232,7 @@
                             if (document.querySelector('.input-container').innerHTML === answer) {
                                 playNote(progress);
                                 document.getElementById(`item-${progress}`).style.background = 'limegreen';
-                                progress++;
+                                if (start) progress++;
                                 document.getElementById(`item-${progress}`).style.background = 'white';
                                 document.querySelector('.input-container').innerHTML = "";
                                 document.getElementById("horizontal-timer-bar").style.animationPlayState = 'running';
@@ -240,6 +245,7 @@
                             }
                         }, timelimit*1000);
                     }, interval*16000);
+                    }
                     synth.triggerAttackRelease('C5', interval/2, now);
                     synth.triggerAttackRelease('C5', interval/2, now + 2 * interval);
                     synth.triggerAttackRelease('B4', interval, now + 3 * interval);
