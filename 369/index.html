@@ -213,7 +213,8 @@
                             document.getElementById("horizontal-timer-bar").style.animationDuration = `${timelimit}s`;
                         document.getElementById("horizontal-timer-bar").classList.add('animate');
                             document.getElementById("horizontal-timer-bar").style.background = 'limegreen';
-                                if (progress % 100 === 1) {
+                                if (progress % 100 === 0 && progress !== 0) {
+                                    progress++;
                                     document.querySelector('.progress-container').innerHTML = "";
                                     for (let i = 1; i <= 10; i++) {
                                         for (let j = (i-1)*10+(progress); j <= (i-1)*10+9+(progress); j++) {
@@ -228,20 +229,39 @@
                                         document.querySelector('.progress-container').appendChild(document.createElement('br'));
                                     }
                                     document.getElementById(`item-${progress}`).style.background = 'white';
+                                    progress--;
                                 }
                             if (document.querySelector('.input-container').innerHTML === answer) {
                                 playNote(progress);
-                                document.getElementById(`item-${progress}`).style.background = 'limegreen';
-                                if (start) progress++;
-                                document.getElementById(`item-${progress}`).style.background = 'white';
-                                document.querySelector('.input-container').innerHTML = "";
-                                document.getElementById("horizontal-timer-bar").style.animationPlayState = 'running';
+                                    try {
+                                        document.getElementById(`item-${progress}`).style.background = 'limegreen';
+                                        if (start && progress % 100 > 0) progress++;
+                                        document.getElementById(`item-${progress}`).style.background = 'white';
+                                        document.querySelector('.input-container').innerHTML = "";
+                                        document.getElementById("horizontal-timer-bar").style.animationPlayState = 'running';
+                                    } catch {
+                                        progress++;
+                                        document.querySelector('.input-container').innerHTML = "";
+                                    }
                             } else {
-                                let now = Tone.now();
-                                document.querySelector(".input-container").innerHTML = `Final Score: ${progress-1}`;
-                                document.getElementById("horizontal-timer-bar").style.animationPlayState = 'paused';
-                                synth.triggerAttackRelease('F2', '32n');
-                                clearInterval(intervalId);
+                                // if (progress <= 103) {
+                                //     playNote(progress);
+                                //     try {
+                                //         document.getElementById(`item-${progress}`).style.background = 'limegreen';
+                                //         if (start && progress % 100 > 0) progress++;
+                                //         document.getElementById(`item-${progress}`).style.background = 'white';
+                                //         document.querySelector('.input-container').innerHTML = "";
+                                //         document.getElementById("horizontal-timer-bar").style.animationPlayState = 'running';
+                                //     } catch {
+                                //         progress++;
+                                //     }
+                                // } else {
+                                    let now = Tone.now();
+                                    document.querySelector(".input-container").innerHTML = `Final Score: ${progress-1}`;
+                                    document.getElementById("horizontal-timer-bar").style.animationPlayState = 'paused';
+                                    synth.triggerAttackRelease('F2', '32n');
+                                    clearInterval(intervalId);
+                                // }
                             }
                         }, timelimit*1000);
                     }, interval*16000);
