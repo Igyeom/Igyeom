@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9C48JXFYE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Z9C48JXFYE');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lookahead</title>
+    <style>
+        td {
+            border: 2px solid white;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+        }
+        table {
+            border-spacing: 0 0;
+            border: 6px solid cyan;
+            border-collapse: collapse;
+        }
+    </style>
+    <script src="https://unpkg.com/tone"></script>
+</head>
+<body style="background: black; color: white; font-family: Arial, Helvetica, sans-serif; font-size: 24pt;">
+    <b style="font-size: 30pt;">Lookahead (Custom Mode)</b><br>
+    <b style="font-size: 20pt;">Can you get a perfect score of <span id="maxScore">64</span>?</b><br>
+    <span style="font-size: 16pt;">Score: <b id="score">0</b></span><br>
+    <span style="font-size: 16pt;">Time: <b id="time">00:00.000</b></span><br>
+    <b style="font-size: 16pt; color: yellow;">Made by Ian Park, play at <span style="color: cyan;">ians.site/lookahead/custom.html</span></b><br>
+    <button onclick="location.reload();" style="font-size: 18pt; background: black; border: 2px solid white; color: white;">Reset (R)</button><br>
+    <div style="margin: 10px 0; font-size: 16pt;">
+        <label style="margin-right: 10px;">Grid Size: <input type="number" id="gridSize" value="8" min="1" style="width: 50px; background: #333; color: white; border: 1px solid white; padding: 4px;"></label>
+        <label style="margin-right: 10px;">Outline Size: <input type="number" id="outlineSize" value="2" min="1" style="width: 50px; background: #333; color: white; border: 1px solid white; padding: 4px;"></label>
+        <label style="margin-right: 10px;">Lookahead: <input type="number" id="lookaheadDepth" value="4" min="1" style="width: 50px; background: #333; color: white; border: 1px solid white; padding: 4px;"></label>
+        <button onclick="applyChanges();" style="font-size: 16pt; background: black; border: 2px solid white; color: white; padding: 4px 12px;">Apply Changes</button>
+    </div><br>
+    <div id="board"></div>
+    <script>
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const gridSize = parseInt(urlParams.get('grid') || '8');
+        const outlineSize = parseInt(urlParams.get('outline') || '2');
+        const lookahead = parseInt(urlParams.get('lookahead') || '4');
+        
+        
+        document.getElementById('gridSize').value = gridSize;
+        document.getElementById('outlineSize').value = outlineSize;
+        document.getElementById('lookaheadDepth').value = lookahead;
+        
+        const totalSquares = gridSize * gridSize;
+        document.getElementById('maxScore').innerText = totalSquares;
+        
+        const synth = new Tone.Synth().toDestination();
+
+        let nextNumberToClick = 1;
+        let positions = [];
+        let interval;
+
+        
+        const effectiveLookahead = Math.min(lookahead, totalSquares);
+
+        
+        const board = document.getElementById('board');
+        const table = document.createElement('table');
+        table.style.borderSpacing = '0';
+        table.style.borderCollapse = 'collapse';
+        table.style.border = `${outlineSize * 3}px solid cyan`;
+        let cellId = 1;
+        for (let r = 1; r <= gridSize; r++) {
+            const tr = document.createElement('tr');
+            for (let c = 1; c <= gridSize; c++) {
+                const td = document.createElement('td');
+                td.id = String(cellId);
+                
+                const thick = `${outlineSize * 3}px solid cyan`;
+                const thin = `2px solid white`;
+                
+                if (c % outlineSize === 0 && c !== gridSize) td.style.borderRight = thick; else td.style.borderRight = thin;
+                
+                if (r % outlineSize === 0 && r !== gridSize) td.style.borderBottom = thick; else td.style.borderBottom = thin;
+                tr.appendChild(td);
+                cellId++;
+            }
+            table.appendChild(tr);
+        }
+        board.appendChild(table);
+
+        for (let i = 1; i <= effectiveLookahead; i++) {
+            let randomSquare = Math.floor(Math.random() * totalSquares) + 1;
+            while (positions.includes(randomSquare)) {
+                randomSquare = Math.floor(Math.random() * totalSquares) + 1;
+            }
+            document.getElementById(randomSquare).innerText = i;
+            positions.push(randomSquare);
+        }
+        for (let i = 1; i <= totalSquares; i++) {
+            document.getElementById(String(i)).addEventListener('click', function() {
+                if (positions[nextNumberToClick-1] === parseInt(this.id)) {
+                    if (nextNumberToClick !== totalSquares) synth.triggerAttackRelease(["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5", "B4", "A4", "G4", "F4", "E4", "D4"][(nextNumberToClick-1)%14], "32n");
+                    document.getElementById("score").innerText = nextNumberToClick;
+                    if (nextNumberToClick === totalSquares) {
+                        const now = Tone.now();
+                        for (let i = 0; i < 8; i++) {
+                            synth.triggerAttackRelease(["C5", "D5", "E5", "F5", "G5", "A5", "B5", "C6"][i], 0.08, now + i * 0.08);
+                        }
+
+                        clearInterval(interval);
+                        document.getElementById("time").style.color = 'limegreen';
+                        for (let j = 1; j <= totalSquares; j++) {
+                            const el = document.getElementById(String(j));
+                            el.style.transition = 'background-color 2s ease, color 2s ease';
+                            el.style.pointerEvents = 'none';
+                            el.style.backgroundColor = 'limegreen';
+                            el.style.color = 'black';
+                            el.innerText = positions.indexOf(j) + 1;
+                        }
+                    }
+                    if (nextNumberToClick === 1) {
+                        if (!window.startTime) {
+                            window.startTime = Date.now();
+                            interval = setInterval(() => {
+                                if (window.startTime) {
+                                    const elapsed = Date.now() - window.startTime;
+                                    const minutes = Math.floor(elapsed / 60000).toString().padStart(2, '0');
+                                    const seconds = Math.floor((elapsed % 60000) / 1000).toString().padStart(2, '0');
+                                    const milliseconds = (elapsed % 1000).toString().padStart(3, '0');
+                                    document.getElementById("time").innerText = `${minutes}:${seconds}.${milliseconds}`;
+                                }
+                            }, 7);
+                        }
+                        for (let j = 2; j <= effectiveLookahead; j++) {
+                            const pos = positions[j-1];
+                            if (pos) document.getElementById(String(pos)).innerText = '';
+                        }
+                    }
+                    if (nextNumberToClick < totalSquares) {
+                        this.style.backgroundColor = 'limegreen';
+                        this.style.color = 'limegreen';
+                        setTimeout(() => {
+                            this.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+                            this.style.backgroundColor = 'black';
+                            this.style.color = 'black';
+                            this.innerText = "";
+                        }, 10);
+                    }
+                    nextNumberToClick++;
+
+                    if (nextNumberToClick == totalSquares - effectiveLookahead + 2) {
+                        const rem = positions[totalSquares-1];
+                        if (rem) {
+                            const el = document.getElementById(String(rem));
+                            el.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+                            el.style.backgroundColor = 'black';
+                            el.style.color = 'black';
+                            el.style.transition = 'none';
+                            el.innerText = "";
+                        }
+                    }
+                    if (nextNumberToClick > totalSquares - effectiveLookahead + 1) return;
+                    if (nextNumberToClick > 2) {
+                        const idx = nextNumberToClick + effectiveLookahead - 3;
+                        const rem = positions[idx];
+                        if (rem) {
+                            const el = document.getElementById(String(rem));
+                            el.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+                            el.style.backgroundColor = 'black';
+                            el.style.color = 'black';
+                            el.style.transition = 'none';
+                            el.innerText = "";
+                        }
+                    }
+
+                    let randomSquare = Math.floor(Math.random() * totalSquares) + 1;
+                    while (positions.includes(randomSquare)) {
+                        randomSquare = Math.floor(Math.random() * totalSquares) + 1;
+                    }
+                    const newEl = document.getElementById(String(randomSquare));
+                    newEl.innerText = nextNumberToClick+effectiveLookahead-1;
+                    newEl.style.backgroundColor = 'black';
+                    newEl.style.color = 'white';
+                    positions.push(randomSquare);
+                } else {
+                    synth.triggerAttackRelease("F2", "32n");
+                    clearInterval(interval);
+                    document.getElementById("time").style.color = 'red';
+                    this.style.backgroundColor = 'red';
+                    document.getElementById(positions[nextNumberToClick-1]).innerText = nextNumberToClick;
+                    document.getElementById(positions[nextNumberToClick-1]).style.color = '#fa0';
+                    for (let j = 1; j <= totalSquares; j++) {
+                        document.getElementById(String(j)).style.pointerEvents = 'none';
+                    }
+                }
+            });
+        }
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'r' || event.key === 'R') {
+                location.reload();
+            }
+        });
+
+        function applyChanges() {
+            const g = parseInt(document.getElementById('gridSize').value) || 8;
+            const o = parseInt(document.getElementById('outlineSize').value) || 2;
+            const l = parseInt(document.getElementById('lookaheadDepth').value) || 4;
+            const params = new URLSearchParams({grid: g, outline: o, lookahead: l});
+            window.location.search = params.toString();
+        }
+    </script>
+</body>
+</html>
