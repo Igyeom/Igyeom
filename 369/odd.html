@@ -83,6 +83,7 @@
         console.log(timelimit*1000);
         let target = ['3', '6', '9'];
         let intervalId, answer;
+        let dead = false;
         if (new URLSearchParams(window.location.search).has('target')) {
             target = new URLSearchParams(window.location.search).get('target').split('');
         }
@@ -258,12 +259,14 @@
                                 //         progress++;
                                 //     }
                                 // } else {
+                                    dead = true;
                                     let now = Tone.now();
                                     document.querySelector(".input-container").style.color = 'white';
                                     document.querySelector(".input-container").innerHTML = `Final Score: ${progress-1}`;
                                     document.getElementById("horizontal-timer-bar").style.animationPlayState = 'paused';
                                     synth.triggerAttackRelease('F2', '32n');
                                     clearInterval(intervalId);
+                                    
                                 // }
                             }
                         }, timelimit*1000);
@@ -296,6 +299,7 @@
                     answer = '👏'.repeat(countTargetDigits(answer));
                 }
                 if (target.includes(key)) {
+                    dead = true;
                     document.querySelector(".input-container").innerHTML = `Final Score: ${progress-1}`;
                     synth.triggerAttackRelease('F2', '32n');
                     clearInterval(intervalId);
@@ -306,6 +310,7 @@
                     document.querySelector(".input-container").innerHTML += key;
                 }
                 if (!answer.startsWith(document.querySelector(".input-container").innerHTML)) {
+                    dead = true;
                     let now = Tone.now();
                     document.getElementById("horizontal-timer-bar").style.animationPlayState = 'paused';
                     document.querySelector(".input-container").innerHTML = `Final Score: ${progress-1}`;
@@ -315,8 +320,8 @@
             }
         });
 
-        setInterval(() => {
-            if (progress > 0 && progress%2==0) {
+        let bot = setInterval(() => {
+            if (progress > 0 && progress%2==0 && !dead) {
                 let answer = progress.toString();
                 if (countTargetDigits(answer)) {
                     document.querySelector(".input-container").style.color = 'cyan';
@@ -330,7 +335,7 @@
                     }
                 }
             }
-        }, 300);
+        }, 10);
     </script>    
 </body>
 </html>
