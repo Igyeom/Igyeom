@@ -12,7 +12,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lookahead</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
         td {
             border: 2px solid white;
@@ -31,7 +30,7 @@
             border-collapse: collapse;
         }
         html {
-            touch-action: manipulation; 
+            touch-action: manipulation;
         }
     </style>
     <script src="https://unpkg.com/tone"></script>
@@ -41,6 +40,7 @@
     <b style="font-size: 20pt;">Can you get a perfect score of 64?</b><br>
     <span style="font-size: 16pt;">Score: <b id="score">0</b></span><br>
     <span style="font-size: 16pt;">Time: <b id="time">00:00.000</b></span><br>
+    <span style="font-size: 16pt;">Pace: <b id="pace">00:00.000</b></span><br>
     <b style="font-size: 16pt; color: yellow;">Made by Ian Park, play at <span style="color: cyan;">ians.site/lookahead</span></b><br>
     <button onclick="location.reload();" style="font-size: 18pt; background: black; border: 2px solid white; color: white;">Reset (R)</button><br><br>
     <table>
@@ -154,6 +154,7 @@
 
                         clearInterval(interval);
                         document.getElementById("time").style.color = 'limegreen';
+                        document.getElementById("pace").style.color = 'limegreen';
                         for (let j = 1; j <= 64; j++) {
                             document.getElementById(j).style.transition = 'background-color 2s ease, color 2s ease';
                             document.getElementById(j).style.pointerEvents = 'none';
@@ -172,6 +173,12 @@
                                     const seconds = Math.floor((elapsed % 60000) / 1000).toString().padStart(2, '0');
                                     const milliseconds = (elapsed % 1000).toString().padStart(3, '0');
                                     document.getElementById("time").innerText = `${minutes}:${seconds}.${milliseconds}`;
+
+                                    const pace = (elapsed * 64 / (nextNumberToClick-1));
+                                    const paceMinutes = Math.floor(pace / 60000).toString().padStart(2, '0');
+                                    const paceSeconds = Math.floor((pace % 60000) / 1000).toString().padStart(2, '0');
+                                    const paceMilliseconds = Math.floor(pace % 1000).toString().padStart(3, '0');
+                                    document.getElementById("pace").innerText = `${paceMinutes}:${paceSeconds}.${paceMilliseconds}`
                                 }
                             }, 7);
                         }
